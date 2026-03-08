@@ -1,0 +1,87 @@
+/* ===== 18 MICON STREET — CSS ===== */
+
+/* --- Navbar --- */
+.mc-nav{position:fixed;top:0;left:0;width:100%;z-index:100;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.06);padding:0}
+.mc-nav__top{display:flex;align-items:center;justify-content:space-between;padding:14px 30px}
+.mc-nav__logo{display:flex;align-items:baseline;gap:6px}
+.mc-nav__logo-num{font-family:'Playfair Display',Georgia,serif;font-size:2.6rem;font-weight:900;color:#222;line-height:1}
+.mc-nav__logo-text{font-family:'Roboto',sans-serif;font-size:1.4rem;font-weight:300;color:#222;text-transform:uppercase;letter-spacing:2px}
+.mc-nav__logo-script{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:1.1rem;color:#888;margin-left:2px}
+.mc-nav__right{display:flex;align-items:center;gap:16px}
+.mc-nav__lang{font-size:.8rem;color:#666;cursor:pointer}
+.mc-nav__book{font-size:.75rem;letter-spacing:1px;text-transform:uppercase;padding:10px 22px;background:#222;color:#fff;border:none;cursor:pointer;font-family:'Roboto',sans-serif;transition:background .3s}
+.mc-nav__book:hover{background:#444}
+.mc-nav__pin{width:36px;height:36px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#222;cursor:pointer;border-radius:2px}
+.mc-nav__menu{display:flex;justify-content:center;gap:0;padding:0 20px;border-top:1px solid #eee;flex-wrap:wrap}
+.mc-nav__link{font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:#222;padding:14px 18px;transition:color .3s;font-family:'Roboto',sans-serif;font-weight:500}
+.mc-nav__link:hover{color:#888}
+
+/* --- Hero Slider --- */
+.mc-hero{position:relative;height:75vh;margin-top:120px;overflow:hidden}
+.mc-hero__slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
+.mc-hero__slide.active{opacity:1}
+.mc-hero__slide img{width:100%;height:100%;object-fit:cover}
+.mc-hero__award{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.5);color:#fff;font-size:.7rem;letter-spacing:1px;padding:8px 20px;text-transform:uppercase;font-family:'Roboto',sans-serif}
+.mc-hero__dots{position:absolute;bottom:60px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.mc-hero__dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:background .3s}
+.mc-hero__dot.active{background:#fff}
+
+/* --- Intro --- */
+.mc-intro{padding:70px 40px;max-width:900px;margin:0 auto;text-align:left}
+.mc-intro__text{font-family:'Roboto',sans-serif;font-size:1rem;line-height:1.9;color:#444;font-weight:300}
+
+/* --- Features Cards --- */
+.mc-features{padding:0 40px 80px;max-width:1100px;margin:0 auto}
+.mc-features__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.mc-features__card{position:relative;height:380px;overflow:hidden;cursor:pointer}
+.mc-features__card img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.mc-features__card:hover img{transform:scale(1.06)}
+.mc-features__card-overlay{position:absolute;inset:0;background:rgba(50,50,50,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;transition:background .4s}
+.mc-features__card:hover .mc-features__card-overlay{background:rgba(50,50,50,.7)}
+.mc-features__card-title{font-family:'Roboto',sans-serif;font-size:.8rem;letter-spacing:3px;text-transform:uppercase;color:#fff;font-weight:500;margin-bottom:10px}
+.mc-features__card-desc{font-family:'Roboto',sans-serif;font-size:.78rem;color:rgba(255,255,255,.8);line-height:1.6;max-width:250px;font-weight:300}
+.mc-features__card-link{margin-top:12px;font-size:.68rem;color:rgba(255,255,255,.6);font-style:italic;letter-spacing:1px}
+
+/* --- 3Elements --- */
+.mc-elements{padding:80px 40px;max-width:900px;margin:0 auto}
+.mc-elements__text{font-family:'Roboto',sans-serif;font-size:1rem;line-height:1.9;color:#444;font-weight:300;margin-bottom:20px}
+
+/* --- Rooms Grid --- */
+.mc-rooms{padding:0 40px 80px;max-width:1100px;margin:0 auto}
+.mc-rooms__title{font-family:'Playfair Display',Georgia,serif;font-size:1.8rem;font-weight:400;color:#222;margin-bottom:40px;text-align:center}
+.mc-rooms__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.mc-rooms__card{cursor:pointer;transition:transform .4s}
+.mc-rooms__card:hover{transform:translateY(-5px)}
+.mc-rooms__card-img{width:100%;height:200px;object-fit:cover;margin-bottom:12px;border-radius:1px}
+.mc-rooms__card-name{font-family:'Roboto',sans-serif;font-size:.85rem;color:#222;text-align:center;font-weight:400;line-height:1.4}
+
+/* --- Gallery Strip --- */
+.mc-gallery{padding:0 0 0;overflow:hidden}
+.mc-gallery__strip{display:flex;gap:4px}
+.mc-gallery__strip img{height:280px;object-fit:cover;flex-shrink:0;width:calc(25% - 3px)}
+
+/* --- Footer --- */
+.mc-footer{padding:50px 40px 30px;max-width:900px;margin:0 auto}
+.mc-footer__section{margin-bottom:30px}
+.mc-footer__section-title{font-family:'Roboto',sans-serif;font-size:.9rem;color:#888;font-weight:300;padding-bottom:10px;border-bottom:1px solid #eee;margin-bottom:15px}
+.mc-footer__info{font-family:'Roboto',sans-serif;font-size:.85rem;color:#444;line-height:1.8;font-weight:300}
+.mc-footer__socials{display:flex;gap:10px;margin-top:5px}
+.mc-footer__social{width:34px;height:34px;background:#222;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;transition:background .3s}
+.mc-footer__social:hover{background:#555}
+.mc-footer__links{display:flex;flex-wrap:wrap;gap:15px}
+.mc-footer__link{font-family:'Roboto',sans-serif;font-size:.82rem;color:#666;font-weight:300;transition:color .3s}
+.mc-footer__link:hover{color:#222}
+.mc-footer__bottom{text-align:center;padding:20px 40px;border-top:1px solid #eee;font-size:.7rem;color:#999;font-family:'Roboto',sans-serif}
+.mc-footer__scroll-top{display:flex;justify-content:center;margin-bottom:15px}
+.mc-footer__scroll-btn{width:40px;height:40px;border:1px solid #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:#888;transition:all .3s;background:transparent}
+.mc-footer__scroll-btn:hover{border-color:#222;color:#222}
+
+/* --- Responsive --- */
+@media(max-width:768px){
+  .mc-nav__menu{gap:0}
+  .mc-nav__link{padding:10px 10px;font-size:.65rem}
+  .mc-hero{height:50vh;margin-top:140px}
+  .mc-features__grid{grid-template-columns:1fr}
+  .mc-rooms__grid{grid-template-columns:1fr 1fr}
+  .mc-gallery__strip img{height:180px;width:50%}
+}

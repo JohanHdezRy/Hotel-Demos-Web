@@ -1,0 +1,135 @@
+/* ===== LA RÉSERVE PARIS — CSS ===== */
+
+/* --- Navbar --- */
+.lr-nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;transition:background .5s,box-shadow .5s;background:transparent}
+.lr-nav.scrolled{background:rgba(255,255,255,.97);box-shadow:0 1px 12px rgba(0,0,0,.06)}
+.lr-nav__logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.55rem;letter-spacing:3px;color:#fff;transition:color .4s}
+.lr-nav.scrolled .lr-nav__logo{color:#1C1C1A}
+.lr-nav__logo span{display:block;font-size:.55rem;letter-spacing:5px;text-transform:uppercase;text-align:center;margin-top:2px;font-family:'Source Sans 3',sans-serif}
+.lr-nav__book{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;padding:10px 24px;border:1px solid rgba(255,255,255,.5);color:#fff;cursor:pointer;background:transparent;transition:all .4s;font-family:'Source Sans 3',sans-serif}
+.lr-nav.scrolled .lr-nav__book{border-color:#1C1C1A;color:#1C1C1A}
+.lr-nav__book:hover{background:rgba(255,255,255,.15)}
+.lr-nav.scrolled .lr-nav__book:hover{background:#1C1C1A;color:#fff}
+
+/* --- Hero --- */
+.lr-hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.lr-hero__bg{position:absolute;inset:0;background:url('../../styles/img/demo-2/eiffel-tower-3349075.jpg') center/cover no-repeat}
+.lr-hero__overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,28,26,.25) 0%,rgba(28,28,26,.45) 100%)}
+.lr-hero__border{position:absolute;inset:12px;border:1px solid rgba(200,175,140,.35);pointer-events:none}
+.lr-hero__content{position:relative;z-index:2;color:#fff;max-width:800px;padding:0 40px}
+.lr-hero__weather{font-family:'Source Sans 3',sans-serif;font-size:.8rem;letter-spacing:2px;color:rgba(255,255,255,.75);margin-bottom:20px}
+.lr-hero__title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:300;line-height:1.25;margin-bottom:30px}
+.lr-hero__line{width:1px;height:50px;background:rgba(255,255,255,.5);margin:0 auto 25px}
+.lr-hero__play{width:70px;height:70px;border-radius:50%;border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;margin:0 auto;cursor:pointer;transition:transform .4s,background .4s}
+.lr-hero__play:hover{transform:scale(1.1);background:rgba(255,255,255,.12)}
+.lr-hero__play svg{fill:#fff;width:18px;margin-left:3px}
+
+/* --- Section: Legendary --- */
+.lr-legendary{padding:120px 40px;text-align:center;max-width:850px;margin:0 auto}
+.lr-legendary__label{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:#8A6D3B;margin-bottom:20px;font-family:'Source Sans 3',sans-serif}
+.lr-legendary__title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;line-height:1.3;margin-bottom:25px;color:#1C1C1A}
+.lr-legendary__line{width:1px;height:40px;background:#C8AF8C;margin:0 auto 20px}
+.lr-legendary__subtitle{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:#8A6D3B;margin-bottom:18px;font-family:'Source Sans 3',sans-serif}
+.lr-legendary__text{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.15rem;line-height:1.8;color:#555;max-width:680px;margin:0 auto}
+
+/* --- Section: Accommodation --- */
+.lr-accommodation{position:relative;min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.lr-accommodation__bg{position:absolute;inset:0;background:url('../../styles/img/demo-2/living-room-1835923.jpg') center/cover no-repeat}
+.lr-accommodation__overlay{position:absolute;inset:0;background:rgba(28,28,26,.55)}
+.lr-accommodation__content{position:relative;z-index:2;text-align:center;padding:80px 40px;width:100%}
+.lr-accommodation__label{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:#C8AF8C;margin-bottom:30px;font-family:'Source Sans 3',sans-serif}
+.lr-accommodation__active{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:300;color:#fff;margin-bottom:10px;transition:opacity .5s}
+.lr-accommodation__meta{color:rgba(255,255,255,.65);font-size:.85rem;letter-spacing:1px;margin-bottom:40px;font-family:'Source Sans 3',sans-serif}
+.lr-accommodation__list{list-style:none;display:flex;flex-direction:column;gap:16px;align-items:center}
+.lr-accommodation__item{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.1rem,2.5vw,1.8rem);color:rgba(255,255,255,.35);cursor:pointer;transition:color .4s,transform .4s;font-weight:300}
+.lr-accommodation__item:hover,.lr-accommodation__item.active{color:#fff;transform:scale(1.03)}
+
+/* --- Booking Bar --- */
+.lr-booking{display:flex;align-items:center;justify-content:center;gap:0;padding:50px 40px;background:#fff;flex-wrap:wrap}
+.lr-booking__field{display:flex;flex-direction:column;align-items:center;padding:0 35px;border-right:1px solid #e0dcd6}
+.lr-booking__field:last-of-type{border-right:none}
+.lr-booking__field-label{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:#8A6D3B;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.lr-booking__field-value{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.2rem;color:#1C1C1A}
+.lr-booking__btn{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;padding:14px 30px;border:1px solid #1C1C1A;background:transparent;color:#1C1C1A;cursor:pointer;margin-left:20px;transition:all .4s;font-family:'Source Sans 3',sans-serif}
+.lr-booking__btn:hover{background:#1C1C1A;color:#fff}
+
+/* --- Section: Services --- */
+.lr-services{padding:120px 40px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.lr-services__left{}
+.lr-services__label{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:#8A6D3B;margin-bottom:20px;font-family:'Source Sans 3',sans-serif}
+.lr-services__title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;line-height:1.25;color:#1C1C1A;margin-bottom:20px}
+.lr-services__right{padding-top:60px}
+.lr-services__text{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.05rem;line-height:1.9;color:#555}
+.lr-services__link{display:inline-block;margin-top:25px;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:#1C1C1A;border-bottom:1px solid #1C1C1A;padding-bottom:4px;font-family:'Source Sans 3',sans-serif;transition:color .3s}
+.lr-services__link:hover{color:#8A6D3B;border-color:#8A6D3B}
+
+/* --- Section: Location --- */
+.lr-location{position:relative;min-height:70vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.lr-location__bg{position:absolute;inset:0;background:url('../../styles/img/demo-2/eiffel-tower-4370271.jpg') center/cover no-repeat}
+.lr-location__overlay{position:absolute;inset:0;background:rgba(0,0,0,.15)}
+.lr-location__content{position:relative;z-index:2;text-align:center;color:#fff;padding:60px 40px}
+.lr-location__label{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:#C8AF8C;margin-bottom:14px;font-family:'Source Sans 3',sans-serif}
+.lr-location__title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;margin-bottom:20px}
+.lr-location__link{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:#fff;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:4px;font-family:'Source Sans 3',sans-serif}
+
+/* --- Section: Family --- */
+.lr-family{padding:120px 40px;max-width:1100px;margin:0 auto}
+.lr-family__label{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:#8A6D3B;margin-bottom:20px;text-align:center;font-family:'Source Sans 3',sans-serif}
+.lr-family__title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;text-align:center;line-height:1.3;color:#1C1C1A;margin-bottom:50px}
+.lr-family__grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.lr-family__img{border-radius:2px;width:100%;height:380px;object-fit:cover}
+.lr-family__col{}
+.lr-family__text{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.05rem;line-height:1.9;color:#555;margin-bottom:12px}
+.lr-family__link{display:inline-block;margin-top:15px;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:#1C1C1A;border-bottom:1px solid #1C1C1A;padding-bottom:4px;font-family:'Source Sans 3',sans-serif;transition:color .3s}
+.lr-family__link:hover{color:#8A6D3B;border-color:#8A6D3B}
+
+/* --- Section: Palace --- */
+.lr-palace{background:#F9F4F1;padding:120px 40px;text-align:center}
+.lr-palace__label{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:#8A6D3B;margin-bottom:20px;font-family:'Source Sans 3',sans-serif}
+.lr-palace__title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;line-height:1.3;color:#1C1C1A;margin-bottom:20px;max-width:700px;margin-left:auto;margin-right:auto}
+.lr-palace__line{width:1px;height:35px;background:#C8AF8C;margin:0 auto 20px}
+.lr-palace__sub{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:#8A6D3B;margin-bottom:18px;font-family:'Source Sans 3',sans-serif}
+.lr-palace__text{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.1rem;line-height:1.85;color:#555;max-width:750px;margin:0 auto 25px}
+.lr-palace__cta{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:#1C1C1A;border-bottom:1px solid #1C1C1A;padding-bottom:4px;background:none;border-top:none;border-left:none;border-right:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:color .3s}
+.lr-palace__cta:hover{color:#8A6D3B;border-bottom-color:#8A6D3B}
+
+/* --- Section: News --- */
+.lr-news{padding:100px 40px;text-align:center}
+.lr-news__label{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:#8A6D3B;margin-bottom:14px;font-family:'Source Sans 3',sans-serif}
+.lr-news__title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;color:#1C1C1A;margin-bottom:50px}
+.lr-news__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:1100px;margin:0 auto}
+.lr-news__card{text-align:left;cursor:pointer;transition:transform .4s}
+.lr-news__card:hover{transform:translateY(-6px)}
+.lr-news__card-img{width:100%;height:240px;object-fit:cover;margin-bottom:16px;border-radius:2px}
+.lr-news__card-date{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#8A6D3B;margin-bottom:8px;font-family:'Source Sans 3',sans-serif}
+.lr-news__card-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.2rem;font-weight:400;color:#1C1C1A;line-height:1.4}
+
+/* --- Newsletter CTA --- */
+.lr-newsletter{background:#1C1C1A;padding:100px 40px;text-align:center}
+.lr-newsletter__title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:300;color:#fff;margin-bottom:30px}
+.lr-newsletter__btn{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;padding:14px 32px;border:1px solid rgba(255,255,255,.4);color:#fff;background:transparent;cursor:pointer;transition:all .4s;font-family:'Source Sans 3',sans-serif}
+.lr-newsletter__btn:hover{background:rgba(255,255,255,.1)}
+
+/* --- Footer --- */
+.lr-footer{background:#1C1C1A;padding:50px 40px 30px;text-align:center;border-top:1px solid rgba(255,255,255,.08)}
+.lr-footer__logo{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.3rem;letter-spacing:3px;color:#fff;margin-bottom:6px}
+.lr-footer__logo span{display:block;font-size:.5rem;letter-spacing:5px;text-transform:uppercase;font-family:'Source Sans 3',sans-serif;color:rgba(255,255,255,.5)}
+.lr-footer__info{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin:25px 0 20px;font-size:.8rem;color:rgba(255,255,255,.45);font-family:'Source Sans 3',sans-serif}
+.lr-footer__info span{display:flex;align-items:center;gap:5px}
+.lr-footer__socials{display:flex;justify-content:center;gap:16px;margin:20px 0}
+.lr-footer__social{width:40px;height:40px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.85rem;transition:all .3s}
+.lr-footer__social:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.lr-footer__copy{font-size:.7rem;color:rgba(255,255,255,.3);margin-top:20px;font-family:'Source Sans 3',sans-serif}
+
+/* --- Responsive --- */
+@media(max-width:768px){
+  .lr-nav{padding:14px 20px}
+  .lr-services{grid-template-columns:1fr;gap:30px}
+  .lr-services__right{padding-top:0}
+  .lr-family__grid{grid-template-columns:1fr}
+  .lr-news__grid{grid-template-columns:1fr}
+  .lr-booking{flex-direction:column;gap:20px}
+  .lr-booking__field{border-right:none;border-bottom:1px solid #e0dcd6;padding:15px 0}
+  .lr-booking__btn{margin-left:0;margin-top:10px}
+  .lr-footer__info{flex-direction:column;align-items:center;gap:10px}
+}

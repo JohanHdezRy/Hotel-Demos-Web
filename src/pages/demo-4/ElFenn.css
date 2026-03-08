@@ -1,0 +1,235 @@
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* ── Variables ── */
+:root {
+  --ef-black: #1a1a1a;
+  --ef-dark: #2c2c2c;
+  --ef-warm: #c2956b;
+  --ef-pink: #d1647a;
+  --ef-teal: #2a7e73;
+  --ef-cream: #f7f3ef;
+  --ef-light: #faf9f7;
+  --ef-gray: #888;
+  --ef-border: #e0dcd6;
+  --ef-font: 'Roboto', sans-serif;
+  --ef-font2: 'Open Sans', sans-serif;
+}
+
+/* ── HEADER / NAV ── */
+.ef-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 70px;
+  background: rgba(26,26,26,.85); backdrop-filter: blur(8px);
+  transition: background .4s;
+}
+.ef-logo { font-family: var(--ef-font); font-weight: 700; font-size: 1.6rem; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
+.ef-nav { display: flex; gap: 28px; }
+.ef-nav a { color: rgba(255,255,255,.8); font-size: .8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; transition: color .3s; }
+.ef-nav a:hover { color: var(--ef-warm); }
+.ef-book-btn { background: var(--ef-warm); color: #fff; border: none; padding: 10px 22px; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer; transition: background .3s; }
+.ef-book-btn:hover { background: var(--ef-pink); }
+
+/* ── HERO ── */
+.ef-hero {
+  position: relative; height: 100vh; overflow: hidden;
+}
+.ef-hero-slide {
+  position: absolute; inset: 0;
+  opacity: 0; transition: opacity 1.2s ease;
+}
+.ef-hero-slide.active { opacity: 1; }
+.ef-hero-slide img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.ef-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(26,26,26,.45) 0%, rgba(26,26,26,.2) 50%, rgba(26,26,26,.55) 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+}
+.ef-hero-tagline {
+  color: #fff; font-family: var(--ef-font); font-weight: 300; font-size: 3.6rem; letter-spacing: 3px; text-transform: uppercase;
+  text-shadow: 0 2px 30px rgba(0,0,0,.4);
+}
+.ef-hero-sub {
+  color: rgba(255,255,255,.85); font-size: 1.1rem; margin-top: 14px; font-weight: 300; letter-spacing: 2px;
+}
+.ef-hero-arrows {
+  position: absolute; bottom: 40px; left: 0; right: 0;
+  display: flex; justify-content: space-between; padding: 0 40px;
+}
+.ef-hero-arrows button {
+  background: none; border: 1px solid rgba(255,255,255,.5); color: #fff;
+  padding: 10px 24px; font-size: .7rem; text-transform: uppercase; letter-spacing: 2px;
+  cursor: pointer; transition: all .3s;
+}
+.ef-hero-arrows button:hover { background: rgba(255,255,255,.15); border-color: #fff; }
+.ef-hero-dots {
+  position: absolute; bottom: 45px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px;
+}
+.ef-hero-dots span {
+  width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.4);
+  cursor: pointer; transition: background .3s;
+}
+.ef-hero-dots span.active { background: var(--ef-warm); }
+
+/* ── ABOUT ── */
+.ef-about {
+  padding: 100px 40px; text-align: center; background: var(--ef-light); max-width: 900px; margin: 0 auto;
+}
+.ef-about h2 {
+  font-family: var(--ef-font); font-weight: 300; font-size: 2.4rem; color: var(--ef-black); letter-spacing: 1px; margin-bottom: 20px;
+}
+.ef-about .ef-gold-line { width: 60px; height: 2px; background: var(--ef-warm); margin: 0 auto 30px; }
+.ef-about p { font-family: var(--ef-font2); font-size: 1rem; line-height: 1.9; color: #666; max-width: 700px; margin: 0 auto 16px; }
+.ef-about .ef-accolade { font-size: .85rem; color: var(--ef-warm); font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 30px; }
+
+/* ── FEATURES GRID ── */
+.ef-features {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px;
+}
+.ef-feat-card {
+  position: relative; overflow: hidden; aspect-ratio: 1; cursor: pointer;
+}
+.ef-feat-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+.ef-feat-card:hover img { transform: scale(1.06); }
+.ef-feat-card .ef-feat-ov {
+  position: absolute; inset: 0;
+  background: rgba(26,26,26,.35);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: background .4s;
+}
+.ef-feat-card:hover .ef-feat-ov { background: rgba(26,26,26,.55); }
+.ef-feat-card .ef-feat-ov h3 {
+  color: #fff; font-weight: 400; font-size: 1.3rem; letter-spacing: 2px; text-transform: uppercase;
+}
+.ef-feat-card .ef-feat-ov span {
+  color: var(--ef-warm); font-size: .75rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px;
+  opacity: 0; transform: translateY(10px); transition: all .4s;
+}
+.ef-feat-card:hover .ef-feat-ov span { opacity: 1; transform: translateY(0); }
+
+/* ── ROOMS ── */
+.ef-rooms { padding: 90px 40px; background: #fff; }
+.ef-rooms h2 {
+  text-align: center; font-weight: 300; font-size: 2rem; letter-spacing: 1px; color: var(--ef-black); margin-bottom: 10px;
+}
+.ef-rooms .ef-rooms-sub {
+  text-align: center; color: var(--ef-gray); font-size: .95rem; margin-bottom: 50px;
+}
+.ef-rooms-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;
+}
+.ef-room-card { position: relative; overflow: hidden; border-radius: 4px; cursor: pointer; }
+.ef-room-card img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform .5s; }
+.ef-room-card:hover img { transform: scale(1.05); }
+.ef-room-info {
+  padding: 16px 0;
+}
+.ef-room-info h4 { font-weight: 500; font-size: .95rem; color: var(--ef-black); margin-bottom: 4px; }
+.ef-room-info span { font-size: .85rem; color: var(--ef-warm); font-weight: 500; }
+
+/* ── ROOFTOP ── */
+.ef-rooftop {
+  position: relative; min-height: 500px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.ef-rooftop img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ef-rooftop-ov {
+  position: relative; z-index: 2; text-align: center; padding: 60px 40px;
+  background: rgba(26,26,26,.6); max-width: 700px; border-radius: 4px;
+}
+.ef-rooftop-ov h2 { color: #fff; font-weight: 300; font-size: 2.2rem; letter-spacing: 1px; margin-bottom: 16px; }
+.ef-rooftop-ov p { color: rgba(255,255,255,.85); font-size: .95rem; line-height: 1.8; margin-bottom: 10px; }
+.ef-rooftop-ov .ef-hours { color: var(--ef-warm); font-size: .9rem; font-weight: 500; }
+
+/* ── ACTIVITIES ── */
+.ef-activities {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+}
+.ef-act-card {
+  position: relative; overflow: hidden; aspect-ratio: .75; cursor: pointer;
+}
+.ef-act-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.ef-act-card:hover img { transform: scale(1.08); }
+.ef-act-ov {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(26,26,26,.7) 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding: 30px 20px;
+}
+.ef-act-ov h3 { color: #fff; font-weight: 500; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; }
+.ef-act-ov span { color: var(--ef-warm); font-size: .75rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 6px; }
+
+/* ── BLOG ── */
+.ef-blog { padding: 90px 40px; background: var(--ef-light); }
+.ef-blog h2 {
+  text-align: center; font-weight: 300; font-size: 2rem; color: var(--ef-black); letter-spacing: 1px; margin-bottom: 50px;
+}
+.ef-blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1100px; margin: 0 auto; }
+.ef-blog-card { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 15px rgba(0,0,0,.06); transition: transform .3s, box-shadow .3s; cursor: pointer; }
+.ef-blog-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,.1); }
+.ef-blog-card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+.ef-blog-card-body { padding: 20px; }
+.ef-blog-card-body h4 { font-size: 1rem; font-weight: 500; color: var(--ef-black); margin-bottom: 8px; line-height: 1.4; }
+.ef-blog-card-body p { font-size: .85rem; color: #888; line-height: 1.6; }
+
+/* ── NEWSLETTER ── */
+.ef-newsletter {
+  padding: 80px 40px; background: var(--ef-black); text-align: center;
+}
+.ef-newsletter h2 { color: #fff; font-weight: 300; font-size: 1.8rem; letter-spacing: 1px; margin-bottom: 12px; }
+.ef-newsletter p { color: rgba(255,255,255,.6); font-size: .9rem; margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto; }
+.ef-nl-form { display: flex; gap: 0; max-width: 440px; margin: 0 auto; }
+.ef-nl-form input {
+  flex: 1; padding: 14px 18px; border: 1px solid #444; background: transparent; color: #fff;
+  font-size: .9rem; outline: none; transition: border-color .3s;
+}
+.ef-nl-form input::placeholder { color: #666; }
+.ef-nl-form input:focus { border-color: var(--ef-warm); }
+.ef-nl-form button {
+  padding: 14px 28px; background: var(--ef-warm); color: #fff; border: none;
+  font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: background .3s;
+}
+.ef-nl-form button:hover { background: var(--ef-pink); }
+
+/* ── INSTAGRAM ── */
+.ef-insta { padding: 70px 40px; text-align: center; background: #fff; }
+.ef-insta h2 { font-weight: 300; font-size: 1.6rem; color: var(--ef-black); letter-spacing: 1px; margin-bottom: 8px; }
+.ef-insta .ef-insta-handle { color: var(--ef-warm); font-size: .85rem; margin-bottom: 30px; display: block; }
+.ef-insta-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; max-width: 1100px; margin: 0 auto; }
+.ef-insta-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; cursor: pointer; transition: opacity .3s; }
+.ef-insta-grid img:hover { opacity: .8; }
+
+/* ── FOOTER ── */
+.ef-footer {
+  padding: 60px 40px 30px; background: var(--ef-black); color: rgba(255,255,255,.6);
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+.ef-footer-logo { color: #fff; font-size: 1.4rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.ef-footer-addr { text-align: center; font-size: .85rem; line-height: 1.8; }
+.ef-footer-social { display: flex; gap: 24px; }
+.ef-footer-social a { color: rgba(255,255,255,.5); font-size: .8rem; text-transform: uppercase; letter-spacing: 1.5px; transition: color .3s; }
+.ef-footer-social a:hover { color: var(--ef-warm); }
+.ef-footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+.ef-footer-links a { color: rgba(255,255,255,.4); font-size: .75rem; text-transform: uppercase; letter-spacing: 1px; transition: color .3s; }
+.ef-footer-links a:hover { color: #fff; }
+.ef-footer-copy { font-size: .75rem; color: rgba(255,255,255,.25); margin-top: 20px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .ef-features { grid-template-columns: repeat(2, 1fr); }
+  .ef-rooms-grid { grid-template-columns: repeat(2, 1fr); }
+  .ef-activities { grid-template-columns: repeat(2, 1fr); }
+  .ef-blog-grid { grid-template-columns: 1fr; }
+  .ef-insta-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .ef-nav { display: none; }
+  .ef-hero-tagline { font-size: 2rem; }
+  .ef-features { grid-template-columns: 1fr; }
+  .ef-rooms-grid { grid-template-columns: 1fr; }
+  .ef-activities { grid-template-columns: 1fr; }
+}
