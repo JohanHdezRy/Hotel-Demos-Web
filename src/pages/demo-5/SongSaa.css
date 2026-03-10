@@ -44,6 +44,8 @@
 }
 .ss-hero-ov h1 { font-family: var(--ss-serif); color: #fff; font-size: 4rem; font-weight: 400; letter-spacing: 2px; text-shadow: 0 2px 40px rgba(0,0,0,.3); }
 .ss-hero-ov p { color: rgba(255,255,255,.85); font-size: 1.1rem; font-weight: 300; letter-spacing: 2px; margin-top: 12px; }
+.ss-hero-tagline { color: rgba(255,255,255,.85); font-size: 1.1rem; font-weight: 300; letter-spacing: 2px; margin-top: 12px; justify-content: center; }
+
 .ss-hero-scroll {
   position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
   color: rgba(255,255,255,.7); font-size: .75rem; text-transform: uppercase; letter-spacing: 3px;

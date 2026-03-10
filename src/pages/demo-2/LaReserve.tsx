@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
-import { FadeIn } from '../../components/FadeIn'
 import { ScrollTop } from '../../components/ScrollTop'
+import RevealSection from '../../components/animations/RevealSection'
+import BlurText from '../../components/animations/BlurText'
+import GlareHover from '../../components/animations/GlareHover'
 import './LaReserve.css'
 import hotel from '../../styles/img/demo-2/hotel4.jpg'
 import room from '../../styles/img/demo-2/room.jpg'
@@ -75,7 +77,14 @@ export function LaReserve() {
         <div className="lr-hero__border" />
         <div className="lr-hero__content">
           <p className="lr-hero__weather">20:59 &nbsp; 14°C &nbsp; clear sky</p>
-          <h1 className="lr-hero__title">At home in Paris, with the Eiffel Tower as a neighbor</h1>
+          <BlurText
+            text="At home in Paris, with the Eiffel Tower as a neighbor"
+            className="lr-hero__title"
+            animateBy="words"
+            direction="top"
+            delay={60}
+            stepDuration={0.45}
+          />
           <div className="lr-hero__line" />
           <div className="lr-hero__play">
             <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19" /></svg>
@@ -84,7 +93,7 @@ export function LaReserve() {
       </section>
 
       {/* ===== LEGENDARY ADDRESS ===== */}
-      <FadeIn>
+      <RevealSection variant="fadeUp">
         <section className="lr-legendary">
           <p className="lr-legendary__label">A Legendary Address</p>
           <h2 className="lr-legendary__title">
@@ -98,10 +107,10 @@ export function LaReserve() {
             Curabitur sed semper nisl, eget efficitur augue. Nulla facilisi in hac habitasse platea dictumst.
           </p>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== ACCOMMODATION ===== */}
-      <FadeIn>
+      <RevealSection variant="scale">
         <section className="lr-accommodation">
           <div className="lr-accommodation__bg" style={{ backgroundImage: `url(${IMG.room})` }} />
           <div className="lr-accommodation__overlay" />
@@ -124,10 +133,10 @@ export function LaReserve() {
             </ul>
           </div>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== BOOKING BAR ===== */}
-      <FadeIn>
+      <RevealSection variant="fadeUp">
         <section className="lr-booking">
           <div className="lr-booking__field">
             <span className="lr-booking__field-label">Arrival Date</span>
@@ -143,10 +152,10 @@ export function LaReserve() {
           </div>
           <button className="lr-booking__btn">CHECK<br />AVAILABILITY</button>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== SERVICES ===== */}
-      <FadeIn>
+      <RevealSection variant="fadeLeft">
         <section className="lr-services">
           <div className="lr-services__left">
             <p className="lr-services__label">Included Hotel Services</p>
@@ -164,10 +173,10 @@ export function LaReserve() {
             <a href="#" className="lr-services__link">VIEW MORE &gt;</a>
           </div>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== LOCATION ===== */}
-      <FadeIn>
+      <RevealSection variant="scale">
         <section className="lr-location">
           <div className="lr-location__bg" />
           <div className="lr-location__overlay" />
@@ -177,10 +186,10 @@ export function LaReserve() {
             <a href="#" className="lr-location__link">VIEW MORE &gt;</a>
           </div>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== FAMILY ===== */}
-      <FadeIn>
+      <RevealSection variant="fadeUp">
         <section className="lr-family">
           <p className="lr-family__label">As a Family</p>
           <h2 className="lr-family__title">
@@ -188,7 +197,7 @@ export function LaReserve() {
           </h2>
           <div className="lr-family__grid">
             <div className="lr-family__col">
-              <img src={IMG.family1} alt="family living" className="lr-family__img" />
+<GlareHover glareColor="#C8AF8C" glareOpacity={0.2} glareSize={280} borderRadius={0}><img src={IMG.family1} alt="family living" className="lr-family__img" /></GlareHover>
               <p className="lr-family__text" style={{ marginTop: 20 }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae
                 vestibulum vestibulum. Cras imperdiet nulla vitae diam egestas porta.
@@ -200,14 +209,14 @@ export function LaReserve() {
                 magna augue vel odio. Praesent vitae erat id velit accumsan elementum.
               </p>
               <a href="#" className="lr-family__link">VIEW MORE &gt;</a>
-              <img src={IMG.family2} alt="family room" className="lr-family__img" style={{ marginTop: 25 }} />
+<GlareHover glareColor="#C8AF8C" glareOpacity={0.2} glareSize={280} borderRadius={0}><img src={IMG.family2} alt="family room" className="lr-family__img" style={{ marginTop: 25 }} /></GlareHover>
             </div>
           </div>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== PALACE HOTEL ===== */}
-      <FadeIn>
+      <RevealSection variant="fadeRight">
         <section className="lr-palace">
           <p className="lr-palace__label">The Advantages of a Palace Hotel</p>
           <h2 className="lr-palace__title">
@@ -223,10 +232,10 @@ export function LaReserve() {
           </p>
           <button className="lr-palace__cta">SEE THE WEBSITE OF LA RÉSERVE PARIS — HOTEL AND SPA &gt;</button>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== NEWS ===== */}
-      <FadeIn>
+      <RevealSection variant="fadeUp">
         <section className="lr-news">
           <p className="lr-news__label">Discover Our</p>
           <h2 className="lr-news__title">News</h2>
@@ -237,14 +246,16 @@ export function LaReserve() {
               { img: IMG.news3, date: 'November 2025', title: 'Fusce dignissim turpis vitae ante' },
             ].map((n, i) => (
               <div key={i} className="lr-news__card">
-                <img src={n.img} alt={n.title} className="lr-news__card-img" />
+                <GlareHover glareColor="#C8AF8C" glareOpacity={0.18} glareSize={260} borderRadius={0}>
+                  <img src={n.img} alt={n.title} className="lr-news__card-img" />
+                </GlareHover>
                 <p className="lr-news__card-date">{n.date}</p>
                 <h3 className="lr-news__card-title">{n.title}</h3>
               </div>
             ))}
           </div>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== NEWSLETTER ===== */}
       <section className="lr-newsletter">

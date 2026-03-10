@@ -112,6 +112,16 @@
   margin: 0 0 20px;
   line-height: 1.2;
 }
+.oo-hero-h1 {
+  font-size: 64px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin: 0 0 20px;
+  line-height: 1.2;
+  justify-content: center;
+  color: #fff;
+}
+
 
 .oo-hero .oo-tagline {
   font-size: 20px;

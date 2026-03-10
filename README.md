@@ -1,73 +1,86 @@
-# React + TypeScript + Vite
+# 🏨 Hotel Demo Collection
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A collection of **7 luxury hotel landing pages** built as frontend demos, each with a unique visual identity, custom design system, and smooth animations.
 
-Currently, two official plugins are available:
+Live site → **[hotel-demos.vercel.app](https://johanhdezry.github.io/hotel-demos/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Demos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| # | Hotel | Style |
+|---|-------|-------|
+| 1 | Bella Grace | Boutique / Charleston |
+| 2 | La Réserve | Parisian Luxury |
+| 3 | Micon Street | Urban Modern |
+| 4 | El Fenn | Moroccan Riad |
+| 5 | Song Saa | Private Island |
+| 8 | Badrutt's Palace | Swiss Alpine |
+| 11 | One&Only Cape Town | African Contemporary |
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠 Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React 19** + **TypeScript**
+- **Vite** — fast dev & build tooling
+- **React Router v7** — client-side routing
+- **Motion (Framer Motion v12)** — scroll & entrance animations
+- **Pure CSS** — custom design systems per hotel, zero UI frameworks
+- **GitHub Actions** — automatic deployment to GitHub Pages
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🎬 Animations
+
+Each page includes animations built from scratch:
+
+- **BlurText** — word-by-word blur reveal on hero titles
+- **RevealSection** — scroll-triggered entrance with 5 variants (`fadeUp`, `fadeLeft`, `fadeRight`, `scale`, `fade`)
+- **GlareHover** — light sweep glare effect on card images (pure CSS)
+
+---
+
+## 🚀 Run Locally
+
+```bash
+git clone https://github.com/JohanHdezRy/hotel-demos.git
+cd hotel-demos
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📦 Build & Deploy
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Pushing to `main` triggers a GitHub Actions workflow that builds the project and deploys it to GitHub Pages automatically.
+
+```bash
+npm run build   # build for production
 ```
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   ├── animations/     # BlurText, GlareHover, RevealSection...
+│   └── ScrollTop.tsx
+├── pages/
+│   ├── demo-1/         # Bella Grace
+│   ├── demo-2/         # La Réserve
+│   ├── demo-3/         # Micon Street
+│   ├── demo-4/         # El Fenn
+│   ├── demo-5/         # Song Saa
+│   ├── demo-8/         # Badrutt's Palace
+│   └── demo-11/        # One&Only Cape Town
+└── styles/
+    └── img/            # Hotel photography assets
+```
+
+---
+
+> These are concept demos for portfolio purposes only. All hotel names and imagery are used for demonstration.

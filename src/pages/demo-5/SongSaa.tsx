@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
-import { FadeIn } from '../../components/FadeIn'
 import { ScrollTop } from '../../components/ScrollTop'
+import RevealSection from '../../components/animations/RevealSection'
+import BlurText from '../../components/animations/BlurText'
+import GlareHover from '../../components/animations/GlareHover'
 import './SongSaa.css'
 import hotel from '../../styles/img/demo-5/hotel.jpg'
 import prop from '../../styles/img/demo-5/room.jpg'
@@ -56,7 +58,14 @@ export function SongSaa() {
         <img src={IMG.hero} alt="Song Saa Private Island" />
         <div className="ss-hero-ov">
           <h1>Song Saa</h1>
-          <p>Building a future where business can heal, not harm</p>
+          <BlurText
+            text="Building a future where business can heal, not harm"
+            className="ss-hero-tagline"
+            animateBy="words"
+            direction="bottom"
+            delay={70}
+            stepDuration={0.4}
+          />
         </div>
         <div className="ss-hero-scroll">
           Discover
@@ -66,7 +75,7 @@ export function SongSaa() {
 
       {/* PHILOSOPHY */}
       <section className="ss-philosophy" id="about">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2>Regenerative Luxury</h2>
           <div className="ss-leaf" />
           <p>
@@ -81,45 +90,45 @@ export function SongSaa() {
             <span>Regenerative Travel</span>
             <span>Virtuoso Member</span>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* PROPERTIES */}
       <section className="ss-properties" id="properties">
-        <FadeIn><h2>Our World</h2></FadeIn>
+        <RevealSection variant="fadeUp"><h2>Our World</h2></RevealSection>
         <div className="ss-prop-grid">
           {IMG.properties.map((p, i) => (
-            <FadeIn key={i} delay={i * 0.15}>
+            <RevealSection key={i} delay={i * 0.15} variant="fadeUp">
               <div className="ss-prop-card">
-                <img src={p.img} alt={p.name} />
+                <GlareHover glareColor="#798D77" glareOpacity={0.2} glareSize={320} borderRadius={0}><img src={p.img} alt={p.name} /></GlareHover>
                 <div className="ss-prop-card-body">
                   <h3>{p.name}</h3>
                   <p>{p.desc}</p>
                   <span className="ss-prop-link">Explore →</span>
                 </div>
               </div>
-            </FadeIn>
+            </RevealSection>
           ))}
         </div>
       </section>
 
       {/* VILLAS */}
       <section className="ss-villas" id="villas">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2>Island Retreats</h2>
           <p className="ss-villas-sub">Each villa is a private sanctuary surrounded by pristine nature</p>
-        </FadeIn>
+        </RevealSection>
         <div className="ss-villa-grid">
           {IMG.villas.map((v, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
+            <RevealSection key={i} delay={i * 0.1} variant="fadeUp">
               <div className="ss-villa-card">
-                <img src={v.img} alt={v.name} />
+                <GlareHover glareColor="#b09a6f" glareOpacity={0.22} glareSize={300} borderRadius={0}><img src={v.img} alt={v.name} /></GlareHover>
                 <div className="ss-villa-ov">
                   <h4>{v.name}</h4>
                   <span>{v.detail}</span>
                 </div>
               </div>
-            </FadeIn>
+            </RevealSection>
           ))}
         </div>
       </section>
@@ -129,7 +138,7 @@ export function SongSaa() {
         <div className="ss-wellness-img">
           <img src={IMG.wellness} alt="Wellness" />
         </div>
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <div className="ss-wellness-text">
             <h2>Saraan Wellbeing</h2>
             <p>
@@ -140,12 +149,12 @@ export function SongSaa() {
             </p>
             <span className="ss-wellness-link">Discover Wellbeing →</span>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* SUSTAINABILITY */}
       <section className="ss-sustain" id="sustain">
-        <FadeIn>
+        <RevealSection variant="scale">
           <h2>Our Impact</h2>
           <p>
             Through the Song Saa Foundation, we've established Cambodia's first
@@ -171,13 +180,13 @@ export function SongSaa() {
               <div className="ss-stat-label">Marine Reserve in Cambodia</div>
             </div>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* AWARDS */}
       <section className="ss-awards">
         <img src={IMG.awards} alt="Awards" />
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <div className="ss-awards-ov">
             <h2>Recognition</h2>
             <div className="ss-awards-list">
@@ -188,19 +197,19 @@ export function SongSaa() {
               <span>Condé Nast Traveler Awards 2025</span>
             </div>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* NEWSLETTER */}
       <section className="ss-newsletter">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2>Stay Connected</h2>
           <p>Receive stories of conservation, travel inspiration, and exclusive offers.</p>
           <div className="ss-nl-form">
             <input type="email" placeholder="Your email address" />
             <button>Subscribe</button>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* FOOTER */}

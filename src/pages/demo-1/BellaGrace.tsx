@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
-import { FadeIn } from '../../components/FadeIn'
 import { ScrollTop } from '../../components/ScrollTop'
 import { Link } from 'react-router-dom'
+import RevealSection from '../../components/animations/RevealSection'
+import BlurText from '../../components/animations/BlurText'
+import GlareHover from '../../components/animations/GlareHover'
 import './BellaGrace.css'
 import room1 from '../../styles/img/demo-1/room1.jpg'
 import room2 from '../../styles/img/demo-1/room2.jpg'
@@ -22,7 +24,7 @@ import lobby from '../../styles/img/demo-1/lobby.jpg'
 import hotel from '../../styles/img/demo-1/hotel.jpg'
 
 
-/* ─── image pool (pixabay CDN) ─── */
+/* ─── image pool ─── */
 const IMG = {
   heroFacade  : hotel,
   lobby       : lobby,
@@ -106,7 +108,14 @@ export function BellaGrace() {
         <div className="hero__overlay" />
         <div className="hero__content">
           <p className="hero__sub">Residence Inn by Marriott</p>
-          <h1 className="hero__title">HOTEL BELLA GRACE /<br/>CHARLESTON HISTORIC DISTRICT</h1>
+          <BlurText
+            text="HOTEL BELLA GRACE / CHARLESTON HISTORIC DISTRICT"
+            className="hero__title"
+            animateBy="words"
+            direction="top"
+            delay={80}
+            stepDuration={0.45}
+          />
           <div className="hero__rating">
             <span className="hero__stars">●●●●○</span>
             <span>4.4 · 376 Reviews</span>
@@ -116,7 +125,7 @@ export function BellaGrace() {
 
       {/* ═══ WELCOME ═══ */}
       <section className="welcome">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <div className="welcome__line" />
           <p className="welcome__label">WELCOME TO HOTEL BELLA GRACE / CHARLESTON HISTORIC DISTRICT</p>
           <h2 className="welcome__title">HOTEL BELLA GRACE</h2>
@@ -125,24 +134,26 @@ export function BellaGrace() {
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           </p>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ═══ ROOMS CAROUSEL ═══ */}
       <section className="rooms" id="rooms">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2 className="sec-title">ROOMS & SUITES</h2>
           <div className="carousel">
             <button className="carousel__arrow carousel__arrow--left" onClick={prevRoom}>←</button>
             <span className="carousel__counter">{String(roomSlide + 1).padStart(2, '0')} / {String(rooms.length).padStart(2, '0')}</span>
             <button className="carousel__arrow carousel__arrow--right" onClick={nextRoom}>→</button>
           </div>
-        </FadeIn>
+        </RevealSection>
         <div className="rooms__track" style={{ transform: `translateX(-${roomSlide * 52}%)` }}>
           {rooms.map((r, i) => (
             <div className="room-card" key={i}>
               <div className="room-card__img-wrap">
-                <img src={r.img} alt={r.name} />
+                <GlareHover glareColor="#D2AA00" glareOpacity={0.22} glareSize={320} transitionDuration={600}>
+                  <img src={r.img} alt={r.name} />
+                </GlareHover>
               </div>
               <h3 className="room-card__name">{r.name} <span className="room-card__chevron">›</span></h3>
               <div className="room-card__sep" />
@@ -154,14 +165,14 @@ export function BellaGrace() {
 
       {/* ═══ ARCHITECTURAL GEM ═══ */}
       <section className="gem">
-        <FadeIn>
+        <RevealSection variant="fadeLeft">
           <h2 className="gem__title">AN ARCHITECTURAL GEM</h2>
           <p className="gem__text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
           </p>
-        </FadeIn>
-        <FadeIn delay={.15}>
+        </RevealSection>
+        <RevealSection variant="scale" delay={0.15}>
           <div className="gem__gallery">
             {gemGallery.map((img, i) => (
               <div key={i} className={`gem__slide${i === gemSlide ? ' gem__slide--active' : ''}`}>
@@ -174,7 +185,7 @@ export function BellaGrace() {
             <span className="carousel__counter">{String(gemSlide + 1).padStart(2, '0')} / {String(gemGallery.length).padStart(2, '0')}</span>
             <button className="carousel__arrow carousel__arrow--right" onClick={nextGem}>→</button>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ═══ OYSTER BAR ═══ */}
@@ -182,7 +193,7 @@ export function BellaGrace() {
         <div className="oyster__img-wrap">
           <img src={IMG.restaurant} alt="Delaney House Oyster Bar" />
         </div>
-        <FadeIn>
+        <RevealSection variant="fadeRight">
           <div className="oyster__content">
             <h2 className="oyster__title">DELANEY HOUSE OYSTER BAR</h2>
             <p className="oyster__text">
@@ -191,20 +202,20 @@ export function BellaGrace() {
             </p>
             <a href="#" className="btn btn--outline">Explore</a>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ═══ A SENSE OF PLACE ═══ */}
       <section className="place" id="explore">
-        <FadeIn>
+        <RevealSection variant="fadeLeft">
           <h2 className="place__title">A SENSE OF PLACE</h2>
           <p className="place__text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </p>
           <a href="#" className="btn btn--dark">Learn More</a>
-        </FadeIn>
-        <FadeIn delay={.15}>
+        </RevealSection>
+        <RevealSection variant="scale" delay={0.15}>
           <div className="place__gallery">
             {placeGallery.map((img, i) => (
               <div key={i} className={`place__slide${i === placeSlide ? ' place__slide--active' : ''}`}>
@@ -217,7 +228,7 @@ export function BellaGrace() {
             <span className="carousel__counter">{String(placeSlide + 1).padStart(2, '0')} / {String(placeGallery.length).padStart(2, '0')}</span>
             <button className="carousel__arrow carousel__arrow--right" onClick={nextPlace}>→</button>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ═══ SUITE ESCAPE ═══ */}
@@ -225,7 +236,7 @@ export function BellaGrace() {
         <div className="escape__img-wrap">
           <img src={IMG.lounge} alt="Suite escape" />
         </div>
-        <FadeIn>
+        <RevealSection variant="fadeRight">
           <div className="escape__content">
             <h2 className="escape__title">A SUITE ESCAPE</h2>
             <p className="escape__text">
@@ -234,7 +245,7 @@ export function BellaGrace() {
             </p>
             <a href="#" className="btn btn--outline">Learn More</a>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ═══ HISTORY & CULTURE ═══ */}
@@ -242,7 +253,7 @@ export function BellaGrace() {
         <div className="history__img-wrap">
           <img src={IMG.suite} alt="History" />
         </div>
-        <FadeIn>
+        <RevealSection variant="fadeLeft">
           <div className="history__content">
             <h2 className="history__title">ENTRENCHED IN HISTORY, ART, AND CULTURE</h2>
             <p className="history__text">
@@ -251,37 +262,39 @@ export function BellaGrace() {
             </p>
             <a href="#" className="btn btn--dark">Learn More</a>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ═══ MARRIOTT SECTION ═══ */}
       <section className="marriott">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2 className="marriott__title">A MARRIOTT HOTEL IN DOWNTOWN CHARLESTON</h2>
           <p className="marriott__sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ═══ AMENITIES ═══ */}
       <section className="amenities" id="amenities">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2 className="sec-title">HOTEL AMENITIES</h2>
-        </FadeIn>
+        </RevealSection>
         <div className="amenities__grid">
           {amenities.map((a, i) => (
-            <FadeIn key={i} delay={i * .12}>
+            <RevealSection key={i} delay={i * 0.12} variant="scale">
               <div className="amenity-card">
-                <img src={a.img} alt={a.title} />
+                <GlareHover glareColor="#D2AA00" glareOpacity={0.25} glareSize={280} borderRadius={4}>
+                  <img src={a.img} alt={a.title} />
+                </GlareHover>
                 <h3>{a.title}</h3>
               </div>
-            </FadeIn>
+            </RevealSection>
           ))}
         </div>
       </section>
 
       {/* ═══ CONTACT / CTA ═══ */}
       <section className="cta" id="contact">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2 className="cta__title">PLAN YOUR STAY</h2>
           <p className="cta__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           <form className="cta__form" onSubmit={e => e.preventDefault()}>
@@ -290,7 +303,7 @@ export function BellaGrace() {
             <input type="number" placeholder="Guests" min={1} defaultValue={2} />
             <button type="submit" className="btn btn--burgundy">Check Availability</button>
           </form>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ═══ FOOTER ═══ */}

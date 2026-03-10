@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
-import { FadeIn } from '../../components/FadeIn'
 import { ScrollTop } from '../../components/ScrollTop'
+import RevealSection from '../../components/animations/RevealSection'
+import BlurText from '../../components/animations/BlurText'
+import GlareHover from '../../components/animations/GlareHover'
 import './BadruttsPalace.css'
 import room from '../../styles/img/demo-8/room.jpg'
 import room2 from '../../styles/img/demo-8/room2.jpg'
@@ -55,13 +57,27 @@ export function BadruttsPalace() {
       <section className="bp-hero">
         <img src={IMG.hero} alt="Badrutt's Palace St. Moritz" />
         <div className="bp-hero-ov">
-          <h1>BADRUTT'S PALACE</h1>
-          <p>St. Moritz · Switzerland · Since 1896</p>
+          <BlurText
+            text="BADRUTT'S PALACE"
+            className="bp-hero-h1"
+            animateBy="words"
+            direction="top"
+            delay={100}
+            stepDuration={0.45}
+          />
+          <BlurText
+            text="St. Moritz · Switzerland · Since 1896"
+            className="bp-hero-p"
+            animateBy="words"
+            direction="top"
+            delay={60}
+            stepDuration={0.35}
+          />
         </div>
       </section>
 
       <section className="bp-about">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2>Where Magic Happens</h2>
           <div className="bp-divider" />
           <p>
@@ -72,29 +88,29 @@ export function BadruttsPalace() {
             with contemporary elegance, offering an unparalleled experience of Alpine splendor.
           </p>
           <div className="bp-heritage">A Legacy of Excellence · Est. 1896</div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       <section className="bp-rooms" id="rooms">
-        <FadeIn><h2>Accommodations</h2></FadeIn>
+        <RevealSection variant="fadeLeft"><h2>Accommodations</h2></RevealSection>
         <div className="bp-room-grid">
           {IMG.rooms.map((r, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
+            <RevealSection key={i} delay={i * 0.08} variant="fadeUp">
               <div className="bp-room-card">
-                <img src={r.img} alt={r.name} />
+                <GlareHover glareColor="#c9a96e" glareOpacity={0.22} glareSize={300} borderRadius={0}><img src={r.img} alt={r.name} /></GlareHover>
                 <div className="bp-room-card-body">
                   <h4>{r.name}</h4>
                   <span>{r.desc}</span>
                 </div>
               </div>
-            </FadeIn>
+            </RevealSection>
           ))}
         </div>
       </section>
 
       <section className="bp-dining" id="dining">
         <img src={IMG.dining} alt="Dining at Badrutt's Palace" />
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <div className="bp-dining-ov">
             <h2>Fine Dining & Gastronomy</h2>
             <p>
@@ -117,12 +133,12 @@ export function BadruttsPalace() {
               </div>
             </div>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       <section className="bp-spa" id="spa">
         <div className="bp-spa-content">
-          <FadeIn>
+          <RevealSection variant="fadeUp">
             <div className="bp-spa-text">
               <h2>Spa & Wellness</h2>
               <div className="bp-divider" />
@@ -133,7 +149,7 @@ export function BadruttsPalace() {
                 dedicated to restoring your body and spirit.
               </p>
             </div>
-          </FadeIn>
+          </RevealSection>
           <div className="bp-spa-img">
             <img src={IMG.spa} alt="Spa & Wellness" />
           </div>
@@ -141,31 +157,31 @@ export function BadruttsPalace() {
       </section>
 
       <section className="bp-activities" id="activities">
-        <FadeIn><h2>Alpine Experiences</h2></FadeIn>
+        <RevealSection variant="fadeUp"><h2>Alpine Experiences</h2></RevealSection>
         <div className="bp-activities-grid">
           {IMG.activities.map((a, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
+            <RevealSection key={i} delay={i * 0.1} variant="fadeUp">
               <div className="bp-activity-card">
-                <img src={a.img} alt={a.name} />
+                <GlareHover glareColor="#c9a96e" glareOpacity={0.22} glareSize={300} borderRadius={0}><img src={a.img} alt={a.name} /></GlareHover>
                 <div className="bp-activity-ov">
                   <h4>{a.name}</h4>
                   <p>{a.desc}</p>
                 </div>
               </div>
-            </FadeIn>
+            </RevealSection>
           ))}
         </div>
       </section>
 
       <section className="bp-newsletter">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2>Discover More</h2>
           <p>Exclusive offers, Alpine experiences, and palace traditions delivered to your inbox.</p>
           <div className="bp-nl-form">
             <input type="email" placeholder="Your email address" />
             <button>Subscribe</button>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       <footer className="bp-footer">

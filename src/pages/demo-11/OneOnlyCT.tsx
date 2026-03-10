@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import React, { useState } from 'react'
-import { FadeIn } from '../../components/FadeIn'
 import { ScrollTop } from '../../components/ScrollTop'
+import RevealSection from '../../components/animations/RevealSection'
+import BlurText from '../../components/animations/BlurText'
+import GlareHover from '../../components/animations/GlareHover'
 import './OneOnlyCT.css'
 import hotel from '../../styles/img/demo-11/hotel.jpg'
 import room1 from '../../styles/img/demo-11/room.jpg'
@@ -56,8 +58,22 @@ export const OneOnlyCT: React.FC = () => {
       {/* Hero Section */}
       <section className="oo-hero">
         <div className="oo-hero-content">
-          <h1>One&Only Cape Town</h1>
-          <p className="oo-tagline">Ultra-Luxury Waterfront Resort</p>
+          <BlurText
+            text="One&Only Cape Town"
+            className="oo-hero-h1"
+            animateBy="words"
+            direction="top"
+            delay={100}
+            stepDuration={0.45}
+          />
+          <BlurText
+            text="Ultra-Luxury Waterfront Resort"
+            className="oo-tagline"
+            animateBy="words"
+            direction="top"
+            delay={70}
+            stepDuration={0.35}
+          />
           <button className="oo-hero-button">Explore Now</button>
         </div>
       </section>
@@ -65,7 +81,7 @@ export const OneOnlyCT: React.FC = () => {
       {/* About Section */}
       <section id="about" className="oo-about">
         <div className="oo-container">
-          <FadeIn>
+          <RevealSection variant="fadeUp">
             <div className="oo-about-grid">
               <div className="oo-about-image" />
               <div>
@@ -101,24 +117,24 @@ export const OneOnlyCT: React.FC = () => {
                 </div>
               </div>
             </div>
-          </FadeIn>
+          </RevealSection>
         </div>
       </section>
 
       {/* Rooms Section */}
       <section id="rooms" className="oo-rooms">
         <div className="oo-container">
-          <FadeIn>
+          <RevealSection variant="fadeLeft">
             <h2 className="oo-section-title">Luxury Suites & Residences</h2>
-          </FadeIn>
-          <FadeIn delay={0.2}>
+          </RevealSection>
+          <RevealSection variant="fadeUp" delay={0.2}>
             <div className="oo-rooms-grid">
               <div className="oo-room-card">
-                <img
+                <GlareHover glareColor="#c4a265" glareOpacity={0.22} glareSize={300} borderRadius={0}><img
                   src={room1}
                   alt="Island Suite"
                   className="oo-room-image"
-                />
+                /></GlareHover>
                 <div className="oo-room-overlay">
                   <h3 className="oo-room-name">Island Suite</h3>
                   <p className="oo-room-description">Waterfront luxury with private terraces and panoramic views</p>
@@ -126,11 +142,11 @@ export const OneOnlyCT: React.FC = () => {
               </div>
 
               <div className="oo-room-card">
-                <img
+                <GlareHover glareColor="#c4a265" glareOpacity={0.22} glareSize={300} borderRadius={0}><img
                   src={room2}
                   alt="Marina Suite"
                   className="oo-room-image"
-                />
+                /></GlareHover>
                 <div className="oo-room-overlay">
                   <h3 className="oo-room-name">Marina Suite</h3>
                   <p className="oo-room-description">Modern elegance with direct marina access and yacht views</p>
@@ -138,35 +154,35 @@ export const OneOnlyCT: React.FC = () => {
               </div>
 
               <div className="oo-room-card">
-                <img
+                <GlareHover glareColor="#c4a265" glareOpacity={0.22} glareSize={300} borderRadius={0}><img
                   src={room3}
                   alt="Penthouse"
                   className="oo-room-image"
-                />
+                /></GlareHover>
                 <div className="oo-room-overlay">
                   <h3 className="oo-room-name">Penthouse</h3>
                   <p className="oo-room-description">Ultimate indulgence with 360-degree Table Mountain views</p>
                 </div>
               </div>
             </div>
-          </FadeIn>
+          </RevealSection>
         </div>
       </section>
 
       {/* Dining Section */}
       <section id="dining" className="oo-dining">
         <div className="oo-container">
-          <FadeIn>
+          <RevealSection variant="scale">
             <h2 className="oo-section-title-dinner">World-Class Dining</h2>
-          </FadeIn>
-          <FadeIn delay={0.2}>
+          </RevealSection>
+          <RevealSection variant="fadeUp" delay={0.2}>
             <div className="oo-dining-grid">
               <div className="oo-dining-card">
-                <img
+                <GlareHover glareColor="#1a5c5c" glareOpacity={0.18} glareSize={280} borderRadius={0}><img
                   src={res}
                   alt="Nobu"
                   className="oo-dining-image"
-                />
+                /></GlareHover>
                 <div className="oo-dining-content">
                   <h3 className="oo-dining-name">Nobu</h3>
                   <p className="oo-dining-cuisine">Japanese Fusion</p>
@@ -178,11 +194,11 @@ export const OneOnlyCT: React.FC = () => {
               </div>
 
               <div className="oo-dining-card">
-                <img
+                <GlareHover glareColor="#1a5c5c" glareOpacity={0.18} glareSize={280} borderRadius={0}><img
                   src={res2}
                   alt="Reuben's"
                   className="oo-dining-image"
-                />
+                /></GlareHover>
                 <div className="oo-dining-content">
                   <h3 className="oo-dining-name">Reuben's</h3>
                   <p className="oo-dining-cuisine">Contemporary South African</p>
@@ -194,11 +210,11 @@ export const OneOnlyCT: React.FC = () => {
               </div>
 
               <div className="oo-dining-card">
-                <img
+                <GlareHover glareColor="#1a5c5c" glareOpacity={0.18} glareSize={280} borderRadius={0}><img
                   src={res3}
                   alt="Vista Bar"
                   className="oo-dining-image"
-                />
+                /></GlareHover>
                 <div className="oo-dining-content">
                   <h3 className="oo-dining-name">Vista Bar</h3>
                   <p className="oo-dining-cuisine">Craft Cocktails & Wine</p>
@@ -209,14 +225,14 @@ export const OneOnlyCT: React.FC = () => {
                 </div>
               </div>
             </div>
-          </FadeIn>
+          </RevealSection>
         </div>
       </section>
 
       {/* Spa Section */}
       <section id="spa" className="oo-spa">
         <div className="oo-container">
-          <FadeIn>
+          <RevealSection variant="fadeUp">
             <div className="oo-spa-content">
               <div className="oo-spa-image" />
               <div>
@@ -250,17 +266,17 @@ export const OneOnlyCT: React.FC = () => {
                 </div>
               </div>
             </div>
-          </FadeIn>
+          </RevealSection>
         </div>
       </section>
 
       {/* Activities Section */}
       <section id="activities" className="oo-activities">
         <div className="oo-container">
-          <FadeIn>
+          <RevealSection variant="fadeRight">
             <h2 className="oo-section-title-act">Unforgettable Experiences</h2>
-          </FadeIn>
-          <FadeIn delay={0.2}>
+          </RevealSection>
+          <RevealSection variant="fadeUp" delay={0.2}>
             <div className="oo-activities-grid">
               <div className="oo-activity-card">
                 <img
@@ -322,14 +338,14 @@ export const OneOnlyCT: React.FC = () => {
                 </div>
               </div>
             </div>
-          </FadeIn>
+          </RevealSection>
         </div>
       </section>
 
       {/* Newsletter Section */}
       <section className="oo-newsletter">
         <div className="oo-container">
-          <FadeIn>
+          <RevealSection variant="fadeUp">
             <h2>Subscribe to Our Newsletter</h2>
             <p>Discover exclusive offers and experiences from One&Only Cape Town</p>
             <form className="oo-newsletter-form" onSubmit={handleSubscribe}>
@@ -347,7 +363,7 @@ export const OneOnlyCT: React.FC = () => {
                 Thank you for subscribing!
               </p>
             )}
-          </FadeIn>
+          </RevealSection>
         </div>
       </section>
 

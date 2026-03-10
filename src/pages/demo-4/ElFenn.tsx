@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
-import { FadeIn } from '../../components/FadeIn'
 import { ScrollTop } from '../../components/ScrollTop'
+import RevealSection from '../../components/animations/RevealSection'
+import BlurText from '../../components/animations/BlurText'
+import GlareHover from '../../components/animations/GlareHover'
 import './ElFenn.css'
 import hotel from '../../styles/img/demo-4/hotel.jpg'
 import hote2 from '../../styles/img/demo-4/hotel5.jpg'
@@ -109,7 +111,14 @@ export function ElFenn() {
         ))}
         <div className="ef-hero-overlay">
           <h1 className="ef-hero-tagline">El Fenn</h1>
-          <p className="ef-hero-sub">Luxury with Authenticity — Marrakech</p>
+          <BlurText
+            text="Luxury with Authenticity — Marrakech"
+            className="ef-hero-sub"
+            animateBy="words"
+            direction="bottom"
+            delay={80}
+            stepDuration={0.4}
+          />
         </div>
         <div className="ef-hero-arrows">
           <button onClick={prev}>← Prev</button>
@@ -124,7 +133,7 @@ export function ElFenn() {
 
       {/* ── ABOUT ── */}
       <section className="ef-about" id="about">
-        <FadeIn>
+        <RevealSection variant="fadeLeft">
           <h2>Luxury with Authenticity</h2>
           <div className="ef-gold-line" />
           <p>
@@ -139,41 +148,41 @@ export function ElFenn() {
             of warmth and character unlike any other in the Red City.
           </p>
           <div className="ef-accolade">Condé Nast Traveler Gold List — 2017, 2021, 2022, 2024</div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ── FEATURES GRID ── */}
       <section className="ef-features">
         {IMG.features.map((f, i) => (
-          <FadeIn key={i} delay={i * 0.1}>
+          <RevealSection key={i} delay={i * 0.1} variant="fadeUp">
             <div className="ef-feat-card">
-              <img src={f.img} alt={f.label} />
+              <GlareHover glareColor="#c2956b" glareOpacity={0.2} glareSize={320} borderRadius={0}><img src={f.img} alt={f.label} /></GlareHover>
               <div className="ef-feat-ov">
                 <h3>{f.label}</h3>
                 <span>Discover →</span>
               </div>
             </div>
-          </FadeIn>
+          </RevealSection>
         ))}
       </section>
 
       {/* ── ROOMS ── */}
       <section className="ef-rooms" id="rooms">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2>The Perfect Night's Sleep</h2>
           <p className="ef-rooms-sub">Discover Our Bedrooms</p>
-        </FadeIn>
+        </RevealSection>
         <div className="ef-rooms-grid">
           {IMG.rooms.map((r, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
+            <RevealSection key={i} delay={i * 0.08} variant="fadeUp">
               <div className="ef-room-card">
-                <img src={r.img} alt={r.name} />
+                <GlareHover glareColor="#d1647a" glareOpacity={0.2} glareSize={280} borderRadius={0}><img src={r.img} alt={r.name} /></GlareHover>
                 <div className="ef-room-info">
                   <h4>{r.name}</h4>
                   <span>From {r.price}+</span>
                 </div>
               </div>
-            </FadeIn>
+            </RevealSection>
           ))}
         </div>
       </section>
@@ -181,7 +190,7 @@ export function ElFenn() {
       {/* ── ROOFTOP ── */}
       <section className="ef-rooftop" id="rooftop">
         <img src={IMG.rooftop} alt="Rooftop terrace" />
-        <FadeIn>
+        <RevealSection variant="scale">
           <div className="ef-rooftop-ov">
             <h2>The Rooftop</h2>
             <p>
@@ -191,60 +200,60 @@ export function ElFenn() {
             </p>
             <div className="ef-hours">Open daily 12:30 — 23:00</div>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ── ACTIVITIES ── */}
       <section className="ef-activities" id="dining">
         {IMG.activities.map((a, i) => (
-          <FadeIn key={i} delay={i * 0.1}>
+          <RevealSection key={i} delay={i * 0.1} variant="fadeUp">
             <div className="ef-act-card">
-              <img src={a.img} alt={a.label} />
+              <GlareHover glareColor="#c2956b" glareOpacity={0.22} glareSize={300} borderRadius={0}><img src={a.img} alt={a.label} /></GlareHover>
               <div className="ef-act-ov">
                 <h3>{a.label}</h3>
                 <span>{a.sub}</span>
               </div>
             </div>
-          </FadeIn>
+          </RevealSection>
         ))}
       </section>
 
       {/* ── BLOG ── */}
       <section className="ef-blog" id="blog">
-        <FadeIn><h2>The El Fenn Blog</h2></FadeIn>
+        <RevealSection variant="fadeUp"><h2>The El Fenn Blog</h2></RevealSection>
         <div className="ef-blog-grid">
           {IMG.blog.map((b, i) => (
-            <FadeIn key={i} delay={i * 0.12}>
+            <RevealSection key={i} delay={i * 0.12} variant="fadeUp">
               <div className="ef-blog-card">
-                <img src={b.img} alt={b.title} />
+                <GlareHover glareColor="#c2956b" glareOpacity={0.15} glareSize={260} borderRadius={0}><img src={b.img} alt={b.title} /></GlareHover>
                 <div className="ef-blog-card-body">
                   <h4>{b.title}</h4>
                   <p>{b.excerpt}</p>
                 </div>
               </div>
-            </FadeIn>
+            </RevealSection>
           ))}
         </div>
       </section>
 
       {/* ── NEWSLETTER ── */}
       <section className="ef-newsletter">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2>Get the El Fenn Hotlist</h2>
           <p>Sign up for our fortnightly newsletter featuring travel tips, events, and insider guides to Marrakech.</p>
           <div className="ef-nl-form">
             <input type="email" placeholder="Your email address" />
             <button>Subscribe</button>
           </div>
-        </FadeIn>
+        </RevealSection>
       </section>
 
       {/* ── INSTAGRAM ── */}
       <section className="ef-insta">
-        <FadeIn>
+        <RevealSection variant="fadeUp">
           <h2>Follow Our Journey</h2>
           <span className="ef-insta-handle">@elfennmarrakech</span>
-        </FadeIn>
+        </RevealSection>
         <div className="ef-insta-grid">
           {IMG.insta.map((src, i) => (
             <img key={i} src={src} alt={`Instagram ${i + 1}`} />

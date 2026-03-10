@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useCallback } from 'react'
-import { FadeIn } from '../../components/FadeIn'
+import RevealSection from '../../components/animations/RevealSection'
+import BlurText from '../../components/animations/BlurText'
+import GlareHover from '../../components/animations/GlareHover'
 import './MiconStreet.css'
 import location from '../../styles/img/demo-3/cozumel2.jpg'
 import terrace from '../../styles/img/demo-3/terrace.jpg'
@@ -103,7 +105,7 @@ export function MiconStreet() {
       </section>
 
       {/* ===== INTRO ===== */}
-      <FadeIn>
+      <RevealSection variant="fadeUp">
         <section className="mc-intro">
           <p className="mc-intro__text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus vitae massa
@@ -114,14 +116,14 @@ export function MiconStreet() {
             potenti. Vivamus lacinia odio vitae vestibulum vestibulum.
           </p>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== FEATURES CARDS ===== */}
-      <FadeIn>
+      <RevealSection variant="scale">
         <section className="mc-features">
           <div className="mc-features__grid">
             <div className="mc-features__card">
-              <img src={IMG.location} alt="Location" />
+              <GlareHover glareColor="#888888" glareOpacity={0.2} glareSize={280} borderRadius={0}><img src={IMG.location} alt="Location" /></GlareHover>
               <div className="mc-features__card-overlay">
                 <h3 className="mc-features__card-title">Location</h3>
                 <p className="mc-features__card-desc">
@@ -131,7 +133,7 @@ export function MiconStreet() {
               </div>
             </div>
             <div className="mc-features__card">
-              <img src={IMG.hipHotels} alt="Hip Hotels" />
+              <GlareHover glareColor="#888888" glareOpacity={0.2} glareSize={280} borderRadius={0}><img src={IMG.hipHotels} alt="Hip Hotels" /></GlareHover>
               <div className="mc-features__card-overlay">
                 <h3 className="mc-features__card-title">HIP Hotels</h3>
                 <p className="mc-features__card-desc">
@@ -141,7 +143,7 @@ export function MiconStreet() {
               </div>
             </div>
             <div className="mc-features__card">
-              <img src={IMG.services} alt="Services" />
+              <GlareHover glareColor="#888888" glareOpacity={0.2} glareSize={280} borderRadius={0}><img src={IMG.services} alt="Services" /></GlareHover>
               <div className="mc-features__card-overlay">
                 <h3 className="mc-features__card-title">Services</h3>
                 <p className="mc-features__card-desc">
@@ -152,10 +154,10 @@ export function MiconStreet() {
             </div>
           </div>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== 3ELEMENTS ===== */}
-      <FadeIn>
+      <RevealSection variant="fadeLeft">
         <section className="mc-elements">
           <p className="mc-elements__text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus libero vel
@@ -166,25 +168,32 @@ export function MiconStreet() {
             Integer accumsan magna vel enim suscipit, vel dignissim felis consequat.
           </p>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== ROOMS GRID ===== */}
-      <FadeIn>
+      <RevealSection variant="fadeUp">
         <section className="mc-rooms">
-          <h2 className="mc-rooms__title">Our Rooms & Suites</h2>
+          <BlurText
+            text="Our Rooms and Suites"
+            className="mc-rooms__title"
+            animateBy="words"
+            direction="top"
+            delay={70}
+            stepDuration={0.4}
+          />
           <div className="mc-rooms__grid">
             {IMG.rooms.map((r, i) => (
               <div key={i} className="mc-rooms__card">
-                <img src={r.img} alt={r.name} className="mc-rooms__card-img" />
+                <GlareHover glareColor="#ffffff" glareOpacity={0.15} glareSize={240} borderRadius={4}><img src={r.img} alt={r.name} className="mc-rooms__card-img" /></GlareHover>
                 <p className="mc-rooms__card-name">{r.name}</p>
               </div>
             ))}
           </div>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== GALLERY STRIP ===== */}
-      <FadeIn>
+      <RevealSection variant="fadeRight">
         <section className="mc-gallery">
           <div className="mc-gallery__strip">
             {IMG.gallery.map((g, i) => (
@@ -192,7 +201,7 @@ export function MiconStreet() {
             ))}
           </div>
         </section>
-      </FadeIn>
+      </RevealSection>
 
       {/* ===== FOOTER ===== */}
       <footer className="mc-footer">
