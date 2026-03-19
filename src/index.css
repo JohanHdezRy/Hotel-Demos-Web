@@ -1,12 +1,55 @@
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:system-ui,-apple-system,sans-serif;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer}
-img{max-width:100%;height:auto;display:block}
+@import "tailwindcss";
 
-/* Shared animation classes */
-.fadeUp{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
-.fadeUp.visible{opacity:1;transform:translateY(0)}
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s ease-out,transform .8s ease-out}
-.fade-in.visible{opacity:1;transform:translateY(0)}
+@theme {
+  /* Brand tokens — Landing */
+  --color-gold: #C19D68;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+
+  /* Demo font families */
+  --font-playfair-sc: "Playfair Display SC", Georgia, serif;
+  --font-playfair: "Playfair Display", Georgia, serif;
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-source-sans: "Source Sans 3", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --font-open-sans: "Open Sans", sans-serif;
+  --font-dm-sans: "DM Sans", sans-serif;
+  --font-dm-serif: "DM Serif Display", serif;
+  --font-lato: "Lato", sans-serif;
+}
+
+@layer base {
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: system-ui, -apple-system, sans-serif; overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+  button { font-family: inherit; cursor: pointer; }
+  img { max-width: 100%; height: auto; display: block; }
+}
+
+/* Shared animation classes used by demo pages */
+.fadeUp { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s ease; }
+.fadeUp.visible { opacity: 1; transform: translateY(0); }
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity .8s ease-out, transform .8s ease-out; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Demo-specific keyframe animations ── */
+@keyframes fadeHero {
+  from { opacity: 0; transform: translateY(-50%) translateX(30px); }
+  to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+/* hero__content needs combined transform+animation — kept as CSS class */
+.hero-content-anim {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  text-align: right;
+  color: #fff;
+  max-width: 480px;
+  animation: fadeHero 1.2s ease both;
+}

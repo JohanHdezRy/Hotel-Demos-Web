@@ -95,84 +95,41 @@ function Card({ hotel, index }: { hotel: typeof hotels[0]; index: number }) {
     >
       <Link
         to={hotel.path}
-        style={{
-          display: 'block',
-          background: '#1a1a1a',
-          overflow: 'hidden',
-          borderRadius: 8,
-          transition: 'transform .4s, box-shadow .4s',
-          textDecoration: 'none',
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.transform = 'translateY(-8px)'
-          e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,.4)'
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.transform = ''
-          e.currentTarget.style.boxShadow = ''
-        }}
+        className="group block bg-[#1a1a1a] overflow-hidden rounded-lg transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,.4)]"
       >
-        {/* Demo badge */}
-        <div style={{
-          position: 'relative',
-          height: 240,
-          overflow: 'hidden',
-        }}>
+        {/* Image */}
+        <div className="relative h-[240px] overflow-hidden">
           <img
             src={hotel.img}
             alt={hotel.name}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .6s' }}
-            onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.08)')}
-            onMouseLeave={e => (e.currentTarget.style.transform = '')}
+            className="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.08]"
           />
-          <div style={{
-            position: 'absolute',
-            top: 12,
-            right: 12,
-            background: 'rgba(0,0,0,.55)',
-            color: '#C19D68',
-            fontSize: '.6rem',
-            letterSpacing: 2,
-            padding: '4px 10px',
-            borderRadius: 3,
-            backdropFilter: 'blur(4px)',
-          }}>
+          <div className="absolute top-3 right-3 bg-black/55 text-gold text-[0.6rem] tracking-[2px] uppercase px-[10px] py-1 rounded-[3px] backdrop-blur-sm">
             DEMO {hotel.demo}
           </div>
         </div>
 
-        {/* Card body */}
-        <div style={{ padding: '24px 24px 28px' }}>
-          <div style={{ fontSize: '.6rem', letterSpacing: 3, textTransform: 'uppercase', color: '#C19D68', marginBottom: 6 }}>
+        {/* Body */}
+        <div className="px-6 pt-6 pb-7">
+          <p className="text-[0.6rem] tracking-[3px] uppercase text-gold mb-1.5">
             {hotel.loc}
-          </div>
-          <h3 style={{
-            fontFamily: "'Cormorant Garamond',Georgia,serif",
-            fontSize: '1.5rem',
-            fontWeight: 300,
-            color: '#fff',
-            marginBottom: 8,
-          }}>
+          </p>
+          <h3 className="font-[var(--font-serif)] text-2xl font-light text-white mb-2 leading-tight">
             {hotel.name}
           </h3>
-          <p style={{ fontSize: '.8rem', color: '#888', marginBottom: 14 }}>{hotel.style}</p>
-          <div style={{ display: 'flex', gap: 6, marginBottom: 12 }}>
+          <p className="text-[0.8rem] text-[#888] mb-3.5">{hotel.style}</p>
+          <div className="flex gap-1.5 mb-3">
             {hotel.colors.map((c, i) => (
               <div
                 key={i}
-                style={{
-                  width: 20,
-                  height: 20,
-                  borderRadius: '50%',
-                  background: c,
-                  border: '1px solid rgba(255,255,255,.15)',
-                }}
+                className="w-5 h-5 rounded-full border border-white/15"
+                style={{ background: c }}
               />
             ))}
           </div>
-          <div style={{ fontSize: '.65rem', color: '#666', letterSpacing: 1 }}>
+          <p className="text-[0.65rem] text-[#666] tracking-[1px]">
             Inspirado en: {hotel.inspired}
-          </div>
+          </p>
         </div>
       </Link>
     </div>
@@ -181,48 +138,29 @@ function Card({ hotel, index }: { hotel: typeof hotels[0]; index: number }) {
 
 export function Landing() {
   return (
-    <div style={{ background: '#111', minHeight: '100vh' }}>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Raleway:wght@300;400;600&display=swap"
-        rel="stylesheet"
-      />
+    <div className="bg-[#111] min-h-screen">
 
       {/* Hero */}
-      <header style={{
-        padding: '120px 60px 80px',
-        textAlign: 'center',
-        background: 'linear-gradient(180deg,#0a0a0a 0%,#111 100%)',
-      }}>
-        <div style={{ fontSize: '.7rem', letterSpacing: 6, textTransform: 'uppercase', color: '#C19D68', marginBottom: 16 }}>
+      <header className="px-6 pt-24 pb-16 text-center bg-gradient-to-b from-[#0a0a0a] to-[#111] md:px-15 md:pt-[120px] md:pb-20">
+        <p className="text-[0.7rem] tracking-[6px] uppercase text-gold mb-4">
           Portfolio de Demos
-        </div>
-        <h1 style={{
-          fontFamily: "'Cormorant Garamond',Georgia,serif",
-          fontSize: '3.8rem',
-          fontWeight: 300,
-          color: '#fff',
-          lineHeight: 1.1,
-          marginBottom: 20,
-        }}>
+        </p>
+        <h1 className="font-[var(--font-serif)] text-[clamp(2.4rem,6vw,3.8rem)] font-light text-white leading-[1.1] mb-5">
           Hotel Demo<br />Collection
         </h1>
-        <div style={{ width: 60, height: 2, background: '#C19D68', margin: '0 auto 20px' }} />
-        <p style={{ color: '#888', fontSize: '.95rem', maxWidth: 600, margin: '0 auto', lineHeight: 1.8 }}>
+        <div className="w-[60px] h-0.5 bg-gold mx-auto mb-5" />
+        <p className="text-[#888] text-[0.95rem] max-w-xl mx-auto leading-[1.8]">
           Demos de páginas web para hoteles de lujo, construidos con React + TypeScript.
           Cada demo está inspirado en hoteles reales y adaptado para promoción.
         </p>
-        <p style={{ color: '#555', fontSize: '.8rem', marginTop: 12 }}>
+        <p className="text-[#555] text-[0.8rem] mt-3">
           {hotels.length} demos disponibles
         </p>
       </header>
 
       {/* Grid */}
-      <section style={{ padding: '40px 60px 100px', maxWidth: 1400, margin: '0 auto' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-          gap: 30,
-        }}>
+      <section className="px-6 pt-10 pb-24 max-w-[1400px] mx-auto md:px-15">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-7">
           {hotels.map((h, i) => (
             <Card key={h.path} hotel={h} index={i} />
           ))}
@@ -230,14 +168,8 @@ export function Landing() {
       </section>
 
       {/* Footer */}
-      <footer style={{
-        textAlign: 'center',
-        padding: '40px 60px',
-        borderTop: '1px solid rgba(255,255,255,.06)',
-        color: '#555',
-        fontSize: '.75rem',
-      }}>
-        <p>React + TypeScript + Vite — {hotels.length} Demos para promoción hotelera</p>
+      <footer className="text-center px-6 py-10 border-t border-white/[0.06] text-[#555] text-[0.75rem]">
+        <p>React + TypeScript + Vite · Tailwind CSS — {hotels.length} Demos para promoción hotelera</p>
       </footer>
     </div>
   )
