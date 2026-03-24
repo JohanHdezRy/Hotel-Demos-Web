@@ -1,6 +1,8 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useEffect } from 'react'
 import { ScrollTop } from '../../components/ScrollTop'
 import { Link } from 'react-router-dom'
+import { useNavbarScroll } from '../../hooks/useNavbarScroll'
+import { useCarousel } from '../../hooks/useCarousel'
 import RevealSection from '../../components/animations/RevealSection'
 import BlurText from '../../components/animations/BlurText'
 import GlareHover from '../../components/animations/GlareHover'
@@ -73,24 +75,12 @@ function CarouselControls({ prev, next, current, total, center }: {
 }
 
 export function BellaGrace() {
-  const [scrolled, setScrolled]     = useState(false)
-  const [roomSlide, setRoomSlide]   = useState(0)
-  const [gemSlide, setGemSlide]     = useState(0)
-  const [placeSlide, setPlaceSlide] = useState(0)
+  const scrolled = useNavbarScroll(80)
+  const { index: roomSlide, next: nextRoom, prev: prevRoom }   = useCarousel(rooms.length - 1)
+  const { index: gemSlide,  next: nextGem,  prev: prevGem }   = useCarousel(gemGallery.length)
+  const { index: placeSlide, next: nextPlace, prev: prevPlace } = useCarousel(placeGallery.length)
 
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 80)
-    window.addEventListener('scroll', h)
-    window.scrollTo(0, 0)
-    return () => window.removeEventListener('scroll', h)
-  }, [])
-
-  const nextRoom  = useCallback(() => setRoomSlide(s => (s + 1) % (rooms.length - 1)), [])
-  const prevRoom  = useCallback(() => setRoomSlide(s => (s - 1 + rooms.length - 1) % (rooms.length - 1)), [])
-  const nextGem   = useCallback(() => setGemSlide(s => (s + 1) % gemGallery.length), [])
-  const prevGem   = useCallback(() => setGemSlide(s => (s - 1 + gemGallery.length) % gemGallery.length), [])
-  const nextPlace = useCallback(() => setPlaceSlide(s => (s + 1) % placeGallery.length), [])
-  const prevPlace = useCallback(() => setPlaceSlide(s => (s - 1 + placeGallery.length) % placeGallery.length), [])
+  useEffect(() => { window.scrollTo(0, 0) }, [])
 
   const navBase = 'fixed top-0 left-0 w-full z-[1000] px-6 md:px-12 flex items-center gap-5 transition-all duration-[400ms]'
   const navScroll = scrolled

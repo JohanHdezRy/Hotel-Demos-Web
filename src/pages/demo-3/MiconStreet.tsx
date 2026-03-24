@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect, useCallback } from 'react'
+import { useEffect } from 'react'
+import { useCarousel } from '../../hooks/useCarousel'
 import RevealSection from '../../components/animations/RevealSection'
 import BlurText from '../../components/animations/BlurText'
 import GlareHover from '../../components/animations/GlareHover'
@@ -40,14 +41,12 @@ const IMG = {
 const NAV_LINKS = ['HOME', '3ELEMENTS', 'BLOG', 'ROOMS', 'SERVICES', 'LOCATION', 'HIP HOTELS', 'PHOTO GALLERY', 'CONTACT']
 
 export function MiconStreet() {
-  const [slide, setSlide] = useState(0)
+  const { index: slide, next: nextSlide, goTo: goSlide } = useCarousel(IMG.slides.length)
 
   useEffect(() => {
-    const timer = setInterval(() => setSlide(p => (p + 1) % IMG.slides.length), 5000)
+    const timer = setInterval(nextSlide, 5000)
     return () => clearInterval(timer)
-  }, [])
-
-  const goSlide = useCallback((i: number) => setSlide(i), [])
+  }, [nextSlide])
 
   return (
     <div>

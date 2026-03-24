@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect, useCallback } from 'react'
+import { useEffect } from 'react'
 import { ScrollTop } from '../../components/ScrollTop'
+import { useCarousel } from '../../hooks/useCarousel'
 import RevealSection from '../../components/animations/RevealSection'
 import BlurText from '../../components/animations/BlurText'
 import GlareHover from '../../components/animations/GlareHover'
@@ -65,9 +66,7 @@ const IMG = {
 }
 
 export function ElFenn() {
-  const [slide, setSlide] = useState(0)
-  const next = useCallback(() => setSlide(s => (s + 1) % IMG.hero.length), [])
-  const prev = useCallback(() => setSlide(s => (s - 1 + IMG.hero.length) % IMG.hero.length), [])
+  const { index: slide, next, prev, goTo: setSlide } = useCarousel(IMG.hero.length)
 
   useEffect(() => {
     const t = setInterval(next, 5500)

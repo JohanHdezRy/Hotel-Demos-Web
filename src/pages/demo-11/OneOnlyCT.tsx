@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { ScrollTop } from '../../components/ScrollTop'
 import RevealSection from '../../components/animations/RevealSection'
 import BlurText from '../../components/animations/BlurText'
@@ -18,7 +18,6 @@ import event2 from '../../styles/img/demo-11/event2.jpg'
 import event3 from '../../styles/img/demo-11/fitness1.jpg'
 import event4 from '../../styles/img/demo-11/dinner.jpg'
 
-export const imagenes = { hotel }
 
 const TEAL      = '#1a5c5c'
 const DARK_TEAL = '#0f3f3f'
@@ -27,7 +26,7 @@ const CREAM     = '#f7f5f0'
 const CHARCOAL  = '#2a2a28'
 const LIGHT_CREAM = '#faf9f7'
 
-export const OneOnlyCT: React.FC = () => {
+export function OneOnlyCT() {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
 

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect, useCallback } from 'react'
+import { useState } from 'react'
 import { ScrollTop } from '../../components/ScrollTop'
+import { useNavbarScroll } from '../../hooks/useNavbarScroll'
 import RevealSection from '../../components/animations/RevealSection'
 import BlurText from '../../components/animations/BlurText'
 import GlareHover from '../../components/animations/GlareHover'
@@ -28,16 +29,8 @@ const apartments = [
 ]
 
 export function LaReserve() {
-  const [scrolled, setScrolled] = useState(false)
+  const scrolled = useNavbarScroll(80)
   const [activeApt, setActiveApt] = useState(0)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  const handleAptClick = useCallback((i: number) => setActiveApt(i), [])
 
   return (
     <div>
@@ -113,7 +106,7 @@ export function LaReserve() {
               {apartments.map((apt, i) => (
                 <li
                   key={i}
-                  onClick={() => handleAptClick(i)}
+                  onClick={() => setActiveApt(i)}
                   className={`font-[var(--font-cormorant)] text-[clamp(1.1rem,2.5vw,1.8rem)] cursor-pointer transition-all duration-[400ms] font-light ${i === activeApt ? 'text-white scale-[1.03]' : 'text-white/35 hover:text-white hover:scale-[1.03]'}`}
                 >
                   {apt.name}
