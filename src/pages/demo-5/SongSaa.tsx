@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ScrollTop } from '../../components/ScrollTop'
+import { useGsapHero } from '../../hooks/useGsapHero'
 import RevealSection from '../../components/animations/RevealSection'
-import BlurText from '../../components/animations/BlurText'
 import GlareHover from '../../components/animations/GlareHover'
 import hotel from '../../styles/img/demo-5/hotel.jpg'
 import prop from '../../styles/img/demo-5/room.jpg'
@@ -40,6 +40,8 @@ const IMG = {
 }
 
 export function SongSaa() {
+  const heroRef = useGsapHero<HTMLElement>()
+
   return (
     <>
       <Link to="/" className="fixed top-4 left-4 z-[9999] bg-black/65 text-white text-[.72rem] tracking-[1px] px-3.5 py-[7px] rounded-[3px] backdrop-blur-md hover:bg-black/80 transition-colors duration-200">← Demos</Link>
@@ -68,17 +70,27 @@ export function SongSaa() {
       </header>
 
       {/* HERO */}
-      <section className="relative h-screen overflow-hidden">
-        <img src={IMG.hero} alt="Song Saa Private Island" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center" style={{ background: 'linear-gradient(180deg,rgba(42,42,40,.3) 0%,rgba(42,42,40,.15) 50%,rgba(42,42,40,.5) 100%)' }}>
-          <h1 className="font-[var(--font-dm-serif)] text-white text-[4rem] font-normal tracking-[2px]" style={{ textShadow: '0 2px 40px rgba(0,0,0,.3)' }}>Song Saa</h1>
-          <BlurText text="Building a future where business can heal, not harm"
-            className="text-white/85 text-[1.1rem] font-light tracking-[2px] mt-3 justify-center"
-            animateBy="words" direction="bottom" delay={70} stepDuration={0.4} />
-        </div>
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70 text-[.75rem] uppercase tracking-[3px] flex flex-col items-center gap-2">
-          Discover
-          <span className="block w-px h-10 bg-white/40" style={{ animation: 'scrollPulse 2s ease infinite' }} />
+      <section ref={heroRef} className="relative h-screen overflow-hidden">
+        <img src={IMG.hero} alt="Song Saa Private Island" className="gh-img w-full h-full object-cover" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg,rgba(42,42,40,.35) 0%,rgba(42,42,40,.15) 50%,rgba(42,42,40,.55) 100%)' }} />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10">
+          <p className="gh-label font-[var(--font-dm-sans)] text-[.62rem] tracking-[6px] uppercase mb-7" style={{ color: GOLD }}>
+            Koh Rong Archipelago · Cambodia
+          </p>
+          <div style={{ overflow: 'hidden' }}>
+            <h1 className="gh-line font-[var(--font-dm-serif)] text-white text-[clamp(3rem,7vw,5rem)] font-normal tracking-[2px]">
+              Song Saa
+            </h1>
+          </div>
+          <div style={{ overflow: 'hidden' }} className="mb-8">
+            <p className="gh-line font-[var(--font-dm-sans)] text-white/80 text-[1rem] font-light tracking-[2px]">
+              Building a future where business can heal, not harm
+            </p>
+          </div>
+          <div className="gh-meta flex flex-col items-center gap-2 text-white/60 text-[.75rem] uppercase tracking-[3px]">
+            Discover
+            <span className="block w-px h-10 bg-white/40" style={{ animation: 'scrollPulse 2s ease infinite' }} />
+          </div>
         </div>
       </section>
 

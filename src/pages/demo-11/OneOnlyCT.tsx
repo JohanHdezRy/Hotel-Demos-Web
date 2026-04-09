@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { ScrollTop } from '../../components/ScrollTop'
 import RevealSection from '../../components/animations/RevealSection'
-import BlurText from '../../components/animations/BlurText'
 import GlareHover from '../../components/animations/GlareHover'
+import { useGsapHero } from '../../hooks/useGsapHero'
 import hotel from '../../styles/img/demo-11/hotel.jpg'
 import hotel2 from '../../styles/img/demo-11/hotel2.jpg'
 import spaImg from '../../styles/img/demo-11/spa1.jpg'
@@ -27,6 +27,7 @@ const CHARCOAL  = '#2a2a28'
 const LIGHT_CREAM = '#faf9f7'
 
 export function OneOnlyCT() {
+  const heroRef = useGsapHero<HTMLElement>()
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
 
@@ -63,18 +64,30 @@ export function OneOnlyCT() {
       </header>
 
       {/* Hero */}
-      <section className="mt-[60px] h-screen relative overflow-hidden flex items-center justify-center" style={{ background: `linear-gradient(135deg,${DARK_TEAL} 0%,${CHARCOAL} 100%)` }}>
-        <img src={hotel} alt="One&Only Cape Town" className="absolute inset-0 w-full h-full object-cover opacity-30 z-[1]" />
-        <div className="relative z-[2] text-center" style={{ color: CREAM }}>
-          <BlurText text="One&Only Cape Town"
-            className="text-[clamp(2.5rem,6vw,64px)] font-light tracking-[2px] leading-[1.2] mb-5 justify-center text-white"
-            animateBy="words" direction="top" delay={100} stepDuration={0.45} />
-          <BlurText text="Ultra-Luxury Waterfront Resort"
-            className="text-[20px] font-light tracking-[1px] mb-10 justify-center text-[#c4a265]"
-            animateBy="words" direction="top" delay={70} stepDuration={0.35} />
-          <button className="border-none font-semibold text-[13px] tracking-[1px] uppercase px-10 py-[15px] cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(196,162,101,.3)]" style={{ background: GOLD, color: CHARCOAL }}
-            onMouseOver={e => (e.currentTarget.style.background = CREAM)}
-            onMouseOut={e => (e.currentTarget.style.background = GOLD)}
+      <section ref={heroRef} className="h-screen relative overflow-hidden">
+        <img src={hotel} alt="One&Only Cape Town" className="gh-img absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, rgba(15,63,63,.25) 0%, rgba(15,63,63,.55) 100%)` }} />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10">
+          <p className="gh-label text-[.62rem] tracking-[6px] uppercase mb-6 font-light" style={{ color: GOLD }}>
+            V&A Waterfront · Cape Town · South Africa
+          </p>
+          <div style={{ overflow: 'hidden' }}>
+            <h1 className="gh-line font-light tracking-[4px] uppercase leading-none" style={{ fontSize: 'clamp(3rem,7vw,6rem)', color: CREAM }}>
+              One&Only
+            </h1>
+          </div>
+          <div style={{ overflow: 'hidden' }} className="mb-6">
+            <h2 className="gh-line font-light tracking-[8px] uppercase" style={{ fontSize: 'clamp(1rem,2.5vw,1.6rem)', color: GOLD }}>
+              Cape Town
+            </h2>
+          </div>
+          <p className="gh-meta text-[.75rem] tracking-[2px] font-light mb-10" style={{ color: 'rgba(247,245,240,.65)' }}>
+            Ultra-Luxury Waterfront Resort
+          </p>
+          <button className="gh-cta border font-semibold text-[.72rem] tracking-[2px] uppercase px-10 py-[13px] cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(196,162,101,.3)]"
+            style={{ background: GOLD, color: CHARCOAL, borderColor: GOLD }}
+            onMouseOver={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = CREAM }}
+            onMouseOut={e => { e.currentTarget.style.background = GOLD; e.currentTarget.style.color = CHARCOAL }}
           >Explore Now</button>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ScrollTop } from '../../components/ScrollTop'
+import { useGsapHero } from '../../hooks/useGsapHero'
 import RevealSection from '../../components/animations/RevealSection'
-import BlurText from '../../components/animations/BlurText'
 import GlareHover from '../../components/animations/GlareHover'
 import room from '../../styles/img/demo-8/room.jpg'
 import room2 from '../../styles/img/demo-8/room2.jpg'
@@ -43,6 +43,8 @@ const IMG = {
 }
 
 export function BadruttsPalace() {
+  const heroRef = useGsapHero<HTMLElement>()
+
   return (
     <>
       <Link to="/" className="fixed top-4 left-4 z-[9999] bg-black/65 text-white text-[.72rem] tracking-[1px] px-3.5 py-[7px] rounded-[3px] backdrop-blur-md hover:bg-black/80 transition-colors duration-200">← Demos</Link>
@@ -65,15 +67,26 @@ export function BadruttsPalace() {
       </header>
 
       {/* HERO */}
-      <section className="relative h-screen overflow-hidden">
-        <img src={IMG.hero} alt="Badrutt's Palace St. Moritz" className="w-full h-full object-cover brightness-[.8]" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <BlurText text="BADRUTT'S PALACE"
-            className="text-white font-[var(--font-playfair)] font-normal text-[clamp(3rem,6vw,5.5rem)] tracking-[8px] justify-center"
-            animateBy="words" direction="top" delay={100} stepDuration={0.45} />
-          <BlurText text="St. Moritz · Switzerland · Since 1896"
-            className="font-[var(--font-lato)] font-light text-[.95rem] tracking-[3px] uppercase mt-3 justify-center text-white/75"
-            animateBy="words" direction="top" delay={60} stepDuration={0.35} />
+      <section ref={heroRef} className="relative h-screen overflow-hidden">
+        <img src={IMG.hero} alt="Badrutt's Palace St. Moritz" className="gh-img w-full h-full object-cover brightness-[.8]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a2744]/30 via-transparent to-[#1a2744]/50" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10">
+          <p className="gh-label font-[var(--font-lato)] text-[.6rem] tracking-[6px] uppercase mb-7" style={{ color: GOLD }}>
+            St. Moritz · Switzerland · Since 1896
+          </p>
+          <div style={{ overflow: 'hidden' }}>
+            <h1 className="gh-line text-white font-[var(--font-playfair)] font-normal text-[clamp(2.8rem,6vw,5.5rem)] tracking-[6px]">
+              BADRUTT'S
+            </h1>
+          </div>
+          <div style={{ overflow: 'hidden' }} className="mb-6">
+            <h1 className="gh-line text-white font-[var(--font-playfair)] font-normal text-[clamp(2.8rem,6vw,5.5rem)] tracking-[6px]">
+              PALACE
+            </h1>
+          </div>
+          <p className="gh-meta font-[var(--font-lato)] font-light text-[.85rem] tracking-[3px] uppercase" style={{ color: 'rgba(255,255,255,.65)' }}>
+            A Legacy of Excellence · Est. 1896
+          </p>
         </div>
       </section>
 

@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { ScrollTop } from '../../components/ScrollTop'
 import { useNavbarScroll } from '../../hooks/useNavbarScroll'
+import { useGsapHero } from '../../hooks/useGsapHero'
 import RevealSection from '../../components/animations/RevealSection'
-import BlurText from '../../components/animations/BlurText'
+import Marquee from '../../components/animations/Marquee'
 import GlareHover from '../../components/animations/GlareHover'
 import hotel from '../../styles/img/demo-2/hotel4.jpg'
 import room from '../../styles/img/demo-2/room.jpg'
@@ -31,6 +32,7 @@ const apartments = [
 export function LaReserve() {
   const scrolled = useNavbarScroll(80)
   const [activeApt, setActiveApt] = useState(0)
+  const heroRef = useGsapHero<HTMLElement>()
 
   return (
     <div>
@@ -54,23 +56,35 @@ export function LaReserve() {
       </nav>
 
       {/* ===== HERO ===== */}
-      <section className="relative h-screen flex items-center justify-content-center text-center overflow-hidden">
-        <img src={hotel} alt="La Réserve hero" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1c1c1a]/25 to-[#1c1c1a]/45" />
+      <section ref={heroRef} className="relative h-screen flex items-center justify-center text-center overflow-hidden">
+        <img src={hotel} alt="La Réserve hero" className="gh-img absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1c1c1a]/25 to-[#1c1c1a]/50" />
         <div className="absolute inset-3 border border-[#C8AF8C]/35 pointer-events-none" />
         <div className="relative z-10 text-white max-w-[800px] mx-auto px-10">
-          <p className="font-[var(--font-source-sans)] text-[.8rem] tracking-[2px] text-white/75 mb-5">20:59 &nbsp; 14°C &nbsp; clear sky</p>
-          <BlurText
-            text="At home in Paris, with the Eiffel Tower as a neighbor"
-            className="font-[var(--font-cormorant)] text-[clamp(2rem,5vw,3.4rem)] font-light leading-[1.25] mb-[30px]"
-            animateBy="words" direction="top" delay={60} stepDuration={0.45}
-          />
-          <div className="w-px h-[50px] bg-white/50 mx-auto mb-[25px]" />
-          <div className="w-[70px] h-[70px] rounded-full border border-white/60 flex items-center justify-center mx-auto cursor-pointer transition-all duration-[400ms] hover:scale-110 hover:bg-white/12">
-            <svg viewBox="0 0 24 24" className="fill-white w-[18px] ml-[3px]"><polygon points="8,5 19,12 8,19" /></svg>
+          <p className="gh-label font-[var(--font-source-sans)] text-[.8rem] tracking-[2px] text-white/75 mb-6">
+            20:59 &nbsp;·&nbsp; 14°C &nbsp;·&nbsp; clear sky
+          </p>
+          <div style={{ overflow: 'hidden' }}>
+            <p className="gh-line font-[var(--font-cormorant)] text-[clamp(2rem,5vw,3.4rem)] font-light leading-[1.2]">
+              At home in Paris,
+            </p>
+          </div>
+          <div style={{ overflow: 'hidden' }} className="mb-8">
+            <p className="gh-line font-[var(--font-cormorant)] text-[clamp(2rem,5vw,3.4rem)] font-light leading-[1.2]">
+              with the Eiffel Tower as a neighbor
+            </p>
+          </div>
+          <div className="gh-meta flex flex-col items-center gap-5">
+            <div className="w-px h-[50px] bg-white/50" />
+            <div className="w-[70px] h-[70px] rounded-full border border-white/60 flex items-center justify-center cursor-pointer transition-all duration-[400ms] hover:scale-110 hover:bg-white/12">
+              <svg viewBox="0 0 24 24" className="fill-white w-[18px] ml-[3px]"><polygon points="8,5 19,12 8,19" /></svg>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* ===== MARQUEE ===== */}
+      <Marquee items={['LA RÉSERVE', 'PARIS', 'PLACE DU TROCADÉRO', 'EIFFEL TOWER VIEW', 'PALACE HOTEL', '10 APARTMENTS', 'BUTLER SERVICE']} speed={30} />
 
       {/* ===== LEGENDARY ADDRESS ===== */}
       <RevealSection variant="fadeUp">

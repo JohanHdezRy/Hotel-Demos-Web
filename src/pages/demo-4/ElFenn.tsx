@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
 import { ScrollTop } from '../../components/ScrollTop'
 import { useCarousel } from '../../hooks/useCarousel'
 import RevealSection from '../../components/animations/RevealSection'
-import BlurText from '../../components/animations/BlurText'
 import GlareHover from '../../components/animations/GlareHover'
 import hotel from '../../styles/img/demo-4/hotel.jpg'
 import hote2 from '../../styles/img/demo-4/hotel5.jpg'
@@ -67,11 +67,23 @@ const IMG = {
 
 export function ElFenn() {
   const { index: slide, next, prev, goTo: setSlide } = useCarousel(IMG.hero.length)
+  const heroOverlayRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const t = setInterval(next, 5500)
     return () => clearInterval(t)
   }, [next])
+
+  useEffect(() => {
+    if (!heroOverlayRef.current) return
+    const ctx = gsap.context(() => {
+      gsap.timeline({ defaults: { ease: 'power4.out' }, delay: 0.2 })
+        .from('.ef-label', { opacity: 0, y: 14, duration: 0.7 }, 0)
+        .from('.ef-title', { yPercent: 105, duration: 1 }, 0.25)
+        .from('.ef-sub',   { opacity: 0, y: 16, duration: 0.8 }, 0.7)
+    }, heroOverlayRef)
+    return () => ctx.revert()
+  }, [])
 
   return (
     <>
@@ -99,13 +111,29 @@ export function ElFenn() {
       <section className="relative h-screen overflow-hidden">
         {IMG.hero.map((src, i) => (
           <div key={i} className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out ${i === slide ? 'opacity-100' : 'opacity-0'}`}>
-            <img src={src} alt={`El Fenn slide ${i + 1}`} className="w-full h-full object-cover" />
+            <img
+              src={src}
+              alt={`El Fenn slide ${i + 1}`}
+              className={`w-full h-full object-cover ${i === slide ? 'ken-burns' : ''}`}
+            />
           </div>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a]/45 via-[#1a1a1a]/20 to-[#1a1a1a]/55 flex flex-col items-center justify-center text-center">
-          <h1 className="text-white font-[var(--font-roboto)] font-light text-[3.6rem] tracking-[3px] uppercase" style={{ textShadow: '0 2px 30px rgba(0,0,0,.4)' }}>El Fenn</h1>
-          <BlurText text="Luxury with Authenticity — Marrakech" className="text-white/85 text-[1.1rem] mt-3.5 font-light tracking-[2px]"
-            animateBy="words" direction="bottom" delay={80} stepDuration={0.4} />
+        <div
+          ref={heroOverlayRef}
+          className="absolute inset-0 flex flex-col items-center justify-center text-center"
+          style={{ background: 'linear-gradient(180deg,rgba(26,26,26,.4) 0%,rgba(26,26,26,.15) 50%,rgba(26,26,26,.55) 100%)' }}
+        >
+          <p className="ef-label text-[.65rem] tracking-[6px] uppercase mb-5" style={{ color: WARM }}>
+            Marrakech · Medina
+          </p>
+          <div style={{ overflow: 'hidden' }}>
+            <h1 className="ef-title text-white font-[var(--font-roboto)] font-light text-[clamp(3rem,7vw,5.5rem)] tracking-[4px] uppercase" style={{ textShadow: '0 2px 30px rgba(0,0,0,.4)' }}>
+              El Fenn
+            </h1>
+          </div>
+          <p className="ef-sub text-white/80 text-[1rem] mt-4 font-light tracking-[2px]">
+            Luxury with Authenticity
+          </p>
         </div>
         <div className="absolute bottom-10 left-0 right-0 flex justify-between px-10">
           <button onClick={prev} className="bg-none border border-white/50 text-white px-6 py-2.5 text-[.7rem] uppercase tracking-[2px] cursor-pointer transition-all duration-300 hover:bg-white/15 hover:border-white">← Prev</button>
@@ -114,7 +142,7 @@ export function ElFenn() {
         <div className="absolute bottom-[45px] left-1/2 -translate-x-1/2 flex gap-2.5">
           {IMG.hero.map((_, i) => (
             <span key={i} onClick={() => setSlide(i)}
-              className="w-2.5 h-2.5 rounded-full cursor-pointer transition-colors duration-300"
+              className="w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300"
               style={{ background: i === slide ? WARM : 'rgba(255,255,255,.4)' }}
             />
           ))}

@@ -76,21 +76,34 @@ export function MiconStreet() {
       </nav>
 
       {/* ===== HERO SLIDER ===== */}
-      <section className="relative h-[75vh] mt-[120px] overflow-hidden">
+      <section className="relative h-[80vh] mt-[120px] overflow-hidden">
         {IMG.slides.map((src, i) => (
           <div key={i} className={`absolute inset-0 transition-opacity duration-1000 ${i === slide ? 'opacity-100' : 'opacity-0'}`}>
-            <img src={src} alt={`Slide ${i + 1}`} className="w-full h-full object-cover" />
+            <img
+              src={src}
+              alt={`Slide ${i + 1}`}
+              className={`w-full h-full object-cover ${i === slide ? 'ken-burns' : ''}`}
+            />
           </div>
         ))}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-black/50 text-white text-[.7rem] tracking-[1px] px-5 py-2 uppercase font-[var(--font-roboto)]">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 pointer-events-none" />
+
+        {/* Overlay title */}
+        <div className="absolute top-1/2 left-10 -translate-y-1/2 text-white">
+          <p className="text-[.6rem] tracking-[5px] uppercase text-white/60 mb-3 font-[var(--font-roboto)]">Monastiraki · Athens</p>
+          <h1 className="font-[var(--font-playfair)] text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight mb-2">18 MICON</h1>
+          <h2 className="font-[var(--font-cormorant)] italic text-[clamp(1.5rem,3vw,2.2rem)] font-light text-white/80">Street Hotel</h2>
+        </div>
+
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-black/55 text-white text-[.68rem] tracking-[1px] px-5 py-2 uppercase font-[var(--font-roboto)] backdrop-blur-sm">
           World Boutique Hotels Awards 2018
         </div>
-        <div className="absolute bottom-[60px] left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-[55px] left-1/2 -translate-x-1/2 flex gap-2">
           {IMG.slides.map((_, i) => (
             <div
               key={i}
               onClick={() => goSlide(i)}
-              className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-colors duration-300 ${i === slide ? 'bg-white' : 'bg-white/40'}`}
+              className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${i === slide ? 'bg-white scale-125' : 'bg-white/40'}`}
             />
           ))}
         </div>
