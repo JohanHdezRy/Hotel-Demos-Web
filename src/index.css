@@ -53,3 +53,15 @@
   max-width: 480px;
   animation: fadeHero 1.2s ease both;
 }
+
+/* Marquee infinite scroll */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Clip-path reveal for Awwwards-style section entrances */
+@keyframes clipRevealUp {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0% 0); }
+}

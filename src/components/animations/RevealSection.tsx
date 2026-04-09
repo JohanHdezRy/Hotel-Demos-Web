@@ -3,7 +3,7 @@
 import { useRef, type ReactNode, type CSSProperties } from 'react'
 import { motion, useInView } from 'motion/react'
 
-type RevealVariant = 'fadeUp' | 'fadeLeft' | 'fadeRight' | 'scale' | 'fade'
+type RevealVariant = 'fadeUp' | 'fadeLeft' | 'fadeRight' | 'scale' | 'fade' | 'clipReveal' | 'slideUp'
 
 interface RevealSectionProps {
   children: ReactNode
@@ -37,6 +37,16 @@ const variants: Record<RevealVariant, { hidden: VariantState; visible: VariantSt
   fade: {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
+  },
+  // Awwwards-style clip-path reveal — content slides in from the bottom of its container
+  clipReveal: {
+    hidden: { clipPath: 'inset(0 0 100% 0)', opacity: 1 },
+    visible: { clipPath: 'inset(0 0 0% 0)', opacity: 1 },
+  },
+  // Clean upward slide without blur — for headings
+  slideUp: {
+    hidden: { opacity: 0, y: 64 },
+    visible: { opacity: 1, y: 0 },
   },
 }
 
