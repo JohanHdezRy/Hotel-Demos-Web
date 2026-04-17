@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { ScrollTop } from "../../components/ScrollTop";
 
 interface RoomData {
@@ -267,7 +267,7 @@ function diffDays(a: string, b: string) {
 }
 
 export function RoomReservation() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const location = useLocation();
   const room = (location.state as { room: RoomData } | null)?.room;
 
