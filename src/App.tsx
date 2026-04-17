@@ -2,7 +2,8 @@ import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Landing } from './pages/Landing'
 
-const BellaGrace     = lazy(() => import('./pages/demo-1/BellaGrace').then(m => ({ default: m.BellaGrace })))
+const BellaGrace       = lazy(() => import('./pages/demo-1/BellaGrace').then(m => ({ default: m.BellaGrace })))
+const RoomReservation  = lazy(() => import('./pages/demo-1/RoomReservation').then(m => ({ default: m.RoomReservation })))
 const LaReserve      = lazy(() => import('./pages/demo-2/LaReserve').then(m => ({ default: m.LaReserve })))
 const MiconStreet    = lazy(() => import('./pages/demo-3/MiconStreet').then(m => ({ default: m.MiconStreet })))
 const ElFenn         = lazy(() => import('./pages/demo-4/ElFenn').then(m => ({ default: m.ElFenn })))
@@ -23,7 +24,8 @@ export default function App() {
     <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/"        element={<Landing />} />
-        <Route path="/demo-1"  element={<BellaGrace />} />
+        <Route path="/demo-1"           element={<BellaGrace />} />
+        <Route path="/demo-1/reserve"  element={<RoomReservation />} />
         <Route path="/demo-2"  element={<LaReserve />} />
         <Route path="/demo-3"  element={<MiconStreet />} />
         <Route path="/demo-4"  element={<ElFenn />} />
