@@ -17,11 +17,11 @@ export function useGsapHero<T extends HTMLElement = HTMLElement>(delay = 0.15) {
     if (!ref.current) return
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' }, delay })
-      tl.from('.gh-img',   { scale: 1.1, duration: 2.5, ease: 'power2.out' }, 0)
+      tl.from('.gh-img', { scale: 1.1, duration: 2.5, ease: 'power2.out' }, 0)
         .from('.gh-label', { opacity: 0, y: 14, duration: 0.7 }, 0.1)
-        .from('.gh-line',  { yPercent: 110, duration: 1, stagger: 0.12 }, 0.3)
-        .from('.gh-meta',  { opacity: 0, y: 16, duration: 0.8 }, 0.7)
-        .from('.gh-cta',   { opacity: 0, y: 14, duration: 0.6 }, 0.9)
+        .from('.gh-line', { yPercent: 110, duration: 1, stagger: 0.12 }, 0.3)
+        .from('.gh-meta', { opacity: 0, y: 16, duration: 0.8 }, 0.7)
+        .from('.gh-cta', { opacity: 0, y: 14, duration: 0.6 }, 0.9)
     }, ref)
     return () => ctx.revert()
   }, [delay])

@@ -1,30 +1,32 @@
 interface MarqueeProps {
-  items?: string[]
-  speed?: number
-  separator?: string
-  className?: string
+  items?: string[];
+  speed?: number;
+  separator?: string;
+  className?: string;
 }
 
 const DEFAULT_ITEMS = [
-  'BELLA GRACE',
-  'LA RÉSERVE',
-  'MICON STREET',
-  'EL FENN',
-  'SONG SAA',
+  "BELLA GRACE",
+  "LA RÉSERVE",
+  "MICON STREET",
+  "EL FENN",
+  "SONG SAA",
   "BADRUTT'S PALACE",
-  'ONE&ONLY CAPE TOWN',
-]
+  "ONE&ONLY CAPE TOWN",
+];
 
 export default function Marquee({
   items = DEFAULT_ITEMS,
   speed = 35,
-  separator = '✦',
-  className = '',
+  separator = "✦",
+  className = "",
 }: MarqueeProps) {
-  const doubled = [...items, ...items]
+  const doubled = [...items, ...items];
 
   return (
-    <div className={`overflow-hidden bg-[#111] border-y border-white/[0.06] py-[13px] ${className}`}>
+    <div
+      className={`overflow-hidden bg-[#111] border-y border-white/[0.06] py-[13px] ${className}`}
+    >
       <div
         className="flex whitespace-nowrap"
         style={{ animation: `marquee ${speed}s linear infinite` }}
@@ -40,5 +42,5 @@ export default function Marquee({
         ))}
       </div>
     </div>
-  )
+  );
 }
