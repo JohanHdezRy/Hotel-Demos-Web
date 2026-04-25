@@ -163,7 +163,10 @@ export default function MiniCalendar({
       </div>
 
       {/* Day cells */}
-      <div className="grid grid-cols-7 gap-px" style={{ padding: "0 14px 14px" }}>
+      <div
+        className="grid grid-cols-7 gap-px"
+        style={{ padding: "0 14px 14px" }}
+      >
         {cells.map((d, i) => {
           if (!d) return <div key={i} style={{ aspectRatio: "1" }} />;
           const date = new Date(vy, vm, d);

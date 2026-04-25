@@ -228,7 +228,11 @@ export function FreshboxCouponsSection() {
         style={{
           background: CREAM,
           borderRadius: isMobile ? 20 : 28,
-          padding: isMobile ? "32px 24px" : isTablet ? "40px 40px" : "48px 60px",
+          padding: isMobile
+            ? "32px 24px"
+            : isTablet
+              ? "40px 40px"
+              : "48px 60px",
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
           alignItems: isMobile ? "flex-start" : "center",
@@ -248,8 +252,7 @@ export function FreshboxCouponsSection() {
               marginBottom: 8,
             }}
           >
-            Hungry?{" "}
-            <span style={{ color: ACCENT }}>We Are Ready.</span>
+            Hungry? <span style={{ color: ACCENT }}>We Are Ready.</span>
           </h3>
           <p style={{ ...MONTSERRAT(300), fontSize: 15, color: "#8C6040" }}>
             Order online or walk in — your table is always waiting.

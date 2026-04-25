@@ -80,12 +80,12 @@ export function FreshboxFoodCardsSection() {
           const cardHeight = isMobile
             ? 220
             : i === 0
-            ? isTablet
-              ? 320
-              : 400
-            : isTablet
-            ? 240
-            : 280;
+              ? isTablet
+                ? 320
+                : 400
+              : isTablet
+                ? 240
+                : 280;
 
           return (
             <div
@@ -142,12 +142,12 @@ export function FreshboxFoodCardsSection() {
                     fontSize: isMobile
                       ? 20
                       : i === 0
-                      ? isTablet
-                        ? 26
-                        : 32
-                      : isTablet
-                      ? 18
-                      : 22,
+                        ? isTablet
+                          ? 26
+                          : 32
+                        : isTablet
+                          ? 18
+                          : 22,
                     color: "#fff",
                     lineHeight: 1.2,
                     whiteSpace: "pre-line",

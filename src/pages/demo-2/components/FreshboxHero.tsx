@@ -35,8 +35,8 @@ export function FreshboxHero() {
         padding: isMobile
           ? "90px 20px 60px"
           : isTablet
-          ? "100px 32px 60px"
-          : "100px 40px 60px",
+            ? "100px 32px 60px"
+            : "100px 40px 60px",
         position: "relative",
         overflow: "hidden",
         ...revealStyle,
@@ -70,8 +70,8 @@ export function FreshboxHero() {
                 fontSize: isMobile
                   ? "clamp(48px, 14vw, 80px)"
                   : isTablet
-                  ? "clamp(64px, 12vw, 120px)"
-                  : "clamp(80px, 14vw, 180px)",
+                    ? "clamp(64px, 12vw, 120px)"
+                    : "clamp(80px, 14vw, 180px)",
                 color: i === lines.length - 1 ? ACCENT : BROWN,
                 display: "block",
                 letterSpacing: isMobile ? 1 : 3,
@@ -94,7 +94,9 @@ export function FreshboxHero() {
                 left: "100%",
                 transform: "translate(-50%, -50%) scaleX(-1)",
                 zIndex: 2,
-                width: isTablet ? "clamp(160px, 24%, 280px)" : "clamp(240px, 32%, 420px)",
+                width: isTablet
+                  ? "clamp(160px, 24%, 280px)"
+                  : "clamp(240px, 32%, 420px)",
                 pointerEvents: "none",
               }}
             >
@@ -117,7 +119,9 @@ export function FreshboxHero() {
                 left: "0%",
                 transform: "translate(-50%, -50%)",
                 zIndex: 2,
-                width: isTablet ? "clamp(160px, 24%, 280px)" : "clamp(240px, 32%, 420px)",
+                width: isTablet
+                  ? "clamp(160px, 24%, 280px)"
+                  : "clamp(240px, 32%, 420px)",
                 pointerEvents: "none",
               }}
             >

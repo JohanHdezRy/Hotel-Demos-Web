@@ -61,7 +61,9 @@ export function FreshboxMenuSection() {
         <h2
           style={{
             ...CLIMATE,
-            fontSize: isMobile ? "clamp(28px, 8vw, 48px)" : "clamp(36px,4vw,64px)",
+            fontSize: isMobile
+              ? "clamp(28px, 8vw, 48px)"
+              : "clamp(36px,4vw,64px)",
             color: BROWN,
             lineHeight: 1.1,
           }}

@@ -32,11 +32,12 @@ export function FreshboxNav() {
   // Prevent body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
-  const navBg =
-    scrolled || menuOpen ? "rgba(250,245,238,0.97)" : "transparent";
+  const navBg = scrolled || menuOpen ? "rgba(250,245,238,0.97)" : "transparent";
   const navBorder =
     scrolled || menuOpen ? "1px solid rgba(30,15,0,0.08)" : "none";
 
@@ -61,7 +62,9 @@ export function FreshboxNav() {
         }}
       >
         {/* Logo */}
-        <div style={{ ...CLIMATE, fontSize: 26, color: BROWN, letterSpacing: 2 }}>
+        <div
+          style={{ ...CLIMATE, fontSize: 26, color: BROWN, letterSpacing: 2 }}
+        >
           Fresh<span style={{ color: ACCENT }}>Box</span>
         </div>
 
@@ -255,9 +258,7 @@ export function FreshboxNav() {
                     textDecoration: "none",
                     letterSpacing: 0.5,
                     opacity: menuOpen ? 1 : 0,
-                    transform: menuOpen
-                      ? "translateX(0)"
-                      : "translateX(-12px)",
+                    transform: menuOpen ? "translateX(0)" : "translateX(-12px)",
                     transition: `opacity 0.3s ease ${i * 60 + 60}ms, transform 0.3s ease ${i * 60 + 60}ms`,
                   }}
                 >

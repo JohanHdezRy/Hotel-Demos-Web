@@ -3,7 +3,10 @@ import { WARM, PINK, BLACK } from "../data/tokens";
 
 export default function Newsletter() {
   return (
-    <section className="px-5 sm:px-10 py-16 sm:py-20 text-center" style={{ background: BLACK }}>
+    <section
+      className="px-5 sm:px-10 py-16 sm:py-20 text-center"
+      style={{ background: BLACK }}
+    >
       <RevealSection variant="fadeUp">
         <h2 className="text-white font-light text-[1.5rem] sm:text-[1.8rem] tracking-[1px] mb-3">
           Get the El Fenn Hotlist

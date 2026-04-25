@@ -26,7 +26,9 @@ export default function Amenities() {
                   className="w-full h-[220px] sm:h-[260px] lg:h-[300px] object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                 />
               </GlareHover>
-              <h3 className="font-normal text-sm sm:text-[.95rem] py-4">{a.title}</h3>
+              <h3 className="font-normal text-sm sm:text-[.95rem] py-4">
+                {a.title}
+              </h3>
             </div>
           </RevealSection>
         ))}

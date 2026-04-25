@@ -36,7 +36,10 @@ function RoomCard({
         <>
           <div
             className="overflow-hidden flex-shrink-0"
-            style={{ height: "clamp(220px, 40vw, 460px)", borderRadius: "20px 20px 0 0" }}
+            style={{
+              height: "clamp(220px, 40vw, 460px)",
+              borderRadius: "20px 20px 0 0",
+            }}
           >
             <img
               src={r.img}
@@ -197,7 +200,10 @@ function RoomCard({
                     color: INK,
                   }}
                 >
-                  $<em style={{ fontStyle: "italic", color: ACCENT }}>{r.price}</em>
+                  $
+                  <em style={{ fontStyle: "italic", color: ACCENT }}>
+                    {r.price}
+                  </em>
                 </div>
                 <div style={{ fontSize: 12, color: MUTED, marginTop: 4 }}>
                   per night
@@ -230,7 +236,10 @@ function RoomCard({
         </>
       ) : (
         /* ── Collapsed layout: responsive horizontal on md+, stacked on mobile ── */
-        <div className="flex flex-col md:grid md:items-center md:gap-10" style={{ padding: 20 }}>
+        <div
+          className="flex flex-col md:grid md:items-center md:gap-10"
+          style={{ padding: 20 }}
+        >
           <style>{`
             @media (min-width: 768px) {
               .room-card-collapsed { grid-template-columns: 300px 1fr auto !important; }
@@ -322,9 +331,7 @@ function RoomCard({
             </div>
 
             {/* Price + CTA — inline on mobile below info, right-aligned on md+ */}
-            <div
-              className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start gap-4 md:gap-4 mt-5 md:mt-0 md:text-right"
-            >
+            <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start gap-4 md:gap-4 mt-5 md:mt-0 md:text-right">
               <div>
                 <div
                   style={{
@@ -348,7 +355,10 @@ function RoomCard({
                     color: INK,
                   }}
                 >
-                  $<em style={{ fontStyle: "italic", color: ACCENT }}>{r.price}</em>
+                  $
+                  <em style={{ fontStyle: "italic", color: ACCENT }}>
+                    {r.price}
+                  </em>
                 </div>
                 <div style={{ fontSize: 12, color: MUTED, marginTop: 4 }}>
                   per night
@@ -389,9 +399,11 @@ export default function Rooms() {
   const [expanded, setExpanded] = useState(0);
 
   return (
-    <section id="rooms" style={{ padding: "clamp(72px, 10vw, 120px) 0", background: BG_ALT }}>
+    <section
+      id="rooms"
+      style={{ padding: "clamp(72px, 10vw, 120px) 0", background: BG_ALT }}
+    >
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-
         {/* Section header — stacked on mobile, side-by-side on md+ */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-10 mb-8 md:mb-10">
           <div>

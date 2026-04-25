@@ -5,7 +5,6 @@ export default function Services() {
   return (
     <section id="services" style={{ padding: "clamp(72px, 10vw, 120px) 0" }}>
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-
         {/* Section header — stacked on mobile, side-by-side on md+ */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-10 mb-8 md:mb-10">
           <div>

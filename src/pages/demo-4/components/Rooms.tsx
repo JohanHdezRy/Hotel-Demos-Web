@@ -5,7 +5,10 @@ import { roomImages } from "../data/imageData";
 
 export default function Rooms() {
   return (
-    <section className="px-5 sm:px-8 lg:px-10 py-14 sm:py-[90px] bg-white" id="rooms">
+    <section
+      className="px-5 sm:px-8 lg:px-10 py-14 sm:py-[90px] bg-white"
+      id="rooms"
+    >
       <RevealSection variant="fadeUp">
         <h2
           className="text-center font-light text-[1.7rem] sm:text-[2rem] tracking-[1px] mb-2 sm:mb-2.5"

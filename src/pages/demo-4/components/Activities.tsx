@@ -5,7 +5,10 @@ import { activityImages } from "../data/imageData";
 
 export default function Activities() {
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4" id="dining">
+    <section
+      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
+      id="dining"
+    >
       {activityImages.map((a, i) => (
         <RevealSection key={i} delay={i * 0.1} variant="fadeUp">
           <div

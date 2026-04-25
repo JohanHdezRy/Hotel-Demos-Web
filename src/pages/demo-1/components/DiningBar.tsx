@@ -13,7 +13,10 @@ export default function DiningBar() {
   return (
     <>
       {/* Mobile layout — simple vertical stack, no GSAP pin */}
-      <section className="sm:hidden px-6 py-14 border-t-2 border-dashed border-[#e0e0e0]" id="dining">
+      <section
+        className="sm:hidden px-6 py-14 border-t-2 border-dashed border-[#e0e0e0]"
+        id="dining"
+      >
         <h2 className="font-[var(--font-cormorant)] text-[clamp(1.8rem,8vw,2.8rem)] font-light tracking-[4px] text-[#999] mb-8">
           DINING &amp; BAR
         </h2>

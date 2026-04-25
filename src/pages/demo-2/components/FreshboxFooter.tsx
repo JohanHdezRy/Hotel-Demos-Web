@@ -19,11 +19,7 @@ export function FreshboxFooter() {
   const { isMobile, isTablet } = useBreakpoint();
 
   // Desktop: "2fr 1fr 1fr 1fr" | Tablet: "1fr 1fr" | Mobile: "1fr"
-  const gridCols = isMobile
-    ? "1fr"
-    : isTablet
-    ? "1fr 1fr"
-    : "2fr 1fr 1fr 1fr";
+  const gridCols = isMobile ? "1fr" : isTablet ? "1fr 1fr" : "2fr 1fr 1fr 1fr";
 
   return (
     <footer
@@ -32,8 +28,8 @@ export function FreshboxFooter() {
         padding: isMobile
           ? "48px 20px 32px"
           : isTablet
-          ? "56px 40px 36px"
-          : "60px 80px 40px",
+            ? "56px 40px 36px"
+            : "60px 80px 40px",
         color: "rgba(255,255,255,0.7)",
       }}
     >

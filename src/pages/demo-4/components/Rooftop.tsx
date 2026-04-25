@@ -26,7 +26,10 @@ export default function Rooftop() {
             Enjoy panoramic views over the medina and Atlas Mountains while
             savoring craft cocktails and Moroccan-inspired sharing plates.
           </p>
-          <div className="text-[.85rem] sm:text-[.9rem] font-medium" style={{ color: WARM }}>
+          <div
+            className="text-[.85rem] sm:text-[.9rem] font-medium"
+            style={{ color: WARM }}
+          >
             Open daily 12:30 — 23:00
           </div>
         </div>

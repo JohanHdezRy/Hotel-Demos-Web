@@ -56,8 +56,7 @@ export default function BookingSection({ data }: Props) {
       setPickerPos({
         top: r.bottom + 8,
         left: align === "left" ? r.left : undefined,
-        right:
-          align === "right" ? window.innerWidth - r.right : undefined,
+        right: align === "right" ? window.innerWidth - r.right : undefined,
       });
     }
     setOpen((f) => (f === field ? null : field));
@@ -132,7 +131,6 @@ export default function BookingSection({ data }: Props) {
   return (
     <section id="booking" style={{ padding: "clamp(72px, 10vw, 120px) 0" }}>
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-
         {/* Two-column on lg+, stacked on mobile/tablet */}
         <div
           className="grid gap-12 lg:gap-20 items-start"
@@ -506,9 +504,7 @@ export default function BookingSection({ data }: Props) {
                 </div>
                 <div className="flex items-center justify-between">
                   <button
-                    onClick={() =>
-                      data.setAdults(Math.max(1, data.adults - 1))
-                    }
+                    onClick={() => data.setAdults(Math.max(1, data.adults - 1))}
                     style={{
                       width: 44,
                       height: 44,
@@ -579,8 +575,7 @@ export default function BookingSection({ data }: Props) {
                       border: "none",
                       borderRadius: 8,
                       cursor: "pointer",
-                      background:
-                        data.roomIdx === i ? BG_ALT : "transparent",
+                      background: data.roomIdx === i ? BG_ALT : "transparent",
                       transition: "background 0.12s",
                     }}
                     onMouseEnter={(e) => {

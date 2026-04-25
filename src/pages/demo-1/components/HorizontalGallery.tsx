@@ -26,10 +26,7 @@ export default function HorizontalGallery() {
       <div className="sm:hidden overflow-x-auto snap-x snap-mandatory scrollbar-none">
         <div className="flex flex-nowrap">
           {STRIP_IMAGES.map((img, i) => (
-            <div
-              key={i}
-              className="snap-center flex-shrink-0 w-[80vw] px-2"
-            >
+            <div key={i} className="snap-center flex-shrink-0 w-[80vw] px-2">
               <img
                 src={img}
                 alt={`Gallery ${i + 1}`}
@@ -41,12 +38,12 @@ export default function HorizontalGallery() {
       </div>
 
       {/* Tablet / Desktop: GSAP horizontal scroll */}
-      <div
-        ref={galleryRef}
-        className="hidden sm:block overflow-x-hidden"
-      >
+      <div ref={galleryRef} className="hidden sm:block overflow-x-hidden">
         <div className="overflow-x-hidden">
-          <div ref={stripRef} className="flex flex-nowrap will-change-transform">
+          <div
+            ref={stripRef}
+            className="flex flex-nowrap will-change-transform"
+          >
             {STRIP_IMAGES.map((img, i) => (
               <div
                 key={i}

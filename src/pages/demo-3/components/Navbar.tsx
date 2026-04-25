@@ -209,13 +209,16 @@ export default function Navbar() {
                 fontWeight: 300,
                 letterSpacing: "-0.02em",
                 color: INK,
-                borderBottom: idx < navLinks.length - 1 ? `1px solid ${LINE}` : "none",
+                borderBottom:
+                  idx < navLinks.length - 1 ? `1px solid ${LINE}` : "none",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "oklch(0.97 0.02 80)";
+                (e.currentTarget as HTMLElement).style.background =
+                  "oklch(0.97 0.02 80)";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "transparent";
+                (e.currentTarget as HTMLElement).style.background =
+                  "transparent";
               }}
             >
               <span>

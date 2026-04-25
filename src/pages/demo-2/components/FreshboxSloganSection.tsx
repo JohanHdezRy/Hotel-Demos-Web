@@ -20,11 +20,7 @@ export function FreshboxSloganSection() {
       ref={ref as React.RefObject<HTMLElement>}
       style={{
         background: BROWN,
-        padding: isMobile
-          ? "60px 20px"
-          : isTablet
-          ? "80px 40px"
-          : "100px 80px",
+        padding: isMobile ? "60px 20px" : isTablet ? "80px 40px" : "100px 80px",
         display: "grid",
         gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr",
         alignItems: "center",

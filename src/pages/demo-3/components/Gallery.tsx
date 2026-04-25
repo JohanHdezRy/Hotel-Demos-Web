@@ -23,9 +23,11 @@ export default function Gallery() {
   );
 
   return (
-    <section id="gallery" style={{ padding: "clamp(72px, 10vw, 120px) 0", background: BG_ALT }}>
+    <section
+      id="gallery"
+      style={{ padding: "clamp(72px, 10vw, 120px) 0", background: BG_ALT }}
+    >
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
-
         {/* Header row — stacked on mobile, side-by-side on md+ */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-10 mb-8 md:mb-10">
           <div>

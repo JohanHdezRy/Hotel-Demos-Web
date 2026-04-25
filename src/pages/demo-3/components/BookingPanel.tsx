@@ -45,7 +45,11 @@ export default function BookingPanel({ data }: Props) {
     setPickerPos({
       top: r.bottom + 8,
       left: isMobile ? 16 : align === "left" ? r.left : undefined,
-      right: isMobile ? undefined : align === "right" ? window.innerWidth - r.right : undefined,
+      right: isMobile
+        ? undefined
+        : align === "right"
+          ? window.innerWidth - r.right
+          : undefined,
     });
     setOpen((f) => (f === field ? null : field));
   };

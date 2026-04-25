@@ -118,7 +118,10 @@ export default function Rooms() {
   const navigate = useNavigate();
 
   return (
-    <section className="px-4 sm:px-8 lg:px-15 pt-14 sm:pt-20 pb-[60px]" id="rooms">
+    <section
+      className="px-4 sm:px-8 lg:px-15 pt-14 sm:pt-20 pb-[60px]"
+      id="rooms"
+    >
       <RevealSection variant="fadeUp">
         <h2 className="font-[var(--font-playfair-sc)] text-[clamp(1.8rem,5vw,2.5rem)] tracking-[4px] text-[#1C1C1C] mb-2">
           ROOMS & SUITES

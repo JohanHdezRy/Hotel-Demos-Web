@@ -1,15 +1,7 @@
 import { useState, useMemo } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { ScrollTop } from "../../components/ScrollTop";
-
-interface RoomData {
-  id: string;
-  name: string;
-  capacity: number;
-  type: string;
-  price: number;
-  images: string[];
-}
+import type { StaticRoom as RoomData } from "./types";
 
 const AMENITIES: Record<
   string,

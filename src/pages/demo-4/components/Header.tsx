@@ -73,9 +73,7 @@ export default function Header() {
             <span
               className="block w-[22px] h-[2px] bg-white transition-all duration-300 origin-center"
               style={{
-                transform: menuOpen
-                  ? "translateY(7px) rotate(45deg)"
-                  : "none",
+                transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none",
               }}
             />
             <span
@@ -140,7 +138,10 @@ export default function Header() {
           style={{ background: "rgba(194,149,107,.25)" }}
         />
 
-        <div className="mt-6 text-[.7rem] uppercase tracking-[2px] text-center" style={{ color: WARM }}>
+        <div
+          className="mt-6 text-[.7rem] uppercase tracking-[2px] text-center"
+          style={{ color: WARM }}
+        >
           Marrakech · Medina
         </div>
       </nav>
