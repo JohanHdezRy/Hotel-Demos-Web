@@ -1,10 +1,13 @@
+import { cn } from "../../../lib/utils";
+
 interface BtnProps {
-  href: string;
+  href?: string;
   variant: "outline" | "dark" | "burgundy";
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
-export default function Btn({ href, variant, children }: BtnProps) {
+export default function Btn({ href, variant, children, onClick }: BtnProps) {
   const base =
     "inline-block px-9 py-3 text-[.78rem] tracking-[2px] uppercase font-semibold rounded-[2px] cursor-pointer transition-all duration-300 text-center";
   const variants: Record<BtnProps["variant"], string> = {
@@ -14,9 +17,20 @@ export default function Btn({ href, variant, children }: BtnProps) {
     burgundy:
       "border-none bg-[#A90023] text-white px-10 py-3.5 rounded-[24px] hover:bg-[#7d001a]",
   };
-  return (
-    <a href={href} className={`${base} ${variants[variant]}`}>
+  // Anchors are for navigation; buttons are for in-page actions. Falling back
+  // to <button> when href is omitted keeps non-navigating CTAs accessible
+  // (focusable + Enter/Space) without dead "#" anchors.
+  return href ? (
+    <a href={href} className={cn(base, variants[variant])}>
       {children}
     </a>
+  ) : (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(base, variants[variant])}
+    >
+      {children}
+    </button>
   );
 }

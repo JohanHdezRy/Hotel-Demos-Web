@@ -108,6 +108,9 @@ export default function About() {
               src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=900&q=80"
               alt="Interior of Mare e Terra restaurant"
               loading="lazy"
+              decoding="async"
+              width={900}
+              height={600}
               className="relative z-10 w-full h-full object-cover max-h-[600px]"
             />
           </div>

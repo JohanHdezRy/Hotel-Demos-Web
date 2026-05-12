@@ -2,7 +2,7 @@ const navColumns = [
   {
     title: "Navigation",
     links: [
-      { label: "Home", href: "#" },
+      { label: "Home", href: "#hero" },
       { label: "About", href: "#about" },
       { label: "Signature Dishes", href: "#dishes" },
       { label: "Menu", href: "#menu" },
@@ -34,7 +34,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-14">
           {/* Brand */}
           <div className="col-span-2 lg:col-span-1">
-            <a href="#" className="block mb-4">
+            <a href="#hero" className="block mb-4">
               <span className="font-[var(--font-cormorant)] italic text-3xl text-cream">
                 Mare e Terra
               </span>
@@ -50,7 +50,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="font-[var(--font-jost)] text-cream/40 hover:text-gold-mare transition-colors duration-300 text-xs tracking-widest uppercase"
+                className="font-[var(--font-jost)] text-cream/70 hover:text-gold-mare transition-colors duration-300 text-xs tracking-widest uppercase"
               >
                 Instagram
               </a>
@@ -59,7 +59,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="font-[var(--font-jost)] text-cream/40 hover:text-gold-mare transition-colors duration-300 text-xs tracking-widest uppercase"
+                className="font-[var(--font-jost)] text-cream/70 hover:text-gold-mare transition-colors duration-300 text-xs tracking-widest uppercase"
               >
                 Facebook
               </a>
@@ -98,7 +98,7 @@ export default function Footer() {
                   <div className="font-[var(--font-jost)] text-cream/70 text-xs tracking-wide">
                     {item.days}
                   </div>
-                  <div className="font-[var(--font-jost)] text-cream/40 text-xs">
+                  <div className="font-[var(--font-jost)] text-cream/65 text-xs">
                     {item.hours}
                   </div>
                 </li>
@@ -108,7 +108,7 @@ export default function Footer() {
               <div className="font-[var(--font-jost)] text-cream/70 text-xs tracking-wide mb-1">
                 Address
               </div>
-              <address className="not-italic font-[var(--font-jost)] text-cream/40 text-xs leading-relaxed">
+              <address className="not-italic font-[var(--font-jost)] text-cream/65 text-xs leading-relaxed">
                 Calle de Velázquez, 45
                 <br />
                 28001 Madrid, Spain
@@ -119,22 +119,22 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-gold-mare/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-[var(--font-jost)] text-cream/30 text-xs">
+          <p className="font-[var(--font-jost)] text-cream/55 text-xs">
             &copy; {new Date().getFullYear()} Mare e Terra. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a
-              href="#"
-              className="font-[var(--font-jost)] text-cream/30 hover:text-cream/60 text-xs transition-colors duration-300"
+            <button
+              type="button"
+              className="font-[var(--font-jost)] text-cream/60 hover:text-cream text-xs transition-colors duration-300 bg-transparent border-0 p-0 cursor-pointer"
             >
               Privacy Policy
-            </a>
-            <a
-              href="#"
-              className="font-[var(--font-jost)] text-cream/30 hover:text-cream/60 text-xs transition-colors duration-300"
+            </button>
+            <button
+              type="button"
+              className="font-[var(--font-jost)] text-cream/60 hover:text-cream text-xs transition-colors duration-300 bg-transparent border-0 p-0 cursor-pointer"
             >
               Legal Notice
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -1,14 +1,13 @@
 import { useLandingHero } from "../hooks/useLandingHero";
 import { usePanelScroll } from "../hooks/usePanelScroll";
-import { DemoPanel } from "../components/landing/DemoPanel";
-import type { Demo } from "../components/landing/DemoCard";
+import { DemoPanel, type Demo } from "../components/landing/DemoPanel";
 
-import imgDemo1 from "../styles/img/demo1.png";
-import imgDemo2 from "../styles/img/demo2.png";
-import imgDemo3 from "../styles/img/demo3.png";
-import imgDemo4 from "../styles/img/demo4.png";
-import imgDemo5 from "../styles/img/demo5.png";
-import imgDemo6 from "../styles/img/demo6.png";
+import imgDemo1 from "../styles/img/demo1.webp";
+import imgDemo2 from "../styles/img/demo2.webp";
+import imgDemo3 from "../styles/img/demo3.webp";
+import imgDemo4 from "../styles/img/demo4.webp";
+import imgDemo5 from "../styles/img/demo5.webp";
+import imgDemo6 from "../styles/img/demo6.webp";
 
 const DEMOS: Demo[] = [
   {
@@ -371,6 +370,7 @@ export function Landing() {
           demo={demo}
           totalPanels={DEMOS.length}
           zIndex={(i + 2) * 10}
+          priority={i === 0}
         />
       ))}
 

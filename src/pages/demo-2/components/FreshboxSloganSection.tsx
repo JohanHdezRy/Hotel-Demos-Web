@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { ACCENT, BROWN, CLIMATE, MONTSERRAT } from "../data/freshboxTokens";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+import { useScrollReveal } from "../../../hooks/useScrollReveal";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 
 export function FreshboxSloganSection() {
@@ -17,7 +17,7 @@ export function FreshboxSloganSection() {
 
   return (
     <section
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={ref}
       style={{
         background: BROWN,
         padding: isMobile ? "60px 20px" : isTablet ? "80px 40px" : "100px 80px",
@@ -112,6 +112,10 @@ export function FreshboxSloganSection() {
         <img
           src="https://cdn.pixabay.com/photo/2022/01/23/16/34/drink-6961361_1280.jpg"
           alt="Restaurant atmosphere"
+          loading="lazy"
+          decoding="async"
+          width={1280}
+          height={853}
           style={{
             width: "100%",
             borderRadius: 24,

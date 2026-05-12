@@ -14,20 +14,7 @@ export default function Intro() {
       className="max-w-[1280px] mx-auto"
       style={{ padding: "clamp(72px, 12vw, 160px) clamp(20px, 5vw, 48px)" }}
     >
-      {/*
-        Two-column on lg+, single column on mobile/tablet.
-        The <style> tag injects the lg breakpoint override since Tailwind v4
-        inline grid-template-columns values can't use arbitrary responsive syntax easily.
-      */}
-      <style>{`
-        @media (min-width: 1024px) {
-          .intro-grid { grid-template-columns: 1fr 1.2fr !important; gap: 120px !important; }
-        }
-      `}</style>
-      <div
-        className="intro-grid grid gap-10"
-        style={{ gridTemplateColumns: "1fr" }}
-      >
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-[120px]">
         {/* Left: eyebrow + heading */}
         <div>
           <div

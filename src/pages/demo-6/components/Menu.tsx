@@ -1,5 +1,5 @@
 import { menuData } from "../data/menuData";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+import { useScrollReveal } from "../../../hooks/useScrollReveal";
 import { useMenuAnimation } from "../hooks/useMenuAnimation";
 import { cn } from "../../../lib/utils";
 

@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { ROOMS } from "../data/roomsData";
 import {
@@ -12,67 +11,23 @@ import {
   MUTED,
   LINE,
 } from "../data/tokens";
-import { addDays, fmtDate, fmtWeekday } from "../hooks/useDateHelpers";
+import { addDays, fmtDate, fmtWeekday } from "../../../lib/dateHelpers";
 import MiniCalendar from "./MiniCalendar";
-import type { BookingData, OpenField } from "../hooks/useBookingData";
+import type { BookingData } from "../hooks/useBookingData";
+import { usePicker } from "../hooks/usePicker";
 
 type Props = { data: BookingData };
 
 export default function BookingSection({ data }: Props) {
-  const [open, setOpen] = useState<OpenField>(null);
-  const [pickerPos, setPickerPos] = useState<{
-    top: number;
-    left: number | undefined;
-    right: number | undefined;
-  }>({ top: 0, left: 0, right: undefined });
-
-  const formRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      const el = document.getElementById("booking-section-form");
-      if (el && !el.contains(e.target as Node)) setOpen(null);
-    };
-    if (open) document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [open]);
-
-  const openAt = (
-    field: OpenField,
-    btn: HTMLButtonElement,
-    align: "left" | "right" = "left",
-  ) => {
-    const r = btn.getBoundingClientRect();
-    const isMobile = window.innerWidth < 768;
-
-    if (isMobile) {
-      // On mobile, show calendar anchored to left edge with safe margin
-      setPickerPos({
-        top: r.bottom + 8,
-        left: 16,
-        right: undefined,
-      });
-    } else {
-      setPickerPos({
-        top: r.bottom + 8,
-        left: align === "left" ? r.left : undefined,
-        right: align === "right" ? window.innerWidth - r.right : undefined,
-      });
-    }
-    setOpen((f) => (f === field ? null : field));
-  };
-
-  const pickCheckIn = (d: Date) => {
-    data.setCI(d);
-    if (data.checkOut <= d) data.setCO(addDays(d, 1));
-    setOpen(null);
-  };
-  const pickCheckOut = (d: Date) => {
-    if (d > data.checkIn) {
-      data.setCO(d);
-      setOpen(null);
-    }
-  };
+  const {
+    open,
+    pickerPos,
+    containerRef: formRef,
+    openAt,
+    close,
+    pickCheckIn,
+    pickCheckOut,
+  } = usePicker<HTMLDivElement>(data, 768);
 
   const cancelDate = addDays(data.checkIn, -14);
   const cancelStr = cancelDate.toLocaleDateString("en-US", {
@@ -132,19 +87,7 @@ export default function BookingSection({ data }: Props) {
     <section id="booking" style={{ padding: "clamp(72px, 10vw, 120px) 0" }}>
       <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12">
         {/* Two-column on lg+, stacked on mobile/tablet */}
-        <div
-          className="grid gap-12 lg:gap-20 items-start"
-          style={{ gridTemplateColumns: "1fr" }}
-        >
-          <style>{`
-            @media (min-width: 1024px) {
-              .booking-grid { grid-template-columns: 1fr 1fr !important; }
-            }
-          `}</style>
-          <div
-            className="booking-grid grid gap-12 lg:gap-20 items-start"
-            style={{ gridTemplateColumns: "1fr" }}
-          >
+        <div className="grid grid-cols-1 gap-12 items-start lg:grid-cols-2 lg:gap-20">
             {/* Left col — copy & perks */}
             <div>
               <div
@@ -245,7 +188,6 @@ export default function BookingSection({ data }: Props) {
 
             {/* Right col — booking form */}
             <div
-              id="booking-section-form"
               ref={formRef}
               className="flex flex-col gap-4 rounded-[20px] lg:sticky lg:top-24"
               style={{
@@ -454,7 +396,6 @@ export default function BookingSection({ data }: Props) {
                 No payment due today · Free cancellation until {cancelStr}
               </div>
             </div>
-          </div>
         </div>
       </div>
 
@@ -476,7 +417,7 @@ export default function BookingSection({ data }: Props) {
                 checkOut={data.checkOut}
                 mode={open}
                 onSelect={open === "checkin" ? pickCheckIn : pickCheckOut}
-                onClose={() => setOpen(null)}
+                onClose={() => close()}
               />
             )}
             {open === "guests" && (
@@ -564,7 +505,7 @@ export default function BookingSection({ data }: Props) {
                     key={i}
                     onClick={() => {
                       data.setRoomIdx(i);
-                      setOpen(null);
+                      close();
                     }}
                     style={{
                       display: "flex",

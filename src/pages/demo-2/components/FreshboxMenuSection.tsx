@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { CSSProperties } from "react";
 import {
   ACCENT,
@@ -8,17 +7,15 @@ import {
   MONTSERRAT,
 } from "../data/freshboxTokens";
 import { CATEGORIES, MENU } from "../data/freshboxMenuData";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+import { useScrollReveal } from "../../../hooks/useScrollReveal";
 import { useBreakpoint } from "../hooks/useBreakpoint";
+import { useMenuFilter } from "../hooks/useMenuFilter";
 
 export function FreshboxMenuSection() {
-  const [active, setActive] = useState("all");
-  const [hovered, setHovered] = useState<number | null>(null);
+  const { active, setActive, hovered, setHovered, filtered } =
+    useMenuFilter(MENU);
   const { ref, isVisible } = useScrollReveal();
   const { isMobile, isTablet } = useBreakpoint();
-
-  const filtered =
-    active === "all" ? MENU : MENU.filter((m) => m.cat === active);
 
   const revealStyle: CSSProperties = {
     opacity: isVisible ? 1 : 0,
@@ -37,7 +34,7 @@ export function FreshboxMenuSection() {
   return (
     <section
       id="menu"
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={ref}
       style={{
         padding: isMobile ? "60px 16px" : isTablet ? "80px 32px" : "100px 60px",
         background: "#fff",
@@ -164,6 +161,10 @@ export function FreshboxMenuSection() {
               <img
                 src={item.img}
                 alt={item.name}
+                loading="lazy"
+                decoding="async"
+                width={700}
+                height={500}
                 style={{
                   width: "100%",
                   height: "100%",

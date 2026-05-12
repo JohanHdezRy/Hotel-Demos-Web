@@ -66,6 +66,8 @@ export default function Services() {
               <img
                 src={s.img}
                 alt={s.name}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
               <div
@@ -158,6 +160,8 @@ export default function Services() {
               <img
                 src={s.img}
                 alt={s.name}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
               <div

@@ -1,7 +1,6 @@
 // GlareHover — from reactbits.dev/animations/glare-hover
-// No external dependencies — pure CSS via CSS custom properties
+// No external dependencies — pure CSS via CSS custom properties (styles in src/index.css)
 import React from "react";
-import "./GlareHover.css";
 
 interface GlareHoverProps {
   width?: string;

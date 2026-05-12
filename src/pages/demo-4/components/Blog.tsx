@@ -31,6 +31,8 @@ export default function Blog() {
                 <img
                   src={b.img}
                   alt={b.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full object-cover"
                   style={{ aspectRatio: "16/10" }}
                 />

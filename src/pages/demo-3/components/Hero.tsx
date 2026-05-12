@@ -1,24 +1,18 @@
-import { useState, useEffect } from "react";
 import { HERO_SLIDES } from "../data/imageData";
 import { DISPLAY, MONO, INK } from "../data/tokens";
 import BookingPanel from "./BookingPanel";
 import type { BookingData } from "../hooks/useBookingData";
+import { useHeroAutoplay } from "../hooks/useHeroAutoplay";
 
 type Props = { data: BookingData };
 
 export default function Hero({ data }: Props) {
-  const [idx, setIdx] = useState(0);
-
-  useEffect(() => {
-    const t = setInterval(
-      () => setIdx((i) => (i + 1) % HERO_SLIDES.length),
-      6000,
-    );
-    return () => clearInterval(t);
-  }, []);
-
-  const go = (n: number) =>
-    setIdx((n + HERO_SLIDES.length) % HERO_SLIDES.length);
+  const {
+    index: idx,
+    goTo: go,
+    next,
+    prev,
+  } = useHeroAutoplay(HERO_SLIDES.length, 6000);
 
   return (
     <section
@@ -31,7 +25,15 @@ export default function Hero({ data }: Props) {
           className="absolute inset-0 transition-opacity duration-[1200ms]"
           style={{ opacity: i === idx ? 1 : 0 }}
         >
-          <img src={src} alt="" className="w-full h-full object-cover" />
+          <img
+            src={src}
+            alt=""
+            role="presentation"
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
+            fetchPriority={i === 0 ? "high" : "auto"}
+            className="w-full h-full object-cover"
+          />
           <div
             className="absolute inset-0"
             style={{
@@ -194,7 +196,7 @@ export default function Hero({ data }: Props) {
         {["‹", "›"].map((ch, i) => (
           <button
             key={ch}
-            onClick={() => go(idx + (i === 0 ? -1 : 1))}
+            onClick={() => (i === 0 ? prev() : next())}
             aria-label={i === 0 ? "previous" : "next"}
             className="flex items-center justify-center rounded-full border text-white text-lg cursor-pointer transition-all duration-200"
             style={{

@@ -1,4 +1,3 @@
-import { useState, useMemo } from "react";
 import { GALLERY, GALLERY_CATS, GALLERY_LAYOUT } from "../data/servicesData";
 import {
   DISPLAY,
@@ -10,17 +9,10 @@ import {
   INK_SOFT,
   MUTED,
 } from "../data/tokens";
+import { useCategoryFilter } from "../hooks/useCategoryFilter";
 
 export default function Gallery() {
-  const [cat, setCat] = useState("All");
-
-  const items = useMemo(
-    () =>
-      cat === "All"
-        ? GALLERY
-        : GALLERY.filter((g) => g.cat.toLowerCase() === cat.toLowerCase()),
-    [cat],
-  );
+  const { cat, setCat, filtered: items } = useCategoryFilter(GALLERY, "cat");
 
   return (
     <section
@@ -103,6 +95,8 @@ export default function Gallery() {
               <img
                 src={g.src}
                 alt={g.cap}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
               />
               <div
@@ -147,6 +141,8 @@ export default function Gallery() {
                 <img
                   src={g.src}
                   alt={g.cap}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                 />
                 <div

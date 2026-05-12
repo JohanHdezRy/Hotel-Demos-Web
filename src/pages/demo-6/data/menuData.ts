@@ -1,16 +1,5 @@
-export interface MenuItem {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-}
-
-export interface MenuCategory {
-  id: string;
-  label: string;
-  sublabel: string;
-  items: MenuItem[];
-}
+import type { MenuCategory } from "../types";
+export type { MenuItem, MenuCategory } from "../types";
 
 export const menuData: MenuCategory[] = [
   {

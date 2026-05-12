@@ -26,6 +26,8 @@ export default function DiningBar() {
               <img
                 src={img}
                 alt={LABELS[i]}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[220px] object-cover rounded-[6px]"
               />
               <p className="text-[1.2rem] font-[var(--font-cormorant)] tracking-[2px] text-[#1C1C1C]">
@@ -67,6 +69,9 @@ export default function DiningBar() {
                 key={i}
                 ref={(el) => {
                   barSlideRefs.current[i] = el;
+                  return () => {
+                    barSlideRefs.current[i] = null;
+                  };
                 }}
                 className="absolute w-1/2 top-1/2 -translate-y-1/2 right-4 rounded-[10px] overflow-hidden"
                 style={{ opacity: 0, visibility: "hidden" }}
@@ -74,6 +79,8 @@ export default function DiningBar() {
                 <img
                   src={img}
                   alt={`Slide ${i + 1}`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full max-w-[600px] object-cover"
                 />
               </div>

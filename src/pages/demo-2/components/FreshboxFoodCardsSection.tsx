@@ -8,7 +8,7 @@ import {
   MONTSERRAT,
 } from "../data/freshboxTokens";
 import { FOOD_CARDS } from "../data/freshboxMenuData";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+import { useScrollReveal } from "../../../hooks/useScrollReveal";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 
 export function FreshboxFoodCardsSection() {
@@ -27,7 +27,7 @@ export function FreshboxFoodCardsSection() {
 
   return (
     <section
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={ref}
       style={{
         padding: isMobile ? "60px 16px" : isTablet ? "80px 32px" : "100px 60px",
         background: CREAM,
@@ -109,6 +109,10 @@ export function FreshboxFoodCardsSection() {
               <img
                 src={card.img}
                 alt={card.phrase}
+                loading="lazy"
+                decoding="async"
+                width={700}
+                height={500}
                 style={{
                   width: "100%",
                   height: "100%",

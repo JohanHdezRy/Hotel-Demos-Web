@@ -3,6 +3,7 @@ import { useCarousel } from "../../../hooks/useCarousel";
 import { CarouselControls } from "./Rooms";
 import Btn from "./Btn";
 import { placeGallery } from "../data/galleryData";
+import { cn } from "../../../lib/utils";
 
 export default function SenseOfPlace() {
   const {
@@ -23,9 +24,7 @@ export default function SenseOfPlace() {
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.
         </p>
-        <Btn href="#" variant="dark">
-          Learn More
-        </Btn>
+        <Btn variant="dark">Learn More</Btn>
       </RevealSection>
       <RevealSection variant="scale" delay={0.15}>
         {/* Mobile: single active image */}
@@ -33,6 +32,8 @@ export default function SenseOfPlace() {
           <img
             src={placeGallery[placeSlide]}
             alt="Charleston"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
         </div>
@@ -41,11 +42,18 @@ export default function SenseOfPlace() {
           {placeGallery.map((img, i) => (
             <div
               key={i}
-              className={`flex-none h-[280px] overflow-hidden rounded-[4px] transition-all duration-500 ${i === placeSlide ? "basis-1/2 opacity-100" : "basis-[32%] opacity-50"}`}
+              className={cn(
+                "flex-none h-[280px] overflow-hidden rounded-[4px] transition-all duration-500",
+                i === placeSlide
+                  ? "basis-1/2 opacity-100"
+                  : "basis-[32%] opacity-50",
+              )}
             >
               <img
                 src={img}
                 alt="Charleston"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>

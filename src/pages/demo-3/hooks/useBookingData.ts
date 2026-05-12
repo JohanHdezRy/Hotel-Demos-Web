@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ROOMS } from "../data/roomsData";
-import { addDays, nightsCount, TODAY } from "./useDateHelpers";
+import { addDays, nightsCount, TODAY } from "../../../lib/dateHelpers";
 import type { OpenField } from "../types";
 
 export type { OpenField };

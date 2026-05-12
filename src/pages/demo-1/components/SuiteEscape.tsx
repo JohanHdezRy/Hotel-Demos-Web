@@ -9,6 +9,8 @@ export default function SuiteEscape() {
         <img
           src={lounge}
           alt="Suite escape"
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover"
         />
       </div>
@@ -23,9 +25,7 @@ export default function SuiteEscape() {
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat.
           </p>
-          <Btn href="#" variant="outline">
-            Learn More
-          </Btn>
+          <Btn variant="outline">Learn More</Btn>
         </div>
       </RevealSection>
     </section>

@@ -11,6 +11,8 @@ export default function Rooftop() {
       <img
         src={rooftopImage}
         alt="Rooftop terrace"
+        loading="lazy"
+        decoding="async"
         className="absolute inset-0 w-full h-full object-cover"
       />
       <RevealSection variant="scale">

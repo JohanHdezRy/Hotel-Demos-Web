@@ -30,6 +30,8 @@ export default function HorizontalGallery() {
               <img
                 src={img}
                 alt={`Gallery ${i + 1}`}
+                loading="lazy"
+                decoding="async"
                 className="w-full aspect-square object-cover rounded-[4px]"
               />
             </div>
@@ -53,6 +55,8 @@ export default function HorizontalGallery() {
                 <img
                   src={img}
                   alt={`Gallery ${i + 1}`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full aspect-square object-cover"
                 />
               </div>

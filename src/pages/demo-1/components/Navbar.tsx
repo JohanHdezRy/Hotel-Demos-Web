@@ -1,34 +1,49 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavbarScroll } from "../../../hooks/useNavbarScroll";
+import { useMobileDrawer } from "../../../hooks/useMobileDrawer";
 import { NAV_LINKS } from "../data/navData";
+import { cn } from "../../../lib/utils";
+
+const DRAWER_ID = "demo1-mobile-drawer";
 
 export default function Navbar() {
   const scrolled = useNavbarScroll(80);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const {
+    isOpen: mobileMenuOpen,
+    toggle,
+    close,
+    drawerRef,
+  } = useMobileDrawer<HTMLDivElement>();
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMobileMenuOpen(false);
+    close();
   };
-
-  const navBase =
-    "fixed top-0 left-0 w-full z-[1000] px-4 md:px-12 flex items-center gap-3 md:gap-5 transition-all duration-[400ms]";
-  const navScroll = scrolled
-    ? "bg-white/[0.97] shadow-[0_2px_16px_rgba(0,0,0,.06)] py-3"
-    : "bg-transparent py-[18px]";
 
   return (
     <>
-      <nav className={`${navBase} ${navScroll}`}>
+      <nav
+        className={cn(
+          "fixed top-0 left-0 w-full z-[1000] px-4 md:px-12 flex items-center gap-3 md:gap-5 transition-all duration-[400ms]",
+          scrolled
+            ? "bg-white/[0.97] shadow-[0_2px_16px_rgba(0,0,0,.06)] py-3"
+            : "bg-transparent py-[18px]",
+        )}
+      >
         <Link
           to="/"
-          className={`text-[.75rem] tracking-[1px] transition-colors duration-[400ms] ${scrolled ? "text-[#A90023]" : "text-white/80"}`}
+          className={cn(
+            "text-[.75rem] tracking-[1px] transition-colors duration-[400ms]",
+            scrolled ? "text-[#A90023]" : "text-white/80",
+          )}
         >
           ← Demos
         </Link>
         <span
-          className={`font-[var(--font-playfair-sc)] text-[.8rem] sm:text-base tracking-[2px] sm:tracking-[3px] truncate transition-colors duration-[400ms] ${scrolled ? "text-[#1C1C1C]" : "text-white"}`}
+          className={cn(
+            "font-[var(--font-playfair-sc)] text-[.8rem] sm:text-base tracking-[2px] sm:tracking-[3px] truncate transition-colors duration-[400ms]",
+            scrolled ? "text-[#1C1C1C]" : "text-white",
+          )}
         >
           HOTEL BELLA GRACE
         </span>
@@ -39,7 +54,10 @@ export default function Navbar() {
             <button
               key={id}
               onClick={() => scrollToSection(id)}
-              className={`text-[.72rem] tracking-[2px] uppercase font-semibold transition-colors duration-300 hover:text-[#D2AA00] bg-transparent border-none cursor-pointer ${scrolled ? "text-[#1C1C1C]" : "text-white/85"}`}
+              className={cn(
+                "text-[.72rem] tracking-[2px] uppercase font-semibold transition-colors duration-300 hover:text-[#D2AA00] bg-transparent border-none cursor-pointer",
+                scrolled ? "text-[#1C1C1C]" : "text-white/85",
+              )}
             >
               {label}
             </button>
@@ -55,28 +73,49 @@ export default function Navbar() {
         {/* Mobile hamburger */}
         <button
           className="ml-auto flex md:hidden flex-col gap-[5px] p-2 bg-transparent border-none cursor-pointer"
-          onClick={() => setMobileMenuOpen((p) => !p)}
+          onClick={toggle}
+          aria-expanded={mobileMenuOpen}
+          aria-controls={DRAWER_ID}
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-5 h-px transition-all duration-300 ${scrolled ? "bg-[#1C1C1C]" : "bg-white"} ${mobileMenuOpen ? "rotate-45 translate-y-[6px]" : ""}`}
+            className={cn(
+              "block w-5 h-px transition-all duration-300",
+              scrolled ? "bg-[#1C1C1C]" : "bg-white",
+              mobileMenuOpen && "rotate-45 translate-y-[6px]",
+            )}
           />
           <span
-            className={`block w-5 h-px transition-all duration-300 ${scrolled ? "bg-[#1C1C1C]" : "bg-white"} ${mobileMenuOpen ? "opacity-0" : ""}`}
+            className={cn(
+              "block w-5 h-px transition-all duration-300",
+              scrolled ? "bg-[#1C1C1C]" : "bg-white",
+              mobileMenuOpen && "opacity-0",
+            )}
           />
           <span
-            className={`block w-5 h-px transition-all duration-300 ${scrolled ? "bg-[#1C1C1C]" : "bg-white"} ${mobileMenuOpen ? "-rotate-45 -translate-y-[6px]" : ""}`}
+            className={cn(
+              "block w-5 h-px transition-all duration-300",
+              scrolled ? "bg-[#1C1C1C]" : "bg-white",
+              mobileMenuOpen && "-rotate-45 -translate-y-[6px]",
+            )}
           />
         </button>
       </nav>
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 z-[999] bg-[#1C1C1C] flex flex-col items-center justify-center gap-8 transition-all duration-300 ease-in-out md:hidden ${
+        id={DRAWER_ID}
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+        aria-hidden={!mobileMenuOpen}
+        className={cn(
+          "fixed inset-0 z-[999] bg-[#1C1C1C] flex flex-col items-center justify-center gap-8 transition-all duration-300 ease-in-out md:hidden",
           mobileMenuOpen
             ? "opacity-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 -translate-y-4 pointer-events-none"
-        }`}
+            : "opacity-0 -translate-y-4 pointer-events-none",
+        )}
       >
         {NAV_LINKS.map(({ label, id }) => (
           <button
@@ -90,7 +129,6 @@ export default function Navbar() {
         <button
           onClick={() => {
             scrollToSection("contact");
-            setMobileMenuOpen(false);
           }}
           className="mt-4 px-10 py-3 bg-[#A90023] text-white text-[.8rem] tracking-[2px] uppercase rounded-[2px] hover:bg-[#7d001a] transition-colors duration-300 border-none cursor-pointer"
         >

@@ -24,6 +24,8 @@ export default function Activities() {
               <img
                 src={a.img}
                 alt={a.label}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.08]"
               />
             </GlareHover>

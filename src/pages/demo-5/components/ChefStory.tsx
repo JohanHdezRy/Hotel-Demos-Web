@@ -84,6 +84,9 @@ export default function ChefStory() {
               src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=700&q=80"
               alt="Chef Marco Ricci"
               loading="lazy"
+              decoding="async"
+              width={700}
+              height={900}
               className="relative z-10 w-full object-cover max-h-[600px]"
             />
           </div>

@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import MiniCalendar from "./MiniCalendar";
 import { ROOMS } from "../data/roomsData";
@@ -12,59 +11,22 @@ import {
   DISPLAY,
   MONO,
 } from "../data/tokens";
-import { addDays, fmtDate, fmtWeekday } from "../hooks/useDateHelpers";
-import type { BookingData, OpenField } from "../hooks/useBookingData";
+import { fmtDate, fmtWeekday } from "../../../lib/dateHelpers";
+import type { BookingData } from "../hooks/useBookingData";
+import { usePicker } from "../hooks/usePicker";
 
 type Props = { data: BookingData };
 
 export default function BookingPanel({ data }: Props) {
-  const [open, setOpen] = useState<OpenField>(null);
-  const [pickerPos, setPickerPos] = useState<{
-    top: number;
-    left: number | undefined;
-    right: number | undefined;
-  }>({ top: 0, left: 0, right: undefined });
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(null);
-    };
-    if (open) document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [open]);
-
-  const openAt = (
-    field: OpenField,
-    btn: HTMLButtonElement,
-    align: "left" | "right" = "left",
-  ) => {
-    const r = btn.getBoundingClientRect();
-    // On narrow viewports, always anchor to left edge of screen with a margin
-    const isMobile = window.innerWidth < 640;
-    setPickerPos({
-      top: r.bottom + 8,
-      left: isMobile ? 16 : align === "left" ? r.left : undefined,
-      right: isMobile
-        ? undefined
-        : align === "right"
-          ? window.innerWidth - r.right
-          : undefined,
-    });
-    setOpen((f) => (f === field ? null : field));
-  };
-
-  const pickCheckIn = (d: Date) => {
-    data.setCI(d);
-    if (data.checkOut <= d) data.setCO(addDays(d, 1));
-    setOpen(null);
-  };
-  const pickCheckOut = (d: Date) => {
-    if (d > data.checkIn) {
-      data.setCO(d);
-      setOpen(null);
-    }
-  };
+  const {
+    open,
+    pickerPos,
+    containerRef: ref,
+    openAt,
+    close,
+    pickCheckIn,
+    pickCheckOut,
+  } = usePicker<HTMLElement>(data, 640);
 
   const fieldBtn = (
     label: string,
@@ -311,7 +273,7 @@ export default function BookingPanel({ data }: Props) {
                 checkOut={data.checkOut}
                 mode={open}
                 onSelect={open === "checkin" ? pickCheckIn : pickCheckOut}
-                onClose={() => setOpen(null)}
+                onClose={() => close()}
               />
             )}
             {open === "guests" && (
@@ -399,7 +361,7 @@ export default function BookingPanel({ data }: Props) {
                     key={i}
                     onClick={() => {
                       data.setRoomIdx(i);
-                      setOpen(null);
+                      close();
                     }}
                     style={{
                       display: "flex",

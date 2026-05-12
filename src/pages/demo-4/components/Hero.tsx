@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
 import { WARM } from "../data/tokens";
 import { heroImages } from "../data/imageData";
 import { useHeroCarousel } from "../hooks/useHeroCarousel";
+import { useHeroEntrance } from "../hooks/useHeroEntrance";
+import { cn } from "../../../lib/utils";
 
 export default function Hero() {
   const {
@@ -11,31 +11,28 @@ export default function Hero() {
     next: onNext,
     goTo: onGoTo,
   } = useHeroCarousel();
-  const heroOverlayRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!heroOverlayRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap
-        .timeline({ defaults: { ease: "power4.out" }, delay: 0.2 })
-        .from(".ef-label", { opacity: 0, y: 14, duration: 0.7 }, 0)
-        .from(".ef-title", { yPercent: 105, duration: 1 }, 0.25)
-        .from(".ef-sub", { opacity: 0, y: 16, duration: 0.8 }, 0.7);
-    }, heroOverlayRef);
-    return () => ctx.revert();
-  }, []);
+  const heroOverlayRef = useHeroEntrance();
 
   return (
     <section className="relative h-screen overflow-hidden">
       {heroImages.map((src, i) => (
         <div
           key={i}
-          className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out ${i === slide ? "opacity-100" : "opacity-0"}`}
+          className={cn(
+            "absolute inset-0 transition-opacity duration-[1200ms] ease-in-out",
+            i === slide ? "opacity-100" : "opacity-0",
+          )}
         >
           <img
             src={src}
             alt={`El Fenn slide ${i + 1}`}
-            className={`w-full h-full object-cover ${i === slide ? "ken-burns" : ""}`}
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
+            fetchPriority={i === 0 ? "high" : "auto"}
+            className={cn(
+              "w-full h-full object-cover",
+              i === slide && "ken-burns",
+            )}
           />
         </div>
       ))}
@@ -87,14 +84,19 @@ export default function Hero() {
       </div>
 
       {/* Dots */}
-      <div className="absolute bottom-[42px] sm:bottom-[48px] left-1/2 -translate-x-1/2 flex gap-2.5">
+      <div
+        className="absolute bottom-[42px] sm:bottom-[48px] left-1/2 -translate-x-1/2 flex gap-2.5"
+        role="tablist"
+        aria-label="Hero slides"
+      >
         {heroImages.map((_, i) => (
-          <span
+          <button
             key={i}
+            type="button"
             onClick={() => onGoTo(i)}
-            role="button"
             aria-label={`Go to slide ${i + 1}`}
-            className="w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full cursor-pointer transition-all duration-300"
+            aria-current={i === slide ? "true" : undefined}
+            className="w-3 h-3 sm:w-2.5 sm:h-2.5 rounded-full cursor-pointer transition-all duration-300 border-0 p-0"
             style={{
               background: i === slide ? WARM : "rgba(255,255,255,.4)",
             }}

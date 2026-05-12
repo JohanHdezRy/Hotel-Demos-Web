@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { CSSProperties } from "react";
 import {
   ACCENT,
@@ -8,19 +7,14 @@ import {
   MONTSERRAT,
 } from "../data/freshboxTokens";
 import { COUPONS } from "../data/freshboxMenuData";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+import { useScrollReveal } from "../../../hooks/useScrollReveal";
 import { useBreakpoint } from "../hooks/useBreakpoint";
+import { useCopyToClipboard } from "../../../hooks/useCopyToClipboard";
 
 export function FreshboxCouponsSection() {
-  const [copied, setCopied] = useState<string | null>(null);
+  const { copied, copy } = useCopyToClipboard();
   const { ref, isVisible } = useScrollReveal();
   const { isMobile, isTablet } = useBreakpoint();
-
-  const copy = (code: string) => {
-    navigator.clipboard?.writeText(code).catch(() => {});
-    setCopied(code);
-    setTimeout(() => setCopied(null), 2000);
-  };
 
   const revealStyle: CSSProperties = {
     opacity: isVisible ? 1 : 0,
@@ -34,7 +28,7 @@ export function FreshboxCouponsSection() {
   return (
     <section
       id="coupons"
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={ref}
       style={{
         padding: isMobile ? "60px 16px" : isTablet ? "80px 32px" : "100px 60px",
         background: "#fff",

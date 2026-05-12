@@ -42,3 +42,22 @@ export function fmtWeekday(d: Date): string {
 export function nightsCount(a: Date, b: Date): number {
   return Math.max(1, Math.round((b.getTime() - a.getTime()) / 86400000));
 }
+
+// ISO string helpers (YYYY-MM-DD) for use with <input type="date">
+
+export function todayISO(): string {
+  return new Date().toISOString().split("T")[0];
+}
+
+export function addDaysISO(iso: string, n: number): string {
+  const d = new Date(iso);
+  d.setDate(d.getDate() + n);
+  return d.toISOString().split("T")[0];
+}
+
+export function nightsCountISO(a: string, b: string): number {
+  return Math.max(
+    1,
+    Math.round((new Date(b).getTime() - new Date(a).getTime()) / 86400000),
+  );
+}

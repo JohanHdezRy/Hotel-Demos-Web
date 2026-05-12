@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useMobileDrawer } from "../../../hooks/useMobileDrawer";
 import { WARM, PINK } from "../data/tokens";
 
 const NAV_LINKS = [
@@ -9,22 +9,15 @@ const NAV_LINKS = [
   ["#about", "About"],
 ] as const;
 
+const DRAWER_ID = "elfenn-mobile-drawer";
+
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  // Lock body scroll while drawer is open
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
-
-  const closeMenu = () => setMenuOpen(false);
+  const {
+    isOpen: menuOpen,
+    toggle,
+    close: closeMenu,
+    drawerRef,
+  } = useMobileDrawer<HTMLElement>();
 
   return (
     <>
@@ -67,7 +60,8 @@ export default function Header() {
           <button
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((v) => !v)}
+            aria-controls={DRAWER_ID}
+            onClick={toggle}
             className="md:hidden flex flex-col justify-center items-center w-[44px] h-[44px] gap-[5px] shrink-0 cursor-pointer"
           >
             <span
@@ -108,6 +102,11 @@ export default function Header() {
 
       {/* Mobile drawer */}
       <nav
+        id={DRAWER_ID}
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
         className="md:hidden fixed top-0 right-0 z-[95] h-full w-[280px] max-w-[85vw] flex flex-col pt-[80px] pb-8 px-8 transition-transform duration-[350ms] ease-[cubic-bezier(.25,.46,.45,.94)]"
         style={{
           background: "#1a1a1a",

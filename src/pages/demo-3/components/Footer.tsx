@@ -17,25 +17,13 @@ export default function Footer() {
         - lg: original 4-column (2fr 1fr 1fr 1fr)
       */}
       <div
-        className="grid gap-10 sm:gap-12 pb-12 sm:pb-16"
+        className="pb-12 sm:pb-16"
         style={{
-          gridTemplateColumns: "1fr",
           borderBottom: "1px solid rgba(255,255,255,0.12)",
           marginBottom: 32,
         }}
       >
-        <style>{`
-          @media (min-width: 640px) {
-            .footer-grid { grid-template-columns: 1fr 1fr !important; }
-          }
-          @media (min-width: 1024px) {
-            .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr !important; }
-          }
-        `}</style>
-        <div
-          className="footer-grid grid gap-10 sm:gap-12"
-          style={{ gridTemplateColumns: "1fr" }}
-        >
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-12 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           {/* Brand column */}
           <div>
             <h4
@@ -108,13 +96,13 @@ export default function Footer() {
               >
                 {col.items.map((item) => (
                   <li key={item}>
-                    <a
-                      href="#"
-                      className="hover:text-white transition-colors duration-200"
+                    <button
+                      type="button"
+                      className="hover:text-white transition-colors duration-200 bg-transparent border-0 p-0 cursor-pointer text-left"
                       style={{ color: "inherit" }}
                     >
                       {item}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>

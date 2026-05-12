@@ -6,14 +6,14 @@ import {
   CLIMATE,
   MONTSERRAT,
 } from "../data/freshboxTokens";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+import { useScrollReveal } from "../../../hooks/useScrollReveal";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import burger from "../../../styles/img/demo-2/burger.png";
 
 const lines = ["FLAVOR that", "makes", "HISTORY!"];
 
 export function FreshboxHero() {
-  const { ref, isVisible } = useScrollReveal(0.1);
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
   const { isMobile, isTablet } = useBreakpoint();
 
   const revealStyle: CSSProperties = {
@@ -24,7 +24,7 @@ export function FreshboxHero() {
 
   return (
     <section
-      ref={ref as React.RefObject<HTMLElement>}
+      ref={ref}
       style={{
         minHeight: "100vh",
         background: CREAM,
@@ -152,6 +152,11 @@ export function FreshboxHero() {
             <img
               src={burger}
               alt="Delicious burger"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              width={420}
+              height={560}
               style={{
                 width: "100%",
                 borderRadius: 20,

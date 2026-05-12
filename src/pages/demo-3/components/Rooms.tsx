@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { ROOMS } from "../data/roomsData";
 import {
   DISPLAY,
@@ -13,7 +13,7 @@ import {
 } from "../data/tokens";
 import type { Room } from "../types";
 
-function RoomCard({
+const RoomCard = memo(function RoomCard({
   room: r,
   expanded,
   onToggle,
@@ -25,7 +25,17 @@ function RoomCard({
   return (
     <article
       onClick={onToggle}
-      className="rounded-[20px] cursor-pointer group transition-shadow duration-300 overflow-hidden"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onToggle();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-expanded={expanded}
+      aria-label={`${r.name} — ${expanded ? "collapse" : "expand"}`}
+      className="rounded-[20px] cursor-pointer group transition-shadow duration-300 overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
       style={{
         background: BG,
         boxShadow: expanded ? "0 10px 40px rgba(20,15,10,0.1)" : undefined,
@@ -44,6 +54,8 @@ function RoomCard({
             <img
               src={r.img}
               alt={r.name}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
             />
           </div>
@@ -108,17 +120,9 @@ function RoomCard({
             </div>
 
             {/* Expanded detail grid — stacked on mobile, 2-col on md+ */}
-            <style>{`
-              @media (min-width: 768px) {
-                .room-detail-grid { grid-template-columns: 2fr 1fr !important; }
-              }
-            `}</style>
             <div
-              className="room-detail-grid grid gap-8 md:gap-16 mt-5 pt-6"
-              style={{
-                borderTop: `1px solid ${LINE}`,
-                gridTemplateColumns: "1fr",
-              }}
+              className="grid grid-cols-1 gap-8 mt-5 pt-6 md:grid-cols-[2fr_1fr] md:gap-16"
+              style={{ borderTop: `1px solid ${LINE}` }}
             >
               <div>
                 <div
@@ -236,22 +240,8 @@ function RoomCard({
         </>
       ) : (
         /* ── Collapsed layout: responsive horizontal on md+, stacked on mobile ── */
-        <div
-          className="flex flex-col md:grid md:items-center md:gap-10"
-          style={{ padding: 20 }}
-        >
-          <style>{`
-            @media (min-width: 768px) {
-              .room-card-collapsed { grid-template-columns: 300px 1fr auto !important; }
-            }
-            @media (min-width: 1024px) {
-              .room-card-collapsed { grid-template-columns: 360px 1fr auto !important; }
-            }
-          `}</style>
-          <div
-            className="room-card-collapsed flex flex-col md:grid md:items-center md:gap-10 w-full"
-            style={{ gridTemplateColumns: "1fr" }}
-          >
+        <div className="p-5">
+          <div className="flex flex-col w-full md:grid md:items-center md:gap-10 md:grid-cols-[300px_1fr_auto] lg:grid-cols-[360px_1fr_auto]">
             {/* Image */}
             <div
               className="overflow-hidden flex-shrink-0 w-full"
@@ -263,6 +253,8 @@ function RoomCard({
               <img
                 src={r.img}
                 alt={r.name}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               />
             </div>
@@ -393,7 +385,7 @@ function RoomCard({
       )}
     </article>
   );
-}
+});
 
 export default function Rooms() {
   const [expanded, setExpanded] = useState(0);

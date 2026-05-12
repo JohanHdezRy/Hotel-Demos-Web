@@ -42,18 +42,18 @@ export default function Footer() {
               {col.title}
             </h4>
             {col.links.map((l) => (
-              <a
+              <button
                 key={l}
-                href="#"
-                className="block text-[.8rem] leading-[1.8] hover:text-[#D2AA00] transition-colors duration-200"
+                type="button"
+                className="block text-left text-[.8rem] leading-[1.8] hover:text-[#D2AA00] transition-colors duration-200 bg-transparent border-0 p-0 cursor-pointer"
               >
                 {l}
-              </a>
+              </button>
             ))}
           </div>
         ))}
       </div>
-      <div className="max-w-[1200px] mx-auto pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row sm:justify-between gap-2 text-[.7rem] text-white/30">
+      <div className="max-w-[1200px] mx-auto pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row sm:justify-between gap-2 text-[.7rem] text-white/55">
         <span>© 2026 Hotel Bella Grace. Marriott Bonvoy.</span>
         <span>Demo — React + TypeScript</span>
       </div>

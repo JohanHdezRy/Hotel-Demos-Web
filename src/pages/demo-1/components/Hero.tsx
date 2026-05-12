@@ -12,6 +12,9 @@ export default function Hero() {
       <img
         src={hotel}
         alt="Hotel Bella Grace facade"
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
         className="gh-img w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-[#1c1c1c]/40" />

@@ -36,6 +36,8 @@ export default function Rooms() {
                 <img
                   src={r.img}
                   alt={r.name}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                 />
               </GlareHover>

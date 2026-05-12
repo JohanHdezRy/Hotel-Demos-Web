@@ -1,47 +1,36 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { testimonials } from '../data/testimonialsData'
+import { useCallback, useEffect, useState } from "react";
+import { testimonials } from "../data/testimonialsData";
+
+const AUTOPLAY_MS = 6000;
 
 export function useTestimonialCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const total = testimonials.length;
 
-  const total = testimonials.length
+  const goNext = useCallback(
+    () => setCurrentIndex((prev) => (prev + 1) % total),
+    [total],
+  );
+  const goPrev = useCallback(
+    () => setCurrentIndex((prev) => (prev - 1 + total) % total),
+    [total],
+  );
+  const goTo = useCallback((index: number) => setCurrentIndex(index), []);
 
-  const goNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % total)
-  }, [total])
+  const handleMouseEnter = useCallback(() => setPaused(true), []);
+  const handleMouseLeave = useCallback(() => setPaused(false), []);
 
-  const goPrev = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + total) % total)
-  }, [total])
-
-  const goTo = useCallback((index: number) => {
-    setCurrentIndex(index)
-  }, [])
-
-  const startInterval = useCallback(() => {
-    intervalRef.current = setInterval(goNext, 6000)
-  }, [goNext])
-
-  const stopInterval = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
-  }, [])
-
-  const handleMouseEnter = useCallback(() => {
-    stopInterval()
-  }, [stopInterval])
-
-  const handleMouseLeave = useCallback(() => {
-    startInterval()
-  }, [startInterval])
-
+  // Single source of truth for the autoplay interval. Pause flips it on/off
+  // without ever leaving two intervals coexisting between renders.
   useEffect(() => {
-    startInterval()
-    return () => stopInterval()
-  }, [startInterval, stopInterval])
+    if (paused) return;
+    const id = setInterval(
+      () => setCurrentIndex((prev) => (prev + 1) % total),
+      AUTOPLAY_MS,
+    );
+    return () => clearInterval(id);
+  }, [paused, total]);
 
   return {
     testimonials,
@@ -51,5 +40,5 @@ export function useTestimonialCarousel() {
     goTo,
     handleMouseEnter,
     handleMouseLeave,
-  }
+  };
 }

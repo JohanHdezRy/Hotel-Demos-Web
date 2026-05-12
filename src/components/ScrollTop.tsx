@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { CSSProperties } from "react";
+import { useScrollVisibility } from "../hooks/useScrollVisibility";
 
 interface Props {
   bg: string;
@@ -9,14 +10,8 @@ interface Props {
 }
 
 export function ScrollTop({ bg, color, hoverBg, hoverColor }: Props) {
-  const [show, setShow] = useState(false);
+  const show = useScrollVisibility(600);
   const [hovered, setHovered] = useState(false);
-
-  useEffect(() => {
-    const h = () => setShow(window.scrollY > 600);
-    window.addEventListener("scroll", h);
-    return () => window.removeEventListener("scroll", h);
-  }, []);
 
   const style: CSSProperties = {
     position: "fixed",
@@ -39,12 +34,14 @@ export function ScrollTop({ bg, color, hoverBg, hoverColor }: Props) {
 
   return (
     <button
+      type="button"
+      aria-label="Scroll to top"
       style={style}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      ↑
+      <span aria-hidden="true">↑</span>
     </button>
   );
 }

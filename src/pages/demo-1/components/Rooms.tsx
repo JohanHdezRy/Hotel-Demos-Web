@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RevealSection from "../../../components/animations/RevealSection";
 import { STATIC_ROOMS, type StaticRoom } from "../data/roomsData";
 import type { CarouselControlsProps } from "../types";
+import { cn } from "../../../lib/utils";
 
 export function CarouselControls({
   prev,
@@ -13,13 +14,17 @@ export function CarouselControls({
 }: CarouselControlsProps) {
   return (
     <div
-      className={`flex items-center gap-5 mb-[30px] ${center ? "justify-center mt-4 mb-0" : ""}`}
+      className={cn(
+        "flex items-center gap-5 mb-[30px]",
+        center && "justify-center mt-4 mb-0",
+      )}
     >
       <button
         onClick={prev}
+        aria-label="Previous"
         className="bg-transparent border-none text-[1.2rem] cursor-pointer text-[#1C1C1C] px-[10px] py-1 transition-colors duration-200 tracking-[8px] hover:text-[#A90023]"
       >
-        ←
+        <span aria-hidden="true">←</span>
       </button>
       <span className="text-[.85rem] tracking-[2px] text-[#757575]">
         {String(current + 1).padStart(2, "0")} /{" "}
@@ -27,9 +32,10 @@ export function CarouselControls({
       </span>
       <button
         onClick={next}
+        aria-label="Next"
         className="bg-transparent border-none text-[1.2rem] cursor-pointer text-[#1C1C1C] px-[10px] py-1 transition-colors duration-200 tracking-[8px] hover:text-[#A90023]"
       >
-        →
+        <span aria-hidden="true">→</span>
       </button>
     </div>
   );
@@ -41,7 +47,7 @@ interface RoomCardProps {
   onReserve: () => void;
 }
 
-function RoomCard({ room, onReserve }: RoomCardProps) {
+const RoomCard = memo(function RoomCard({ room, onReserve }: RoomCardProps) {
   const [activeImg, setActiveImg] = useState(0);
   const total = room.images.length;
 
@@ -53,40 +59,48 @@ function RoomCard({ room, onReserve }: RoomCardProps) {
             key={i}
             src={img}
             alt={`${room.name} ${i + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-              i === activeImg ? "opacity-100" : "opacity-0"
-            }`}
+            loading="lazy"
+            decoding="async"
+            className={cn(
+              "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+              i === activeImg ? "opacity-100" : "opacity-0",
+            )}
           />
         ))}
         <button
+          aria-label="Previous image"
           onClick={(e) => {
             e.stopPropagation();
             setActiveImg((p) => (p - 1 + total) % total);
           }}
           className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition-colors text-base leading-none"
         >
-          ‹
+          <span aria-hidden="true">‹</span>
         </button>
         <button
+          aria-label="Next image"
           onClick={(e) => {
             e.stopPropagation();
             setActiveImg((p) => (p + 1) % total);
           }}
           className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition-colors text-base leading-none"
         >
-          ›
+          <span aria-hidden="true">›</span>
         </button>
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
           {room.images.map((_, i) => (
             <button
               key={i}
+              aria-label={`Go to image ${i + 1}`}
+              aria-current={i === activeImg ? "true" : undefined}
               onClick={(e) => {
                 e.stopPropagation();
                 setActiveImg(i);
               }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === activeImg ? "w-4 bg-white" : "w-1.5 bg-white/50"
-              }`}
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-300",
+                i === activeImg ? "w-4 bg-white" : "w-1.5 bg-white/50",
+              )}
             />
           ))}
         </div>
@@ -111,7 +125,7 @@ function RoomCard({ room, onReserve }: RoomCardProps) {
       </div>
     </div>
   );
-}
+});
 
 /* ── Rooms section ── */
 export default function Rooms() {

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   BG,
   INK,
@@ -9,7 +8,8 @@ import {
   MUTED,
   BG_ALT,
 } from "../data/tokens";
-import { MONTHS_FULL, DAYS_SHORT, TODAY } from "../hooks/useDateHelpers";
+import { MONTHS_FULL, DAYS_SHORT, TODAY, fmtDate } from "../../../lib/dateHelpers";
+import { useMonthNav } from "../hooks/useMonthNav";
 
 type Props = {
   checkIn: Date;
@@ -27,21 +27,7 @@ export default function MiniCalendar({
   onClose,
 }: Props) {
   const init = mode === "checkin" ? checkIn : checkOut;
-  const [vy, setVy] = useState(init.getFullYear());
-  const [vm, setVm] = useState(init.getMonth());
-
-  const prevM = () => {
-    if (vm === 0) {
-      setVm(11);
-      setVy((y) => y - 1);
-    } else setVm((m) => m - 1);
-  };
-  const nextM = () => {
-    if (vm === 11) {
-      setVm(0);
-      setVy((y) => y + 1);
-    } else setVm((m) => m + 1);
-  };
+  const { year: vy, month: vm, prev: prevM, next: nextM } = useMonthNav(init);
 
   const dim = new Date(vy, vm + 1, 0).getDate();
   const fwd = new Date(vy, vm, 1).getDay();
@@ -71,6 +57,7 @@ export default function MiniCalendar({
       >
         <button
           onClick={prevM}
+          aria-label="Previous month"
           style={{
             width: 32,
             height: 32,
@@ -86,7 +73,7 @@ export default function MiniCalendar({
             flexShrink: 0,
           }}
         >
-          ‹
+          <span aria-hidden="true">‹</span>
         </button>
         <span
           style={{
@@ -101,6 +88,7 @@ export default function MiniCalendar({
         <div className="flex items-center gap-1">
           <button
             onClick={nextM}
+            aria-label="Next month"
             style={{
               width: 32,
               height: 32,
@@ -116,7 +104,7 @@ export default function MiniCalendar({
               flexShrink: 0,
             }}
           >
-            ›
+            <span aria-hidden="true">›</span>
           </button>
           {/* Close button — visible only on mobile via inline flex/none trick */}
           <button
@@ -175,10 +163,14 @@ export default function MiniCalendar({
           const isCO = date.getTime() === checkOut.getTime();
           const inRange = date > checkIn && date < checkOut;
           const isActive = isCI || isCO;
+          const isToday = date.getTime() === TODAY.getTime();
           return (
             <button
               key={i}
               disabled={isPast}
+              aria-label={fmtDate(date)}
+              aria-current={isToday ? "date" : undefined}
+              aria-pressed={isActive}
               onClick={() => {
                 if (!isPast) onSelect(date);
               }}

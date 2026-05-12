@@ -18,6 +18,8 @@ export default function FeaturesGrid() {
               <img
                 src={f.img}
                 alt={f.label}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.06]"
               />
             </GlareHover>

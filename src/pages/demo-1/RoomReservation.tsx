@@ -1,7 +1,8 @@
-import { useState, useMemo } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { ScrollTop } from "../../components/ScrollTop";
+import { todayISO, addDaysISO } from "../../lib/dateHelpers";
 import type { StaticRoom as RoomData } from "./types";
+import { useRoomReservation } from "./hooks/useRoomReservation";
 
 const AMENITIES: Record<
   string,
@@ -243,39 +244,26 @@ function AmenityIcon({ icon }: { icon: string }) {
   return <span className="text-[#A90023]">{icons[icon] ?? icons["wifi"]}</span>;
 }
 
-function today() {
-  return new Date().toISOString().split("T")[0];
-}
-function addDays(date: string, n: number) {
-  const d = new Date(date);
-  d.setDate(d.getDate() + n);
-  return d.toISOString().split("T")[0];
-}
-function diffDays(a: string, b: string) {
-  return Math.max(
-    1,
-    Math.ceil((new Date(b).getTime() - new Date(a).getTime()) / 86400000),
-  );
-}
-
 export function RoomReservation() {
-  //const navigate = useNavigate();
   const location = useLocation();
   const room = (location.state as { room: RoomData } | null)?.room;
 
-  const [checkIn, setCheckIn] = useState(today());
-  const [checkOut, setCheckOut] = useState(addDays(today(), 2));
-  const [guests, setGuests] = useState(1);
-  const [requests, setRequests] = useState("");
-  const [confirmed, setConfirmed] = useState(false);
-
-  const nights = useMemo(
-    () => diffDays(checkIn, checkOut),
-    [checkIn, checkOut],
-  );
-  const subtotal = (room?.price ?? 0) * nights;
-  const taxes = Math.round(subtotal * 0.11);
-  const total = subtotal + taxes;
+  const {
+    checkIn,
+    checkOut,
+    guests,
+    requests,
+    confirmed,
+    nights,
+    subtotal,
+    taxes,
+    total,
+    setCheckIn,
+    setCheckOut,
+    setGuests,
+    setRequests,
+    setConfirmed,
+  } = useRoomReservation(room);
 
   const amenities = AMENITIES[room?.type ?? "STANDARD"] ?? AMENITIES.STANDARD;
 
@@ -370,6 +358,9 @@ export function RoomReservation() {
                 <img
                   src={room.images[0]}
                   alt={room.name}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -452,6 +443,8 @@ export function RoomReservation() {
                   <img
                     src={room.images[1]}
                     alt="Room detail"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -459,6 +452,8 @@ export function RoomReservation() {
                   <img
                     src={room.images[2]}
                     alt="Room detail"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -483,29 +478,33 @@ export function RoomReservation() {
                 {/* Dates */}
                 <div className="grid grid-cols-2 gap-5">
                   <div>
-                    <label className="text-[.62rem] tracking-[3px] uppercase text-[#A90023] block mb-2">
+                    <label
+                      htmlFor="reservation-checkin"
+                      className="text-[.62rem] tracking-[3px] uppercase text-[#A90023] block mb-2"
+                    >
                       Check-In
                     </label>
                     <input
+                      id="reservation-checkin"
                       type="date"
                       value={checkIn}
-                      min={today()}
-                      onChange={(e) => {
-                        setCheckIn(e.target.value);
-                        if (e.target.value >= checkOut)
-                          setCheckOut(addDays(e.target.value, 1));
-                      }}
+                      min={todayISO()}
+                      onChange={(e) => setCheckIn(e.target.value)}
                       className="w-full border-b border-[#D2D2D2] focus:border-[#A90023] bg-transparent py-2 text-[#1C1C1C] outline-none transition-colors duration-200 text-[.85rem]"
                     />
                   </div>
                   <div>
-                    <label className="text-[.62rem] tracking-[3px] uppercase text-[#A90023] block mb-2">
+                    <label
+                      htmlFor="reservation-checkout"
+                      className="text-[.62rem] tracking-[3px] uppercase text-[#A90023] block mb-2"
+                    >
                       Check-Out
                     </label>
                     <input
+                      id="reservation-checkout"
                       type="date"
                       value={checkOut}
-                      min={addDays(checkIn, 1)}
+                      min={addDaysISO(checkIn, 1)}
                       onChange={(e) => setCheckOut(e.target.value)}
                       className="w-full border-b border-[#D2D2D2] focus:border-[#A90023] bg-transparent py-2 text-[#1C1C1C] outline-none transition-colors duration-200 text-[.85rem]"
                     />
@@ -514,10 +513,14 @@ export function RoomReservation() {
 
                 {/* Guests */}
                 <div>
-                  <label className="text-[.62rem] tracking-[3px] uppercase text-[#A90023] block mb-2">
+                  <label
+                    htmlFor="reservation-guests"
+                    className="text-[.62rem] tracking-[3px] uppercase text-[#A90023] block mb-2"
+                  >
                     Guests
                   </label>
                   <select
+                    id="reservation-guests"
                     value={guests}
                     onChange={(e) => setGuests(Number(e.target.value))}
                     className="w-full border-b border-[#D2D2D2] focus:border-[#A90023] bg-transparent py-2 text-[#1C1C1C] outline-none cursor-pointer appearance-none text-[.85rem]"
@@ -534,10 +537,14 @@ export function RoomReservation() {
 
                 {/* Requests */}
                 <div>
-                  <label className="text-[.62rem] tracking-[3px] uppercase text-[#A90023] block mb-2">
+                  <label
+                    htmlFor="reservation-requests"
+                    className="text-[.62rem] tracking-[3px] uppercase text-[#A90023] block mb-2"
+                  >
                     Special Requests
                   </label>
                   <textarea
+                    id="reservation-requests"
                     value={requests}
                     onChange={(e) => setRequests(e.target.value)}
                     placeholder="Dietary requirements, arrival time…"
@@ -589,13 +596,13 @@ export function RoomReservation() {
               "Accessibility",
               "Sustainability",
             ].map((l) => (
-              <a
+              <button
                 key={l}
-                href="#"
-                className="hover:text-[#A90023] transition-colors duration-200"
+                type="button"
+                className="hover:text-[#A90023] transition-colors duration-200 bg-transparent border-0 p-0 cursor-pointer"
               >
                 {l}
-              </a>
+              </button>
             ))}
           </nav>
         </div>

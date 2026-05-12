@@ -9,17 +9,6 @@ export interface StaticRoom {
   images: string[];
 }
 
-export interface AmenityItem {
-  icon: string;
-  title: string;
-  desc: string;
-}
-
-export interface NavLink {
-  label: string;
-  id: string;
-}
-
 export interface CarouselControlsProps {
   prev: () => void;
   next: () => void;

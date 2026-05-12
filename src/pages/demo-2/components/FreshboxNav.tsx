@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   ACCENT,
   BROWN,
@@ -8,34 +8,28 @@ import {
   MONTSERRAT,
 } from "../data/freshboxTokens";
 import { useBreakpoint } from "../hooks/useBreakpoint";
+import { useNavbarScroll } from "../../../hooks/useNavbarScroll";
+import { useMobileDrawer } from "../../../hooks/useMobileDrawer";
 
 const NAV_LINKS = ["Menu", "About", "Coupons", "Contact"] as const;
+const DRAWER_ID = "freshbox-mobile-drawer";
 
 export function FreshboxNav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const scrolled = useNavbarScroll(40);
+  const {
+    isOpen: menuOpen,
+    toggle,
+    close,
+    drawerRef,
+  } = useMobileDrawer<HTMLDivElement>();
   const { isMobile, isTablet } = useBreakpoint();
 
   const isMobileOrTablet = isMobile || isTablet;
 
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
-
   // Close drawer when viewport goes desktop
   useEffect(() => {
-    if (!isMobileOrTablet) setMenuOpen(false);
-  }, [isMobileOrTablet]);
-
-  // Prevent body scroll when drawer is open
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
+    if (!isMobileOrTablet) close();
+  }, [isMobileOrTablet, close]);
 
   const navBg = scrolled || menuOpen ? "rgba(250,245,238,0.97)" : "transparent";
   const navBorder =
@@ -143,9 +137,10 @@ export function FreshboxNav() {
 
             {/* Hamburger button */}
             <button
-              onClick={() => setMenuOpen((o) => !o)}
+              onClick={toggle}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
+              aria-controls={DRAWER_ID}
               style={{
                 background: "none",
                 border: "none",
@@ -209,7 +204,7 @@ export function FreshboxNav() {
         <>
           {/* Backdrop */}
           <div
-            onClick={() => setMenuOpen(false)}
+            onClick={close}
             style={{
               position: "fixed",
               inset: 0,
@@ -223,6 +218,12 @@ export function FreshboxNav() {
 
           {/* Drawer panel */}
           <div
+            id={DRAWER_ID}
+            ref={drawerRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
+            aria-hidden={!menuOpen}
             style={{
               position: "fixed",
               top: 68,
@@ -244,7 +245,7 @@ export function FreshboxNav() {
                 <a
                   key={l}
                   href={`#${l.toLowerCase()}`}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={close}
                   style={{
                     display: "block",
                     ...MONTSERRAT(700),

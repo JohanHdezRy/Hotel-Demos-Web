@@ -75,6 +75,8 @@ export default function Hero() {
         src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80"
         alt="Mare e Terra restaurant interior"
         className="absolute inset-0 w-full h-full object-cover scale-110"
+        loading="eager"
+        decoding="async"
         fetchPriority="high"
       />
 

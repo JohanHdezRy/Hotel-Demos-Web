@@ -11,27 +11,27 @@ export function useDiningBar() {
   const barSlideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    if (!barRef.current || !barListRef.current || !barFillRef.current) return;
+    const bar = barRef.current;
+    const list = barListRef.current;
+    const fill = barFillRef.current;
+    if (!bar || !list || !fill) return;
 
     const ctx = gsap.context(() => {
-      const listItems = gsap.utils.toArray<HTMLLIElement>(
-        "li",
-        barListRef.current!,
-      );
+      const listItems = gsap.utils.toArray<HTMLLIElement>("li", list);
       const slides = barSlideRefs.current.filter(
         (s): s is HTMLDivElement => s !== null,
       );
 
       gsap.set(listItems[0], { color: "#A90023" });
       gsap.set(slides[0], { autoAlpha: 1 });
-      gsap.set(barFillRef.current!, {
+      gsap.set(fill, {
         scaleY: 1 / listItems.length,
         transformOrigin: "top left",
       });
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: barRef.current,
+          trigger: bar,
           start: "top top",
           end: "+=" + listItems.length * 120 + "%",
           pin: true,
@@ -50,7 +50,7 @@ export function useDiningBar() {
       });
 
       tl.to(
-        barFillRef.current!,
+        fill,
         {
           scaleY: 1,
           transformOrigin: "top left",

@@ -23,6 +23,7 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full object-cover"
         fetchPriority="high"
         loading="eager"
+        decoding="async"
       />
 
       {/* Tint overlay */}

@@ -23,6 +23,8 @@ export default function Amenities() {
                 <img
                   src={a.img}
                   alt={a.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-[220px] sm:h-[260px] lg:h-[300px] object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                 />
               </GlareHover>

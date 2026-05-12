@@ -6,7 +6,13 @@ export default function HistoryCulture() {
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 min-h-[440px]">
       <div className="overflow-hidden h-[260px] sm:h-[340px] md:h-auto">
-        <img src={suite} alt="History" className="w-full h-full object-cover" />
+        <img
+          src={suite}
+          alt="History"
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover"
+        />
       </div>
       <RevealSection variant="fadeLeft">
         <div className="px-6 sm:px-10 md:px-[60px] py-12 sm:py-16 md:py-20 flex flex-col justify-center">
@@ -18,9 +24,7 @@ export default function HistoryCulture() {
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris.
           </p>
-          <Btn href="#" variant="dark">
-            Learn More
-          </Btn>
+          <Btn variant="dark">Learn More</Btn>
         </div>
       </RevealSection>
     </section>

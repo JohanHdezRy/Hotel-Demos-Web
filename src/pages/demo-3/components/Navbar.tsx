@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useNavbarScroll } from "../../../hooks/useNavbarScroll";
+import { useMobileDrawer } from "../../../hooks/useMobileDrawer";
 import {
   DISPLAY,
   MONO,
@@ -12,33 +13,34 @@ import {
   MUTED,
 } from "../data/tokens";
 
+const DRAWER_ID = "costamare-mobile-drawer";
+
 export default function Navbar() {
   const scrolled = useNavbarScroll(50);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const {
+    isOpen: drawerOpen,
+    open: openDrawer,
+    close: closeDrawer,
+    drawerRef,
+  } = useMobileDrawer<HTMLDivElement>();
+  const scrollTimer = useRef<number | null>(null);
 
   const scrollTo = (id: string) => {
-    setDrawerOpen(false);
-    setTimeout(() => {
+    closeDrawer();
+    if (scrollTimer.current) clearTimeout(scrollTimer.current);
+    scrollTimer.current = window.setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      scrollTimer.current = null;
     }, 280);
   };
 
-  // Lock body scroll when drawer is open
-  useEffect(() => {
-    document.body.style.overflow = drawerOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [drawerOpen]);
-
-  // Close drawer on Escape key
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setDrawerOpen(false);
-    };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
-  }, []);
+  // Cancel a pending scroll if the component unmounts mid-transition.
+  useEffect(
+    () => () => {
+      if (scrollTimer.current) clearTimeout(scrollTimer.current);
+    },
+    [],
+  );
 
   const navLinks = ["rooms", "services", "gallery", "booking"] as const;
 
@@ -123,7 +125,9 @@ export default function Navbar() {
             Book
           </button>
           <button
-            onClick={() => setDrawerOpen(true)}
+            onClick={openDrawer}
+            aria-expanded={drawerOpen}
+            aria-controls={DRAWER_ID}
             aria-label="Open menu"
             className="flex flex-col justify-center items-center gap-[5px] w-10 h-10 rounded-lg border-none cursor-pointer bg-transparent"
           >
@@ -152,11 +156,17 @@ export default function Navbar() {
           opacity: drawerOpen ? 1 : 0,
           pointerEvents: drawerOpen ? "auto" : "none",
         }}
-        onClick={() => setDrawerOpen(false)}
+        onClick={closeDrawer}
       />
 
       {/* Mobile drawer */}
       <div
+        id={DRAWER_ID}
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+        aria-hidden={!drawerOpen}
         className="fixed top-0 right-0 bottom-0 z-[200] md:hidden flex flex-col"
         style={{
           width: "min(320px, 88vw)",
@@ -185,7 +195,7 @@ export default function Navbar() {
             Costa <em style={{ fontStyle: "italic", color: ACCENT }}>Mare</em>
           </span>
           <button
-            onClick={() => setDrawerOpen(false)}
+            onClick={closeDrawer}
             aria-label="Close menu"
             className="flex items-center justify-center w-9 h-9 rounded-full border-none cursor-pointer transition-colors duration-200"
             style={{ background: "oklch(0.93 0.02 80)", color: INK }}

@@ -1,9 +1,10 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { Menu, X } from "lucide-react";
 import { cn } from "../../../lib/utils";
 import { useNavbarScroll } from "../../../hooks/useNavbarScroll";
+import { useMobileDrawer } from "../../../hooks/useMobileDrawer";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -13,9 +14,12 @@ const navLinks = [
   { label: "Gallery", href: "#gallery" },
 ];
 
+const DRAWER_ID = "mareterra-mobile-drawer";
+
 export default function Navbar() {
   const isScrolled = useNavbarScroll();
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, toggle, close, drawerRef } =
+    useMobileDrawer<HTMLDivElement>();
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -29,7 +33,7 @@ export default function Navbar() {
     { scope: containerRef },
   );
 
-  const handleLinkClick = () => setIsOpen(false);
+  const handleLinkClick = close;
 
   return (
     <nav
@@ -57,7 +61,7 @@ export default function Navbar() {
           </div>
 
           {/* Logo */}
-          <a href="#" className="text-center flex-1 lg:flex-none">
+          <a href="#hero" className="text-center flex-1 lg:flex-none">
             <span className="font-[var(--font-cormorant)] italic text-2xl text-cream tracking-wide">
               Mare e Terra
             </span>
@@ -86,8 +90,10 @@ export default function Navbar() {
           <button
             type="button"
             className="lg:hidden text-cream p-2"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={toggle}
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            aria-controls={DRAWER_ID}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -96,6 +102,12 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       <div
+        id={DRAWER_ID}
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+        aria-hidden={!isOpen}
         className={cn(
           "lg:hidden bg-midnight/95 backdrop-blur-md transition-all duration-300 overflow-hidden",
           isOpen ? "max-h-screen py-6" : "max-h-0",

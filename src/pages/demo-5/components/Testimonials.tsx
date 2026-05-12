@@ -88,6 +88,9 @@ export default function Testimonials() {
                 src={current.avatarUrl}
                 alt={current.name}
                 loading="lazy"
+                decoding="async"
+                width={56}
+                height={56}
                 className="w-14 h-14 rounded-full object-cover border-2 border-gold-mare/40"
               />
               <div>

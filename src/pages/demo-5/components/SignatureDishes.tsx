@@ -61,6 +61,9 @@ export default function SignatureDishes() {
                   src={dish.imageUrl}
                   alt={dish.name}
                   loading="lazy"
+                  decoding="async"
+                  width={600}
+                  height={400}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <span

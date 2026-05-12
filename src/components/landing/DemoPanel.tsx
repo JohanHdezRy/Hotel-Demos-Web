@@ -1,14 +1,33 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
-import type { Demo } from "./DemoCard";
+
+export interface Demo {
+  path: string;
+  num: string;
+  name: string;
+  loc: string;
+  style: string;
+  tag: string;
+  colors: string[];
+  img: string;
+}
 
 interface Props {
   demo: Demo;
   totalPanels?: number;
   zIndex?: number;
+  priority?: boolean;
 }
 
-export function DemoPanel({ demo, totalPanels = 6, zIndex }: Props) {
+export const DemoPanel = memo(function DemoPanel({
+  demo,
+  totalPanels = 6,
+  zIndex,
+  priority = false,
+}: Props) {
   const padded = String(totalPanels).padStart(2, "0");
+  const imgLoading = priority ? "eager" : "lazy";
+  const imgFetchPriority = priority ? "high" : "auto";
 
   return (
     <section
@@ -79,6 +98,9 @@ export function DemoPanel({ demo, totalPanels = 6, zIndex }: Props) {
           <img
             src={demo.img}
             alt={demo.name}
+            loading={imgLoading}
+            fetchPriority={imgFetchPriority}
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/10 mix-blend-multiply" />
@@ -108,6 +130,9 @@ export function DemoPanel({ demo, totalPanels = 6, zIndex }: Props) {
           <img
             src={demo.img}
             alt={demo.name}
+            loading={imgLoading}
+            fetchPriority={imgFetchPriority}
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/10 mix-blend-multiply" />
@@ -173,4 +198,4 @@ export function DemoPanel({ demo, totalPanels = 6, zIndex }: Props) {
       </div>
     </section>
   );
-}
+});
